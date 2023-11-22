@@ -1,0 +1,33 @@
+{
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:CrowdStrike/graphics.git",
+    "directory": "package"
+  },
+  "license": "MIT",
+  "author": "CrowdStrike UX Team",
+  "scripts": {
+    "lint": "pnpm --filter '*' lint",
+    "lint:fix": "pnpm --filter '*' run lint:fix",
+    "test": "pnpm --filter '*' test"
+  },
+  "devDependencies": {
+    "concurrently": "7.6.0",
+    "@changesets/changelog-github": "^0.4.8",
+    "@changesets/cli": "^2.26.0"
+  },
+  "volta": {
+    "node": "16.15.1",
+    "pnpm": "7.3.0"
+  },
+  "packageManager": "pnpm@7.3.0",
+  "pnpm": {
+    "overrides": {
+      "@types/eslint": "^8.0.0"
+    },
+    "overrides-notes": {
+      "@types/eslint": "the lint todo formatter brings in an old version of this package"
+    }
+  }
+}
