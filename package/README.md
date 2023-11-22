@@ -1,5 +1,3 @@
-[![Install lint and test](https://github.com/CrowdStrike/graphics/actions/workflows/ci.yml/badge.svg)](https://github.com/CrowdStrike/graphics/actions/workflows/ci.yml)
-
 # @crowdstrike/graphics-core
 
 This package contains the `@crowdstrike/graphics-core` addon (in `./package`) and the tests/ dummy app for this addon

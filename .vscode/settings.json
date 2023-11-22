@@ -1,0 +1,38 @@
+{
+    // Disable all vscode internal formatters; They tend to collide with eslint
+    "html.format.enable": false,
+    "json.format.enable": false,
+    "typescript.format.enable": false,
+    "javascript.format.enable": false,
+    // Enable eslint formatter; We use this as a main formatter in monorepo
+    "eslint.format.enable": true,
+    "eslint.workingDirectories": [
+		"package",
+        "test-app"
+	],
+    // Enable format on save
+    "editor.formatOnSave": true,
+    "[javascript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    // Set default context lines to 2 when search is opened in the editor
+    "search.searchEditor.defaultNumberOfContextLines": 2,
+    // Minimap usually just steals screen space
+    "editor.minimap.enabled": false,
+    // Replacement for Bracket Pair Colorizer 2 extension
+    "editor.bracketPairColorization.enabled": true,
+    // Gets rid of following warning: "Experimental support for decorators is a feature that is subject to change in a future release. Set the 'experimentalDecorators' option `to remove this warning."
+    "js/ts.implicitProjectConfig.experimentalDecorators": true,
+    // Settings for `RunOnSave` extension
+    "emeraldwalk.runonsave": {
+        "commands": [
+            { // For every `.hbs` run the template linter in fix mode
+                "match": "\\.hbs$",
+                "cmd": "yarn ember-template-lint ${file} --fix --cwd ${fileDirname}"
+            },
+        ]
+    },
+}
