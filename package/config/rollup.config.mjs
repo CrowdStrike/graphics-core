@@ -1,6 +1,7 @@
 import { Addon } from '@embroider/addon-dev/rollup';
 
 import { defineConfig } from 'rollup';
+import copy from 'rollup-plugin-copy';
 import ts from 'rollup-plugin-ts';
 
 const addon = new Addon({
@@ -57,5 +58,11 @@ export default defineConfig({
 
     // Remove leftover build artifacts when starting a new build.
     addon.clean(),
+
+    copy({
+      targets: [
+        {src: '../LICENSE.md', dest: '.'}
+      ]
+    })
   ],
 });
