@@ -1,45 +1,31 @@
+<p align="center">
+  <a href="https://www.crowdstrike.com">
+    <img src=".github/cs-logo.png?raw=true" alt="CrowdStrike logo" width="300" />
+  </a>
+</p>
+
+<br>
+
 [![Install lint and test](https://github.com/CrowdStrike/graphics/actions/workflows/ci.yml/badge.svg)](https://github.com/CrowdStrike/graphics/actions/workflows/ci.yml)
 
-# @crowdstrike/graphics-core
+<br>
 
-This package contains the `@crowdstrike/graphics-core` addon (in `./package`) and the tests/ dummy app for this addon
-(in `./test-app`);
+`@crowdstrike/graphics-core` is a JavaScript library that provides a collection of useful abstractions frequently used in the context of WebGL programming. Some of them are WebGL framework-agnostic, and some of them extend [three.js](https://threejs.org/).
+
+## Installation
+
+```
+pnpm add @crowdstrike/graphics-core
+# or
+yarn add @crowdstrike/graphics-core
+# or
+npm install @crowdstrike/graphics-core
+```
 
 ## Usage
 
-```
-yarn ember install @crowdstrike/graphics-core
-```
-
-(or in the monorepo you will need to just add it to the relevant `package.json` and run `yarn`)
+To illustrate different use cases of the library, this repository includes the `test-app` folder; inside it are some demos as well as the package's test suite.
 
 ## Contributing
 
-For the best ergonomics, developing this addon will require 2 terminals:
-
-In one terminal, start this addon in "watch" mode
-
-```
-yarn start
-# or if you know that this addon does not need any of its dependencies built locally
-yarn watch:js
-```
-
-In the other terminal, start the app,
-
-```
-yarn start
-```
-
-and visit `/tests` at the URL printed in the terminal
-
-### References
-
-The addon is built with [Rollup.JS](https://rollupjs.org/).
-
-For more information on V2 Addons, read (in-order):
-
-- https://emberjs.github.io/rfcs/0507-embroider-v2-package-format.html
-- https://github.com/embroider-build/embroider/blob/main/ADDON-AUTHOR-GUIDE.md
-- https://github.com/embroider-build/embroider/blob/main/PORTING-ADDONS-TO-V2.md
-- https://github.com/embroider-build/embroider/tree/main/packages/test-setup
+See the [Contributing](CONTRIBUTING.md) guide for details.
