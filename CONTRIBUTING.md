@@ -21,8 +21,7 @@ pnpm start
 This will:
 
 - Build the package and watch it for changes
-
-## Releasing
+- Enable you to run the demo app by `cd`-ing into `test-app` and running `pnpm start`
 
 ## Building the Package
 
