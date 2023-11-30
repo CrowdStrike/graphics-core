@@ -4,12 +4,11 @@ import { LineMesh2 as _LineMesh2 } from './_LineMesh2';
 import type { CurveProperties } from '../utils/LineMeshUtils';
 import type { LineMeshSettings } from './settings/LineMeshSettings';
 import type * as THREE from 'three';
-import type { LineGeometry } from 'three/examples/jsm/lines/LineGeometry';
 import type { LineMaterial } from 'three/examples/jsm/lines/LineMaterial';
 
 export interface ILineMesh2 extends THREE.Line {
   // eslint-disable-next-line @typescript-eslint/no-misused-new
-  new (material: LineGeometry, settings: LineMaterial): ILineMesh2Type;
+  new (material: LineMaterial, settings: LineMeshSettings): ILineMesh2Type;
   dispose(): void;
 }
 

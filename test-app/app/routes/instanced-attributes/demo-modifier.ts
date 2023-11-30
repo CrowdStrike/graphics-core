@@ -269,6 +269,7 @@ export class LabelGeneratorModifier extends Modifier<Args> {
     this.textEntities?.dispose();
     this.iconEntities?.dispose();
     this.raf && cancelAnimationFrame(this.raf);
+    this.gui.destroy();
 
     // gets rid of the static DynamicSpriteSheetGenerator
     this.textGenerator.dispose();

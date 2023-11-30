@@ -1,0 +1,43 @@
+<div
+  class='z-10 flex w-1/4 flex-col flex-wrap justify-around space-y-1.5 bg-basement p-2 text-body-and-labels'
+>
+  {{#each this.demos as |demo|}}
+    <LinkTo
+      class='relative text-primary-idle underline hover:text-positive focus:text-blue'
+      @route='routes.demo-viewer'
+      @model={{demo.id}}
+    >
+      {{demo.name}}
+    </LinkTo>
+  {{/each}}
+  {{! <LinkTo @route='routes.demos' class='flex'>demos</LinkTo> }}
+  <LinkTo
+    @route='routes.vertex-playground'
+    class='relative text-primary-idle underline hover:text-positive focus:text-blue'
+  >Vertex playground</LinkTo>
+  <LinkTo
+    @route='routes.instanced-attributes'
+    class='relative text-primary-idle underline hover:text-positive focus:text-blue'
+  >Instanced Attributes</LinkTo>
+  <LinkTo
+    @route='routes.label-generator'
+    class='relative text-primary-idle underline hover:text-positive focus:text-blue'
+  >Label Generator</LinkTo>
+  <LinkTo
+    @route='routes.multi-texture-shader'
+    class='relative text-primary-idle underline hover:text-positive focus:text-blue'
+  >Multi Texture Shader</LinkTo>
+  <LinkTo
+    @route='routes.edges-v2'
+    class='relative text-primary-idle underline hover:text-positive focus:text-blue'
+  >Edge demo</LinkTo>
+  <LinkTo
+    @route='routes.edge-types'
+    class='relative text-primary-idle underline hover:text-positive focus:text-blue'
+  >Edge types</LinkTo>
+  <LinkTo
+    @route='routes.entity-types'
+    class='relative text-primary-idle underline hover:text-positive focus:text-blue'
+  >Entity types</LinkTo>
+</div>
+{{outlet}}

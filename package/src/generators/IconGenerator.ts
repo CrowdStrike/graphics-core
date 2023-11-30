@@ -17,9 +17,9 @@ interface MaterialData {
 interface AddLayerParams {
   asset: string;
   color?: number;
-  offset: THREE.Vector2;
+  offset?: THREE.Vector2;
   shouldCenterOnBackground?: boolean;
-  alpha: number;
+  alpha?: number;
 }
 
 interface IconGeneratorMakeParams {
