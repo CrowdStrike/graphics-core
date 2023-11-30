@@ -380,5 +380,6 @@ export class LineEntitiesDemo {
     window.removeEventListener('resize', this.resizeDelegate);
     this.threeJsView?.dispose();
     this.isDisposed = true;
+    this.gui?.destroy()
   }
 }
