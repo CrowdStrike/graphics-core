@@ -132,6 +132,7 @@ importers:
       '@types/ember__engine': 4.0.4
       '@types/ember__error': 4.0.2
       '@types/ember__object': 4.0.5
+      '@types/ember__owner': ^4.0.8
       '@types/ember__polyfills': 4.0.1
       '@types/ember__routing': 4.0.12
       '@types/ember__runloop': 4.0.2
@@ -187,6 +188,8 @@ importers:
       webpack: 5.76.2
     dependencies:
       '@crowdstrike/graphics-core': link:../package
+      '@glimmer/component': 1.1.2_@babel+core@7.22.10
+      '@glimmer/tracking': 1.1.2
       d3: 6.7.0
       dat.gui: 0.7.9
       ember-modifier: 4.1.0_ember-source@4.10.0
@@ -216,8 +219,6 @@ importers:
       '@embroider/core': 2.1.1
       '@embroider/test-setup': 2.1.1
       '@embroider/webpack': 2.1.1_ne4q3jiydbni2be4mfi7slb23y
-      '@glimmer/component': 1.1.2_@babel+core@7.22.10
-      '@glimmer/tracking': 1.1.2
       '@nullvoxpopuli/eslint-configs': 3.2.2_l4j77shwodhzsifhwz6qj6wqoe
       '@tsconfig/ember': 1.1.0
       '@types/d3': 6.7.5
@@ -231,6 +232,7 @@ importers:
       '@types/ember__engine': 4.0.4_@babel+core@7.22.10
       '@types/ember__error': 4.0.2
       '@types/ember__object': 4.0.5_@babel+core@7.22.10
+      '@types/ember__owner': 4.0.8
       '@types/ember__polyfills': 4.0.1
       '@types/ember__routing': 4.0.12_@babel+core@7.22.10
       '@types/ember__runloop': 4.0.2_@babel+core@7.22.10
@@ -2696,7 +2698,6 @@ packages:
     dependencies:
       '@glimmer/env': 0.1.7
       '@glimmer/validator': 0.44.0
-    dev: true
 
   /@glimmer/util/0.44.0:
     resolution: {integrity: sha512-duAsm30uVK9jSysElCbLyU6QQYO2X9iLDLBIBUcCqck9qN1o3tK2qWiHbGK5d6g8E2AJ4H88UrfElkyaJlGrwg==}
@@ -2718,7 +2719,6 @@ packages:
 
   /@glimmer/validator/0.44.0:
     resolution: {integrity: sha512-i01plR0EgFVz69GDrEuFgq1NheIjZcyTy3c7q+w7d096ddPVeVcRzU3LKaqCfovvLJ+6lJx40j45ecycASUUyw==}
-    dev: true
 
   /@glimmer/validator/0.65.4:
     resolution: {integrity: sha512-0YUjAyo45DF5JkQxdv5kHn96nMNhvZiEwsAD4Jme0kk5Q9MQcPOUtN76pQAS4f+C6GdF9DeUr2yGXZLFMmb+LA==}

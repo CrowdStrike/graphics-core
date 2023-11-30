@@ -12,6 +12,8 @@ Router.map(function () {
    * This is a non-ember convention that CrowdStrike uses
    */
   this.route('routes', { path: '/' }, function () {
+    this.route('demos');
+    this.route('demo-viewer', { path: '/view/:id' });
     this.route('instanced-attributes');
     this.route('label-generator');
     this.route('multi-texture-shader');
