@@ -10,5 +10,7 @@ module.exports = {
   content: [path.join(appEntry, relevantFilesGlob)],
   presets: [require('@crowdstrike/tailwind-toucan-base')],
 
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography')
+  ],
 };

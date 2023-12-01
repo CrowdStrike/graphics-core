@@ -121,6 +121,7 @@ importers:
       '@glimmer/component': 1.1.2
       '@glimmer/tracking': 1.1.2
       '@nullvoxpopuli/eslint-configs': ^3.2.2
+      '@tailwindcss/typography': ^0.5.10
       '@tsconfig/ember': 1.1.0
       '@types/d3': 6.7.5
       '@types/dat.gui': 0.7.11
@@ -223,6 +224,7 @@ importers:
       '@embroider/test-setup': 2.1.1
       '@embroider/webpack': 2.1.1_ne4q3jiydbni2be4mfi7slb23y
       '@nullvoxpopuli/eslint-configs': 3.2.2_l4j77shwodhzsifhwz6qj6wqoe
+      '@tailwindcss/typography': 0.5.10_tailwindcss@3.3.5
       '@tsconfig/ember': 1.1.0
       '@types/d3': 6.7.5
       '@types/dat.gui': 0.7.11
@@ -3058,6 +3060,18 @@ packages:
 
   /@socket.io/component-emitter/3.1.0:
     resolution: {integrity: sha512-+9jVqKhRSpsc591z5vX+X5Yyw+he/HCB4iQ/RYxw35CEPaY1gnsNE43nf9n9AaYjAQrTiI/mOwKUKdUs9vf7Xg==}
+    dev: true
+
+  /@tailwindcss/typography/0.5.10_tailwindcss@3.3.5:
+    resolution: {integrity: sha512-Pe8BuPJQJd3FfRnm6H0ulKIGoMEQS+Vq01R6M5aCrFB/ccR/shT+0kXLjouGC1gFLm9hopTFN+DMP0pfwRWzPw==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || insiders'
+    dependencies:
+      lodash.castarray: 4.4.0
+      lodash.isplainobject: 4.0.6
+      lodash.merge: 4.6.2
+      postcss-selector-parser: 6.0.10
+      tailwindcss: 3.3.5
     dev: true
 
   /@tootallnate/once/1.1.2:
@@ -10902,6 +10916,10 @@ packages:
     resolution: {integrity: sha512-JwObCrNJuT0Nnbuecmqr5DgtuBppuCvGD9lxjFpAzwnVtdGoDQ1zig+5W8k5/6Gcn0gZ3936HDAlGd28i7sOGQ==}
     dev: true
 
+  /lodash.isplainobject/4.0.6:
+    resolution: {integrity: sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA==}
+    dev: true
+
   /lodash.kebabcase/4.1.1:
     resolution: {integrity: sha512-N8XRTIMMqqDgSy4VLKPnJ/+hpGZN+PHQiJnSenYqPaVV/NCqEogTnAdZLQiGKhxX+JCs8waWq2t1XHWKOmlY8g==}
     dev: true
@@ -12095,6 +12113,14 @@ packages:
     dependencies:
       postcss: 8.4.31
       postcss-selector-parser: 6.0.13
+
+  /postcss-selector-parser/6.0.10:
+    resolution: {integrity: sha512-IQ7TZdoaqbT+LCpShg46jnZVlhWD2w6iQYAcYXfHARZ7X1t/UGhhceQDs5X0cGqKvYlHNOuv7Oa1xmb0oQuA3w==}
+    engines: {node: '>=4'}
+    dependencies:
+      cssesc: 3.0.0
+      util-deprecate: 1.0.2
+    dev: true
 
   /postcss-selector-parser/6.0.13:
     resolution: {integrity: sha512-EaV1Gl4mUEV4ddhDnv/xtj7sxwrwxdetHdWUGnT4VJQf+4d05v6lHYZr8N573k5Z0BViss7BDhfWtKS3+sfAqQ==}

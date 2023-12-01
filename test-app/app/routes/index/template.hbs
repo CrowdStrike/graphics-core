@@ -1,43 +1,65 @@
-<div
-  class='z-10 flex w-1/4 flex-col flex-wrap justify-around space-y-1.5 bg-basement p-2 text-body-and-labels'
->
-  {{#each this.demos as |demo|}}
-    <LinkTo
-      class='relative text-primary-idle underline hover:text-positive focus:text-blue'
-      @route='routes.demo-viewer'
-      @model={{demo.id}}
-    >
-      {{demo.name}}
-    </LinkTo>
-  {{/each}}
-  {{! <LinkTo @route='routes.demos' class='flex'>demos</LinkTo> }}
-  <LinkTo
-    @route='routes.vertex-playground'
-    class='relative text-primary-idle underline hover:text-positive focus:text-blue'
-  >Vertex playground</LinkTo>
-  <LinkTo
-    @route='routes.instanced-attributes'
-    class='relative text-primary-idle underline hover:text-positive focus:text-blue'
-  >Instanced Attributes</LinkTo>
-  <LinkTo
-    @route='routes.label-generator'
-    class='relative text-primary-idle underline hover:text-positive focus:text-blue'
-  >Label Generator</LinkTo>
-  <LinkTo
-    @route='routes.multi-texture-shader'
-    class='relative text-primary-idle underline hover:text-positive focus:text-blue'
-  >Multi Texture Shader</LinkTo>
-  <LinkTo
-    @route='routes.edges-v2'
-    class='relative text-primary-idle underline hover:text-positive focus:text-blue'
-  >Edge demo</LinkTo>
-  <LinkTo
-    @route='routes.edge-types'
-    class='relative text-primary-idle underline hover:text-positive focus:text-blue'
-  >Edge types</LinkTo>
-  <LinkTo
-    @route='routes.entity-types'
-    class='relative text-primary-idle underline hover:text-positive focus:text-blue'
-  >Entity types</LinkTo>
+<div class='flex flex-col flex-wrap w-full justify-around p-2 font-sans text-nav-text-and-icons'>
+  <div class='flex flex-col flex-wrap items-center'>
+    <div class='text-xl'>@crowdstrike/graphics-core</div>
+    <div class='text-lg'>A utility library for WebGL</div>
+  </div>
+  <div class='flex flex-row justify-center'>
+    <div
+      onClick={{this.onDemoFilter}}
+      class='m-2 border-2 rounded-md p-1 cursor-pointer hover:text-positive uppercase text-brand'
+    >reset</div>
+    {{#each this.demoTags as |tag|}}
+      <div
+        onClick={{this.onDemoFilter}}
+        data-tag={{tag}}
+        class='m-2 border-2 rounded-md p-1 cursor-pointer hover:text-positive'
+      >{{tag}}</div>
+    {{/each}}
+  </div>
+  <div class='flex flex-row flex-wrap m-2'>
+    <div class='my-4'>
+      {{#each this.filteredDemos as |demo|}}
+        <div class='mt-4 hover:text-positive'>
+          {{#if demo.id}}
+            <LinkTo
+              class='flex flex-col'
+              @route='routes.{{demo.route}}'
+              @model={{if demo.id demo.id demo.description}}
+            >
+              <div class='text-md'>
+                {{demo.name}}
+              </div>
+              <div class='text-sm'>
+                {{demo.description}}
+              </div>
+              <div class='flex flex-row my-2'>
+                {{#each demo.tags as |tag|}}
+                  <div
+                    class='text-xs flex mr-2 border-2 rounded-md p-1 cursor-pointer'
+                  >{{tag}}</div>
+                {{/each}}
+              </div>
+            </LinkTo>
+          {{else}}
+            <LinkTo class='flex flex-col' @route='routes.{{demo.route}}'>
+              <div class='text-md'>
+                {{demo.name}}
+              </div>
+              <div class='text-sm'>
+                {{demo.description}}
+              </div>
+              <div class='flex flex-row my-2'>
+                {{#each demo.tags as |tag|}}
+                  <div
+                    class='text-xs flex mr-2 border-2 rounded-md p-1 cursor-pointer'
+                  >{{tag}}</div>
+                {{/each}}
+              </div>
+            </LinkTo>
+          {{/if}}
+        </div>
+      {{/each}}
+    </div>
+
+  </div>
 </div>
-{{outlet}}
