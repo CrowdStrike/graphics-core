@@ -56,6 +56,7 @@
     "@embroider/test-setup": "2.1.1",
     "@embroider/webpack": "2.1.1",
     "@nullvoxpopuli/eslint-configs": "^3.2.2",
+    "@tailwindcss/typography": "^0.5.10",
     "@tsconfig/ember": "1.1.0",
     "@types/d3": "6.7.5",
     "@types/dat.gui": "0.7.11",
