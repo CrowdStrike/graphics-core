@@ -2,7 +2,7 @@
 
 [![CrowdStrike Subreddit](https://img.shields.io/badge/-r%2Fcrowdstrike-white?logo=reddit&labelColor=gray&link=https%3A%2F%2Freddit.com%2Fr%2Fcrowdstrike)](https://reddit.com/r/crowdstrike)
 
-[![Install lint and test](https://github.com/CrowdStrike/graphics/actions/workflows/ci.yml/badge.svg)](https://github.com/CrowdStrike/graphics/actions/workflows/ci.yml)
+[![Install lint and test](https://github.com/CrowdStrike/graphics-core/actions/workflows/ci.yml/badge.svg)](https://github.com/CrowdStrike/graphics-core/actions/workflows/ci.yml)
 
 <br>
 
