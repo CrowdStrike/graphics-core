@@ -10,6 +10,9 @@
 		"package",
         "test-app"
 	],
+    "files.associations": {
+        "*.css": "tailwindcss"
+    },
     // Enable format on save
     "editor.formatOnSave": true,
     "[javascript]": {
