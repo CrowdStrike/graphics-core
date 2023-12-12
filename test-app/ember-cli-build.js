@@ -1,8 +1,7 @@
 'use strict';
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
-// const autoprefixer = require('autoprefixer');
-// const tailwind = require('tailwindcss');
+const tailwindConfig = require('./tailwind.config');
 
 const isProduction = () => EmberApp.env() === 'production';
 
@@ -17,7 +16,7 @@ console.debug({ configureTailwind, configureCSSModules });
 
 module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
-    // ...configureCSSModules({ tailwindConfig }),
+    ...configureCSSModules({ tailwindConfig }),
     name: 'test-app',
   });
 

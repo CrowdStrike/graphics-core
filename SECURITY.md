@@ -1,4 +1,4 @@
-![CrowdStrike Falcon](./github/cs-logo.png)
+![CrowdStrike Falcon](/.github/cs-logo.png)
 
 # Security Policy
 

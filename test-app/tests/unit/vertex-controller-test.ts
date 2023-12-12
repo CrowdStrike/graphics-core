@@ -22,7 +22,7 @@ module('Unit | graphics-core | vertex-controller', function (hooks) {
   const loader = new THREE.TextureLoader();
   let iconTextureAtlas: THREE.Texture;
   let sharedIconAttributesForVertices: InstancedIconAttributes;
-  let baseIcon = 'graph-entities/node-24-pressed' as keyof typeof iconCoordinates;
+  let baseIcon = 'circle-filled' as keyof typeof iconCoordinates;
   let entity: GraphicsV2VertexController;
   const entityId = '';
   let slots = generateDefaultUiSlots();
@@ -131,9 +131,9 @@ module('Unit | graphics-core | vertex-controller', function (hooks) {
       'entity.iconCoordinates: setting the base icon sends the correct UV offsets to the uvOffset attributes',
     );
 
-    entity.updateState({ icon: 'micro/hexagon-10' });
+    entity.updateState({ icon: 'hexagon-10' });
 
-    let newIconCoordinates = iconCoordinates['micro/hexagon-10'];
+    let newIconCoordinates = iconCoordinates['hexagon-10'];
 
     assert.ok(
       entity.iconAttributes.attributes['uvOffset']?.getX(0) === newIconCoordinates.x &&

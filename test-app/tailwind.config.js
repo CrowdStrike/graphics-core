@@ -18,6 +18,6 @@ module.exports = {
   // presets: [],
 
   plugins: [
-    // require('@tailwindcss/typography')
+    require('@tailwindcss/typography')
   ],
 };

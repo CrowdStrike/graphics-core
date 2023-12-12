@@ -322,9 +322,9 @@ export class VertexPlaygroundDemo {
 
     return {
       badge_below: [
-        { icon: 'metadata/dns-requests-active-24', color: 0xdddddd },
-        { icon: 'metadata/process-operations-active-24', color: 0xdddddd },
-        { icon: 'metadata/disc-operations-active-24', color: 0xdddddd },
+        { icon: 'circle-squares', color: 0xdddddd },
+        { icon: 'arrow-and-circle', color: 0xdddddd },
+        { icon: 'concentric-circles', color: 0xdddddd },
       ].slice(0, numBadgeBelow),
       label: [
         {
@@ -347,7 +347,7 @@ export class VertexPlaygroundDemo {
       ],
       interactions: [
         {
-          icon: 'controls/settings-16',
+          icon: 'settings',
           color: 0xaaaaaa,
           interactions: {
             onClick: (e: GraphicsV2VertexController, layerAttributes: InstancedIconAttributes) => {
@@ -385,23 +385,23 @@ export class VertexPlaygroundDemo {
           } satisfies InteractionCallbacks<InstancedIconAttributes>,
         },
         {
-          icon: 'controls/minus-encircled-16',
+          icon: 'circle-minus',
           color: 0xaaaaaa,
         },
         {
-          icon: 'controls/load-more-16',
+          icon: 'hexagon-plus',
           color: 0xaaaaaa,
         },
       ].slice(0, numInteractions),
       disposition: [
         {
-          icon: 'micro/status-dot-12',
+          icon: 'dot-12',
           color: 0x00ff00,
         },
       ],
       disposition_background: [
         {
-          icon: 'micro/status-dot-12',
+          icon: 'dot-12',
           color: this.demoParams.bgColor,
         },
       ],
