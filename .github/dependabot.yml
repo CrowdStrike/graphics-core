@@ -5,15 +5,15 @@
 
 version: 2
 updates:
-  - package-ecosystem: "pnpm"
+  - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "weekly"
-  - package-ecosystem: "pnpm"
+  - package-ecosystem: "npm"
     directory: "/package"
     schedule:
       interval: "weekly"
-  - package-ecosystem: "pnpm"
+  - package-ecosystem: "npm"
     directory: "/test-app"
     schedule:
       interval: "weekly"
