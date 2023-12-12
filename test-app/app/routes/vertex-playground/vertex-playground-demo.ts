@@ -6,11 +6,13 @@
 
 import {
   DEFAULT_UI_OFFSETS,
-  generateDefaultUiSlots,
+  generateHorizontalUiSlots,
+  generateVerticalUiSlots,
   GL_MAX_TEXTURE_IMAGE_UNITS,
   GraphicsV2VertexController,
   InstancedIconAttributes,
   InstancedMeshWithController,
+  InstancedTextAlignment,
   MouseControls,
   MouseControlsEvent,
   MousePickerEvents,
@@ -28,6 +30,7 @@ import * as THREE from 'three';
 
 import type {
   InstancedInteractionAttributes,
+  InstancedTextAttributes,
   InteractionCallbacks,
   OverlayContent,
   ThreeJSView,
@@ -67,6 +70,7 @@ export class VertexPlaygroundDemo {
     labelColor: 0xffffff,
     descriptionColor: 0xaaaaaa,
     highlightColor: 0x5fcc91,
+    showTextUnderIcon: true,
     updateOverlayContent: () => {
       this.entities.forEach((entity) => {
         entity.updateOverlayContent(this.randomizeOverlays(entity.state.icon));
@@ -318,12 +322,14 @@ export class VertexPlaygroundDemo {
 
   randomizeOverlays(baseIcon?: string) {
     const numInteractions = NumberUtils.getRandomInt(0, 3);
-    const numBadgeBelow = NumberUtils.getRandomInt(0, 3);
+    const numBadgeBelow = NumberUtils.getRandomInt(0, 5);
 
     return {
       badge_below: [
         { icon: 'circle-squares', color: 0xdddddd },
         { icon: 'arrow-and-circle', color: 0xdddddd },
+        { icon: 'concentric-circles', color: 0xdddddd },
+        { icon: 'concentric-circles', color: 0xdddddd },
         { icon: 'concentric-circles', color: 0xdddddd },
       ].slice(0, numBadgeBelow),
       label: [
@@ -424,7 +430,7 @@ export class VertexPlaygroundDemo {
       // it's possible a bug might show up if element N introduces a slot
       // that the previous ones don't have
       // (it could mess up the recursive structure of this.sharedIconAttributesForVertices)
-      const slots = generateDefaultUiSlots();
+      const slots = this.generateSlots();
 
       const entity = new GraphicsV2VertexController({
         id,
@@ -439,6 +445,7 @@ export class VertexPlaygroundDemo {
       });
 
       this.entities.push(entity);
+      this.updateTextConfigAccordingToTextOrientation();
     }
 
     this.entities.forEach((entity, idx) => {
@@ -514,7 +521,7 @@ export class VertexPlaygroundDemo {
 
         // GraphicsV2VertexController.registerUiSlots(generateDefaultUiSlots());
         this.entities.forEach((entity) => {
-          entity.registerUiSlots(generateDefaultUiSlots());
+          entity.registerUiSlots(this.generateSlots());
           entity.update();
         });
       });
@@ -524,7 +531,7 @@ export class VertexPlaygroundDemo {
 
         // GraphicsV2VertexController.registerUiSlots(generateDefaultUiSlots());
         this.entities.forEach((entity) => {
-          entity.registerUiSlots(generateDefaultUiSlots());
+          entity.registerUiSlots(this.generateSlots());
           entity.update();
         });
       });
@@ -548,6 +555,13 @@ export class VertexPlaygroundDemo {
     vertexElementsFolder.add(this.demoParams, 'visible').onChange((e) => {
       this.entities.forEach((entity) => entity.setVisibility(e));
     });
+    vertexElementsFolder.add(this.demoParams, 'showTextUnderIcon').onChange(() => {
+      this.updateTextConfigAccordingToTextOrientation();
+      this.entities.forEach((entity) => {
+        entity.registerUiSlots(this.generateSlots());
+        entity.update();
+      });
+    });
     vertexElementsFolder.add(this.demoParams, 'moveVertices');
     vertexElementsFolder.add(this.demoParams, 'animateSize');
     vertexElementsFolder.add(this.demoParams, 'animateUiSlots');
@@ -569,6 +583,42 @@ export class VertexPlaygroundDemo {
     return { memory, calls, triangles, points, lines };
   }
 
+  updateTextConfigAccordingToTextOrientation() {
+    try {
+      if (this.labelAttributes) {
+        this.labelAttributes.updateTextConfig({
+          alignment: this.demoParams.showTextUnderIcon
+            ? InstancedTextAlignment.middle
+            : InstancedTextAlignment.start,
+          truncationLength: 15,
+          truncationStrategy: 'end',
+          pixelDensity: 3,
+        });
+      }
+
+      if (this.descriptionAttributes) {
+        this.descriptionAttributes.updateTextConfig({
+          alignment: this.demoParams.showTextUnderIcon
+            ? InstancedTextAlignment.middle
+            : InstancedTextAlignment.start,
+          truncationLength: 15,
+          truncationStrategy: 'end',
+          pixelDensity: 3,
+        });
+      }
+    } catch {
+      //
+    }
+  }
+
+  generateSlots() {
+    if (this.demoParams.showTextUnderIcon) {
+      return generateVerticalUiSlots();
+    } else {
+      return generateHorizontalUiSlots();
+    }
+  }
+
   get interactionAttributes() {
     if (!this.entities[0]) {
       throw new Error('interactionAttributes: failed to retrieve');
@@ -576,6 +626,26 @@ export class VertexPlaygroundDemo {
 
     return this.entities[0].iconAttributes?.getUiLayer<InstancedInteractionAttributes>(
       GraphicsV2VertexController.getLayerSlotName('interaction_plane', 0),
+    );
+  }
+
+  get labelAttributes() {
+    if (!this.entities[0]) {
+      throw new Error('labelAttributes: failed to retrieve');
+    }
+
+    return this.entities[0].getUiLayer<InstancedTextAttributes>(
+      GraphicsV2VertexController.getLayerSlotName('label', 0),
+    );
+  }
+
+  get descriptionAttributes() {
+    if (!this.entities[0]) {
+      throw new Error('descriptionAttributes: failed to retrieve');
+    }
+
+    return this.entities[0].getUiLayer<InstancedTextAttributes>(
+      GraphicsV2VertexController.getLayerSlotName('description', 0),
     );
   }
 
