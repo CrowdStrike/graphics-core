@@ -30,5 +30,6 @@
     "overrides-notes": {
       "@types/eslint": "the lint todo formatter brings in an old version of this package"
     }
-  }
+  },
+  "version": "1.0.0"
 }
