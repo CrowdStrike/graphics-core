@@ -226,6 +226,7 @@ export class GraphicsV2VertexController {
        * recursively set the position of the base icon and all overlays
        */
       attributes: this.iconAttributes,
+      entity: this
     });
 
     this.uiAttributes.forEach((d) => {

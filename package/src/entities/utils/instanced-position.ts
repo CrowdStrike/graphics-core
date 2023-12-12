@@ -1,6 +1,7 @@
 import gsap, { Power3 } from 'gsap';
 import * as THREE from 'three';
 
+import type { GraphicsV2VertexController } from '../../graph/entities/vertex';
 import type { InstancedAttributes } from '../instanced-attributes';
 
 interface InstancedPositionVector3Props {
@@ -9,6 +10,7 @@ interface InstancedPositionVector3Props {
   z: number;
   id: string;
   attributes: InstancedAttributes;
+  entity?: GraphicsV2VertexController;
 }
 
 const positionHandler = {
@@ -38,9 +40,11 @@ export class InstancedPositionVector3 extends THREE.Vector3 {
   declare _id: string;
 
   attributes: InstancedAttributes;
+  entity?: GraphicsV2VertexController;
 
-  constructor({ x, y, z, id, attributes }: InstancedPositionVector3Props) {
+  constructor({ x, y, z, id, attributes, entity }: InstancedPositionVector3Props) {
     super(x, y, z);
+    this.entity = entity;
     this.attributes = attributes;
     this.id = id;
 
@@ -85,7 +89,26 @@ export class InstancedPositionVector3 extends THREE.Vector3 {
   }
 
   set(x: number, y: number, z: number) {
+    if (x === this.x && y === this.y && z === this.z) return this;
+
     super.set(x, y, z);
+
+    if (this.entity) {
+      /**
+       * This is necessary because:
+       *
+       * If we have an attached GraphicsV2VertexController entity,
+       * the offsets in shared InstancedIconAttributes need to be reconfigured
+       * for the particular "slot" location of each particular entity.
+       *
+       * This is useful if, for example, we're iterating over entities and setting
+       * their positions using entity.position.set(). In this case, the InstancedIconAttributes
+       * of each entity would not take into account the slot config of the particular entity
+       * because the update() method wasn't called, which in turn calls the setConfigForLayers()
+       * method.
+       */
+      this.entity.update();
+    }
 
     const geometryIdx = this.attributes.idDict.get(this.id);
 
