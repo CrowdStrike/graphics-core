@@ -3,7 +3,7 @@ import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
 import {
-  generateDefaultUiSlots,
+  generateVerticalUiSlots,
   GraphicsV2VertexController,
   InstancedIconAttributes,
   TextStyle,
@@ -25,7 +25,7 @@ module('Unit | graphics-core | vertex-controller', function (hooks) {
   let baseIcon = 'circle-filled' as keyof typeof iconCoordinates;
   let entity: GraphicsV2VertexController;
   const entityId = '';
-  let slots = generateDefaultUiSlots();
+  let slots = generateVerticalUiSlots();
   const overlayContent: OverlayContent = {
     label: [
       {
