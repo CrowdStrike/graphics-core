@@ -17,7 +17,7 @@
     "lint:hbs:fix": "ember-template-lint . --fix --no-error-on-unmatched-pattern",
     "lint:js": "eslint . --cache",
     "start": "ember serve",
-    "tailwind:watch": "pnpm tailwindcss -i ./app/styles/app.css -o ./dist/assets/vendor.css --watch",
+    "tailwind:watch": "pnpm tailwindcss -i ./app/app.css -o ./dist/assets/vendor.css --watch",
     "test": "pnpm run test:ember",
     "test:ember": "ember test"
   },
