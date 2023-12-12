@@ -1,4 +1,5 @@
 export {
-  UI_OFFSETS as DEFAULT_UI_OFFSETS,
-  generateUiSlots as generateDefaultUiSlots,
+  DEFAULT_UI_OFFSETS,
+  generateHorizontalUiSlots,
+  generateVerticalUiSlots,
 } from './vertex-layer-configurations/default';
