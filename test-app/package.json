@@ -104,7 +104,7 @@
     "ember-css-modules": "2.0.1",
     "ember-load-initializers": "2.1.2",
     "ember-qunit": "8.0.0",
-    "ember-resolver": "10.0.0",
+    "ember-resolver": "11.0.1",
     "ember-source": "4.10.0",
     "ember-template-lint": "^3.15.0",
     "eslint": "8.33.0",
