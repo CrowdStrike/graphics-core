@@ -1,6 +1,6 @@
 {
   "name": "test-app-for-graphics-core",
-  "version": "2.10.1",
+  "version": "0.0.0",
   "private": true,
   "description": "Test app for @crowdstrike/graphics-core",
   "repository": "git@github.com:CrowdStrike/graphics.git",
@@ -11,6 +11,7 @@
     "test": "tests"
   },
   "scripts": {
+    "build": "ember build --environment=production",
     "lint": "concurrently 'npm:lint:*(!fix)' --names 'lint:'",
     "lint:fix": "concurrently 'npm:lint:*:fix' --names 'fix:'",
     "lint:hbs": "ember-template-lint . --no-error-on-unmatched-pattern",
