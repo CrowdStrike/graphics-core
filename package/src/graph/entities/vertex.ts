@@ -315,14 +315,22 @@ export class GraphicsV2VertexController {
 
       if (!uiElementsToAdd || !slots) return;
 
-      const positions = slots[uiElementsToAdd.length - 1];
+      // Make sure we don't add slots than we have positions
+      const positions = slots[uiElementsToAdd.length - 1] || slots[slots.length - 1];
 
       uiElementsToAdd.forEach((element, idx) => {
         const { icon, color, ringColor, text, interactions } = element;
         const instanceName = GraphicsV2VertexController.getLayerSlotName(layerName, idx);
-        const { instanceIdx } = this;
 
-        const attributes = this.getUiLayer(instanceName);
+        const { instanceIdx } = this;
+        let attributes;
+
+        // if we try to access a slot that doesn't exist, do nothing
+        try {
+          attributes = this.getUiLayer(instanceName);
+        } catch {
+          return;
+        }
 
         out.push({
           attributes,
@@ -384,6 +392,10 @@ export class GraphicsV2VertexController {
           let { x, y, w, h, width, height } = this.iconCoordinates[icon];
 
           attributes.changeIcon(instanceIdx, width, height, [x, y, w, h]);
+        } else {
+          throw new Error(
+            `GraphicsV2VertexController: this.iconCoordinates[${icon}] entry doesn't exist`,
+          );
         }
       }
 
@@ -518,10 +530,10 @@ export class GraphicsV2VertexController {
 
   update() {
     if (this.isOverlayStateDirty) {
-      this.setConfigForLayers();
-      // this.isOverlayStateDirty = false;
+      // TODO here would be a good spot for performance optimizations
     }
 
+    this.setConfigForLayers();
     // this.setScale(this.baseSize * this.zoomPercent);
     this.setScale(this.baseSize);
   }
