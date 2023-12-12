@@ -46,7 +46,7 @@
     "watch:js": "pnpm build:js --watch"
   },
   "dependencies": {
-    "gsap": "3.11.5",
+    "gsap": "3.12.3",
     "three": "0.154.0"
   },
   "devDependencies": {
