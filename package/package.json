@@ -1,6 +1,6 @@
 {
   "name": "@crowdstrike/graphics-core",
-  "version": "1.0.0",
+  "version": "0.9.0",
   "description": "WebGL primitives and utility functions that power CrowdStrike's graphs.",
   "keywords": [
     "threejs",
@@ -35,14 +35,14 @@
     "build": "pnpm build:js",
     "build:docs": "cp ../README.md ./README.md",
     "build:js": "rollup -c ./config/rollup.config.mjs",
-    "lint": "concurrently 'npm:lint:js'",
-    "lint:fix": "concurrently 'npm:lint:js:fix'",
+    "lint": "concurrently 'pnpm:lint:js'",
+    "lint:fix": "concurrently 'pnpm:lint:js:fix'",
     "lint:js": "eslint .",
     "lint:js:fix": "eslint . --fix",
     "prepack": "pnpm build",
     "prepublishOnly": "pnpm build",
     "start": "pnpm watch:js",
-    "watch": "concurrently 'npm:watch:*'",
+    "watch": "concurrently 'pnpm:watch:*'",
     "watch:js": "pnpm build:js --watch"
   },
   "dependencies": {

@@ -9,6 +9,8 @@
   "author": "CrowdStrike UX Team",
   "scripts": {
     "build:docs": "pnpm --filter '*' build",
+    "changeset:version": "changeset version",
+    "release": "changeset publish",
     "lint": "pnpm --filter '*' lint",
     "lint:fix": "pnpm --filter '*' run lint:fix",
     "test": "pnpm --filter '*' test"

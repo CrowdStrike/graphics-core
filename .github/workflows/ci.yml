@@ -78,10 +78,9 @@ jobs:
             Env: ${{ steps.publishStep.outputs.environment }}
             Docs: ${{ steps.publishStep.outputs.url }}
   release:
-    permissions:
-        contents: write # to create release commit (google-github-actions/release-please-action)
-        pull-requests: write # to create release PR (google-github-actions/release-please-action)
+    timeout-minutes: 5
     runs-on: ubuntu-latest
+    if: ${{ github.ref_name == 'main' }}
     needs:
       - build
     steps:
@@ -90,23 +89,13 @@ jobs:
           persist-credentials: false
       - uses: ./.github/actions/pnpm
       - uses: ./.github/actions/download-built-package
-      - name: Release
-        id: release
-        if: ${{ github.ref_name == 'main' }}
-        uses: google-github-actions/release-please-action@v3
+      - name: Create Release Pull Request or Publish to npm
+        id: changesets
+        uses: changesets/action@v1
         with:
-          release-type: node
-          default-branch: main
-          token: ${{ secrets.GITHUB_TOKEN }}
-      # Setup .npmrc file to publish to npm
-      # - name: Setup Node
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: '16.15.1'
-      #     registry-url: 'https://registry.npmjs.org'
-      #     cache: 'pnpm'
-      - name: Publish
-        run: pnpm publish
-        if: ${{ steps.release.outputs.releases_created }}
+          # This expects you to have a script called release which does a build for your packages and calls changeset publish
+          publish: pnpm release
+          title: 'Release Preview'
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
