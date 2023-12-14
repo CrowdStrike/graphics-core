@@ -1,5 +1,11 @@
 # @crowdstrike/graphics-core
 
+## 1.1.0
+
+### Minor Changes
+
+- [#36](https://github.com/CrowdStrike/graphics-core/pull/36) [`90113a3`](https://github.com/CrowdStrike/graphics-core/commit/90113a36887d32730e52522fa147d6b5f6152686) Thanks [@zacoppotamus](https://github.com/zacoppotamus)! - Update peer dependencies for three.js and gsap
+
 ## 1.0.0
 
 ### Major Changes
