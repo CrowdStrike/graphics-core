@@ -85,6 +85,10 @@
     "typescript": "5.0.2",
     "webpack": "5.76.2"
   },
+  "peerDependencies": {
+    "three": ">=0.154.0",
+    "gsap": ">=3.11.5"
+  },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
