@@ -56,7 +56,7 @@ jobs:
       - uses: ./.github/actions/pnpm
       - name: "Change TS to ${{ matrix.typescript-scenario }}"
         run: "pnpm add --save-dev ${{ matrix.typescript-scenario}}"
-        directory: ./test-app
+        working-directory: ./test-app
       - name: "Type checking"
         run: pnpm typecheck
   tests:
