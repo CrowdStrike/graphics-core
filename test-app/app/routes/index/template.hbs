@@ -1,57 +1,61 @@
-<div class='flex flex-col flex-wrap w-full justify-around p-2 font-sans text-nav-text-and-icons'>
-  <div class='flex flex-col flex-wrap items-center'>
-    <div class='text-xl'>@crowdstrike/graphics-core</div>
-    <div class='text-lg'>A utility library for WebGL</div>
-  </div>
-  <div class='flex flex-row justify-center'>
-    <div
-      onClick={{this.onDemoFilter}}
-      class='m-2 mx-5 border-2 rounded-md p-1 cursor-pointer hover:text-positive uppercase text-brand'
-    >reset</div>
-    {{#each this.demoTags as |tag|}}
+<div
+  class='flex flex-col flex-wrap w-full justify-around p-2 font-sans text-nav-text-and-icons scroll-smooth'
+>
+  <div class='fixed top-0 p-2 w-full bg-basement border-b'>
+    <div class='flex flex-col flex-wrap items-center'>
+      <div class='text-xl'>@crowdstrike/graphics-core</div>
+      <div class='text-lg'>A utility library for WebGL</div>
+    </div>
+    <div class='flex flex-row justify-center max-w-full overflow-x-auto'>
       <div
         onClick={{this.onDemoFilter}}
-        data-tag={{tag}}
-        class='m-2 border-2 rounded-md p-1 cursor-pointer hover:text-positive'
-      >{{tag}}</div>
-    {{/each}}
+        class='m-2 mx-5 border-2 rounded-md p-1 cursor-pointer hover:text-positive uppercase text-brand'
+      >reset</div>
+      {{#each this.demoTags as |tag|}}
+        <div
+          onClick={{this.onDemoFilter}}
+          data-tag={{tag}}
+          class='m-2 border-2 rounded-md p-1 cursor-pointer hover:text-positive'
+        >{{tag}}</div>
+      {{/each}}
+    </div>
   </div>
-  <div class='flex flex-row flex-wrap m-2'>
-    <div class='my-4'>
+  <div class='max-w-5xl m-auto flex justify-center my-32'>
+    <div class='flex flex-row flex-wrap justify-between m-2'>
       {{#each this.filteredDemos as |demo|}}
-        <div class='mt-4 hover:text-positive'>
+        <div class='m-8 hover:text-positive w-64 border-t'>
           {{#if demo.id}}
             <LinkTo
               class='flex flex-col'
               @route='routes.{{demo.route}}'
               @model={{if demo.id demo.id demo.description}}
             >
-              <div class='text-md'>
+              <div class='text-md font-bold mt-2'>
                 {{demo.name}}
               </div>
-              <div class='text-sm'>
+              <div class='text-sm mt-4 mb-2'>
                 {{demo.description}}
               </div>
-              <div class='flex flex-row my-2'>
+              <div class='flex flex-row flex-wrap my-2'>
                 {{#each demo.tags as |tag|}}
                   <div
-                    class='text-xs flex mr-2 border-2 rounded-md p-1 cursor-pointer'
+                    class='text-xs flex mr-2 mb-2 border rounded-md p-1 font-bold cursor-pointer'
                   >{{tag}}</div>
                 {{/each}}
               </div>
             </LinkTo>
           {{else}}
             <LinkTo class='flex flex-col' @route='routes.{{demo.route}}'>
-              <div class='text-md'>
+              <div class='text-md font-bold mt-2'>
                 {{demo.name}}
               </div>
-              <div class='text-sm'>
+              <div class='text-sm mt-4 mb-2'>
                 {{demo.description}}
               </div>
-              <div class='flex flex-row my-2'>
+              <div class='flex flex-row flex-wrap my-2'>
                 {{#each demo.tags as |tag|}}
                   <div
-                    class='text-xs flex mr-2 border-2 rounded-md p-1 cursor-pointer'
+                    class='text-xs flex mr-2 mb-2 border rounded-md p-1 font-bold cursor-pointer'
                   >{{tag}}</div>
                 {{/each}}
               </div>
@@ -59,7 +63,7 @@
           {{/if}}
         </div>
       {{/each}}
-    </div>
 
+    </div>
   </div>
 </div>

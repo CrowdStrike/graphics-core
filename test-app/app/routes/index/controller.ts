@@ -9,10 +9,12 @@ export default class LabelGeneratorModifierController extends Controller {
 
   @action
   onDemoFilter(f: PointerEvent) {
-    if (f.target?.dataset?.tag) {
-      this.activeFilter = f.target?.dataset?.tag;
-    } else {
-      this.activeFilter = undefined;
+    if (f.target instanceof HTMLElement) {
+      if (f.target?.dataset['tag']) {
+        this.activeFilter = f.target?.dataset['tag'];
+      } else {
+        this.activeFilter = undefined;
+      }
     }
   }
 
@@ -25,7 +27,7 @@ export default class LabelGeneratorModifierController extends Controller {
       return this.allDemos;
     } else {
       return this.allDemos.filter((d) => {
-        return d.tags.includes(this.activeFilter);
+        return d.tags.includes(this.activeFilter ?? '');
       });
     }
   }

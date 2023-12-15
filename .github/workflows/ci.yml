@@ -15,7 +15,7 @@ jobs:
     name: Install
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/pnpm
   build:
     name: Build Tests
@@ -23,7 +23,7 @@ jobs:
     timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/pnpm
       - uses: ./.github/actions/assert-build
   lint:
@@ -32,10 +32,34 @@ jobs:
     needs:
       - install_dependencies
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/pnpm
       - name: Lint
         run: pnpm lint
+  typecheck:
+    name: "${{ matrix.typescript-scenario }}"
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    needs:
+      - install_dependencies
+    continue-on-error: true
+    strategy:
+      fail-fast: true
+      matrix:
+        typescript-scenario:
+          - typescript@4.9
+          - typescript@5.0
+          - typescript@5.1
+          - typescript@5.2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/pnpm
+      - uses: ./.github/actions/assert-build
+      - name: "Change TS to ${{ matrix.typescript-scenario }}"
+        run: "pnpm add --save-dev ${{ matrix.typescript-scenario}}"
+        working-directory: ./test-app
+      - name: "Type checking"
+        run: pnpm typecheck
   tests:
     name: Default Tests
     timeout-minutes: 5
@@ -43,7 +67,7 @@ jobs:
     needs:
       - build
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/pnpm
       - uses: ./.github/actions/download-built-package
       - run: pnpm test
@@ -57,7 +81,7 @@ jobs:
       deployments: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           persist-credentials: false
       - uses: ./.github/actions/pnpm
@@ -84,7 +108,7 @@ jobs:
     needs:
       - build
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           persist-credentials: false
       - uses: ./.github/actions/pnpm
@@ -95,7 +119,7 @@ jobs:
         with:
           # This expects you to have a script called release which does a build for your packages and calls changeset publish
           publish: pnpm release
-          title: 'Release Preview'
+          title: "Release Preview"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

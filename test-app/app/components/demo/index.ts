@@ -1,4 +1,6 @@
 import Component from '@glimmer/component';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 // eslint-disable-next-line
 import { cached } from '@glimmer/tracking';
 
