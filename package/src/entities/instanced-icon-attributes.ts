@@ -302,15 +302,15 @@ export class InstancedIconAttributes extends InstancedAttributes<
     return [x, y, w, h];
   }
 
+  /**
+   * This function is responsible for rendering the primary icon
+   * but also any kind of secondary icon (such as badges)
+   * Secondary icons may be optional, so we need to have a check to see whether
+   * they exist in the vertex configuration. If they don't exist,
+   * we toggle the visibility of that particular instance so that it doesn't
+   * render.
+   */
   changeIconFromSvgMeshGenerator(idx: number, iconName: string | undefined) {
-    /**
-     * This class is responsible for rendering the primary icon
-     * but also any kind of secondary icon (such as badges)
-     * Secondary icons may be optional, so we need to have a check to see whether
-     * they exist in the vertex configuration. If they don't exist,
-     * we toggle the visibility of that particular instance so that it doesn't
-     * render.
-     */
     if (iconName !== undefined) {
       this.toggleVisibility(idx, true);
 

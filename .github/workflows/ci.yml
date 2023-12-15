@@ -71,7 +71,8 @@ jobs:
       - uses: ./.github/actions/pnpm
       - uses: ./.github/actions/download-built-package
       - run: pnpm test
-  publishDocs:
+
+  publishDemos:
     name: Publish Demos to Cloudflare Pages
     runs-on: ubuntu-latest
     needs:
@@ -101,6 +102,30 @@ jobs:
             ## Preview URLs
             Env: ${{ steps.publishStep.outputs.environment }}
             Docs: ${{ steps.publishStep.outputs.url }}
+
+  publishDocs:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs:
+      - build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: ./.github/actions/pnpm
+      - run: pnpm typedoc
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          # Upload docs folder in root
+          path: "./docs"
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v3
+
   release:
     timeout-minutes: 5
     runs-on: ubuntu-latest

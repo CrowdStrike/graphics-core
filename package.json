@@ -13,12 +13,14 @@
     "lint": "pnpm --filter '*' lint",
     "lint:fix": "pnpm --filter '*' run lint:fix",
     "test": "pnpm --filter '*' test",
-    "typecheck": "pnpm --filter '*' typecheck"
+    "typecheck": "pnpm --filter '*' typecheck",
+    "typedoc": "typedoc"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.4.8",
     "@changesets/cli": "^2.26.0",
-    "concurrently": "7.6.0"
+    "concurrently": "7.6.0",
+    "typedoc": "^0.25.4"
   },
   "volta": {
     "node": "16.15.1",
