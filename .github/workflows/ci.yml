@@ -114,6 +114,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - uses: ./.github/actions/pnpm
+      - uses: ./.github/actions/download-built-package
       - run: pnpm typedoc
       - name: Setup Pages
         uses: actions/configure-pages@v4
