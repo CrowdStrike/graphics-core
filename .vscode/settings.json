@@ -23,6 +23,12 @@
     },
     // Set default context lines to 2 when search is opened in the editor
     "search.searchEditor.defaultNumberOfContextLines": 2,
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/*.code-search": true,
+        "**/docs": true,
+    },
     // Minimap usually just steals screen space
     "editor.minimap.enabled": false,
     // Replacement for Bracket Pair Colorizer 2 extension

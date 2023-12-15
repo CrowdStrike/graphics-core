@@ -86,8 +86,8 @@
     "webpack": "5.76.2"
   },
   "peerDependencies": {
-    "three": ">=0.154.0",
-    "gsap": ">=3.11.5"
+    "gsap": ">=3.11.5",
+    "three": ">=0.154.0"
   },
   "publishConfig": {
     "access": "public",

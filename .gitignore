@@ -2,6 +2,8 @@
 /dist/
 /tmp/
 
+/docs/
+
 # dependencies
 /bower_components/
 /node_modules/
