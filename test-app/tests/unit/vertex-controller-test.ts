@@ -8,8 +8,6 @@ import {
   InstancedIconAttributes,
   TextStyle,
 } from '@crowdstrike/graphics-core';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
 import IconTextureAtlas from 'test-app-for-graphics-core/assets/icon-texture-atlas.png';
 import iconCoordinates from 'test-app-for-graphics-core/utils/coordinates';
 import * as THREE from 'three';

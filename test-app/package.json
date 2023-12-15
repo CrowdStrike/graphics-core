@@ -20,7 +20,8 @@
     "start": "ember serve",
     "tailwind:watch": "pnpm tailwindcss -i ./app/app.css -o ./dist/assets/vendor.css --watch",
     "test": "pnpm run test:ember",
-    "test:ember": "ember test"
+    "test:ember": "ember test",
+    "typecheck": "tsc --project ./tsconfig.json"
   },
   "dependencies": {
     "@crowdstrike/ember-toucan-core": "^0.4.0",
