@@ -54,6 +54,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/pnpm
+      - uses: ./.github/actions/assert-build
       - name: "Change TS to ${{ matrix.typescript-scenario }}"
         run: "pnpm add --save-dev ${{ matrix.typescript-scenario}}"
         working-directory: ./test-app
