@@ -25,7 +25,6 @@
       {{#each this.filteredDemos as |demo|}}
         <div class='m-8 hover:text-positive w-64 border-t'>
           {{#if demo.id}}
-            {{this.isFiltered demo.tags}}
             <LinkTo
               class='flex flex-col'
               @route='routes.{{demo.route}}'
