@@ -8,14 +8,8 @@ export default class LabelGeneratorModifierController extends Controller {
   @tracked activeFilter?: string;
 
   @action
-  onDemoFilter(f: PointerEvent) {
-    if (f.target instanceof HTMLElement) {
-      if (f.target?.dataset['tag']) {
-        this.activeFilter = f.target?.dataset['tag'];
-      } else {
-        this.activeFilter = undefined;
-      }
-    }
+  onDemoFilter(tag: string | undefined) {
+    this.activeFilter = tag;
   }
 
   get allDemos() {
