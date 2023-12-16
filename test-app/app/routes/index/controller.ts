@@ -32,6 +32,15 @@ export default class LabelGeneratorModifierController extends Controller {
     }
   }
 
+  @action
+  isFiltered(tags: string[]) {
+    if (!this.activeFilter) {
+      return false
+    }
+
+    return tags.includes(this.activeFilter);
+  }
+
   get demoTags() {
     return Object.values(DEMO_TAGS);
   }
