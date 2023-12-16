@@ -1,7 +1,7 @@
 <div
-  class='flex flex-col flex-wrap w-full justify-around p-2 font-sans text-nav-text-and-icons scroll-smooth'
+  class='flex flex-col flex-wrap w-full justify-around font-sans text-nav-text-and-icons scroll-smooth bg-ground-floor'
 >
-  <div class='fixed top-0 p-2 w-full bg-basement border-b'>
+  <div class='fixed top-0 p-2 w-full border-b bg-basement'>
     <div class='flex flex-col flex-wrap items-center'>
       <div class='text-xl'>@crowdstrike/graphics-core</div>
       <div class='text-lg'>A utility library for WebGL</div>
@@ -9,13 +9,13 @@
     <div class='flex flex-row justify-center max-w-full overflow-x-auto'>
       <div
         onClick={{this.onDemoFilter}}
-        class='m-2 mx-5 border-2 rounded-md p-1 cursor-pointer hover:text-positive uppercase text-brand'
+        class='m-2 mx-5 border-2 rounded-md p-1 cursor-pointer hover:text-positive uppercase'
       >reset</div>
       {{#each this.demoTags as |tag|}}
         <div
           onClick={{this.onDemoFilter}}
           data-tag={{tag}}
-          class='m-2 border-2 rounded-md p-1 cursor-pointer hover:text-positive'
+          class='m-2 border-2 rounded-md p-1 cursor-pointer hover:text-positive text-blue'
         >{{tag}}</div>
       {{/each}}
     </div>
@@ -33,10 +33,10 @@
               <div class='text-md font-bold mt-2'>
                 {{demo.name}}
               </div>
-              <div class='text-sm mt-4 mb-2'>
+              <div class='text-sm mt-4 mb-2 text-nav-text-secondary'>
                 {{demo.description}}
               </div>
-              <div class='flex flex-row flex-wrap my-2'>
+              <div class='flex flex-row flex-wrap my-2 text-blue'>
                 {{#each demo.tags as |tag|}}
                   <div
                     class='text-xs flex mr-2 mb-2 border rounded-md p-1 font-bold cursor-pointer'
