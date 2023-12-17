@@ -10,11 +10,13 @@
       <button
         {{on 'mouseup' (fn this.onDemoFilter undefined)}}
         class='m-2 mx-5 border-2 rounded-md py-1 px-2 cursor-pointer hover:text-positive uppercase'
+        type='button'
       >reset</button>
       {{#each this.demoTags as |tag|}}
         <button
           {{on 'mouseup' (fn this.onDemoFilter tag)}}
           class='m-2 border-2 rounded-md py-1 px-2 cursor-pointer hover:text-positive text-blue {{if (this.isFiltered tag) 'text-positive' }}'
+          type='button'
         >{{tag}}</button>
       {{/each}}
     </div>
