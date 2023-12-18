@@ -651,5 +651,6 @@ export class LineTypesDemo {
     window.removeEventListener('resize', this.resizeDelegate);
     this.threeJsView?.dispose();
     this.isDisposed = true;
+    this.gui?.destroy()
   }
 }
