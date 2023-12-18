@@ -46,6 +46,10 @@ pnpm start
 
 and visit `http://localhost:4200/tests` to view your tests.
 
+## Adding a changeset
+
+To commit a changeset alongside your PR, run `pnpm changeset` from the root folder. Here you will clarify whether the change made requires a `patch/minor/major` version update. The command will generate a randomly named file inside `.changeset/`, which should be commited. This changelog will be consolidated and a new version of the package released whenever the automated `Release Preview` PR is closed.
+
 ## VS Code Setup
 
 Upon opening the repo in VS Code, you may be prompted to download the recommended extensions that help with linting. The following workspace settings are recommended in order to get Prettier to auto-save and ESLint working:
