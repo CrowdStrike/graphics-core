@@ -1,5 +1,13 @@
 # @crowdstrike/graphics-core
 
+## 1.1.1
+
+### Patch Changes
+
+- [#45](https://github.com/CrowdStrike/graphics-core/pull/45) [`c2ae12e`](https://github.com/CrowdStrike/graphics-core/commit/c2ae12e36e75b0268c71896de61785cf6a86fe1a) Thanks [@zacoppotamus](https://github.com/zacoppotamus)! - Remove hardcoded URL from AssetLoader
+
+- [#41](https://github.com/CrowdStrike/graphics-core/pull/41) [`39e3856`](https://github.com/CrowdStrike/graphics-core/commit/39e38565710140ee4708aa91bc0d0e8503c0dfbc) Thanks [@zacoppotamus](https://github.com/zacoppotamus)! - generate documentation and publish to gh pages
+
 ## 1.1.0
 
 ### Minor Changes
