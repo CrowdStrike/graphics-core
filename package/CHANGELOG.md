@@ -1,5 +1,11 @@
 # @crowdstrike/graphics-core
 
+## 1.1.2
+
+### Patch Changes
+
+- [#46](https://github.com/CrowdStrike/graphics-core/pull/46) [`cb5a9bd`](https://github.com/CrowdStrike/graphics-core/commit/cb5a9bd8747a91079d87392ccb030b9ea200bebd) Thanks [@zacoppotamus](https://github.com/zacoppotamus)! - Add pnpm release for publishing package
+
 ## 1.1.1
 
 ### Patch Changes
