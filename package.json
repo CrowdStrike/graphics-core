@@ -12,6 +12,7 @@
     "changeset": "changeset",
     "lint": "pnpm --filter '*' lint",
     "lint:fix": "pnpm --filter '*' run lint:fix",
+    "release": "changeset publish",
     "test": "pnpm --filter '*' test",
     "typecheck": "pnpm --filter '*' typecheck",
     "typedoc": "typedoc"
