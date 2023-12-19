@@ -7,7 +7,6 @@ import type { Atlas } from "../../loaders/TextureAtlasLoader";
 
 interface AssetLoaderParams {
   fonts: string[];
-  rootURL: string;
 }
 
 export class AssetLoader extends EventDispatcher {
@@ -16,21 +15,15 @@ export class AssetLoader extends EventDispatcher {
   atlas?: TextureAtlasLoader = new TextureAtlasLoader();
   fontLoader?: FontLoader = new FontLoader();
   fonts?: string[];
-  rootURL?: string;
 
   constructor(settings: AssetLoaderParams) {
     super();
 
-    this.rootURL = settings.rootURL;
     this.fonts = settings.fonts;
   }
 
   load(url: string, spritesJson: Atlas) {
     this.areAllAssetsLoaded = false;
-    url = url.replace(
-      "/@crowdstrike/graph-ui/",
-      `${this.rootURL}@crowdstrike/graph-ui/`
-    );
     this.atlas?.addEventListener(Event.COMPLETE, this._checkLoaded, this);
     this.atlas?.addEventListener(Event.ERROR, this._onAssetLoadError, this);
     this.atlas?.load(spritesJson, url);
@@ -74,7 +67,6 @@ export class AssetLoader extends EventDispatcher {
     this.fontLoader?.dispose();
     this.fontLoader = undefined;
 
-    this.rootURL = undefined;
     this.fonts = undefined;
 
     super.dispose();
