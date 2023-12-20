@@ -51,7 +51,6 @@ lineV2TextStyle.fontName = 'Helvetica Neue';
 lineV2TextStyle.pixelDensity = 2;
 
 export class LineV2 extends Line2 {
-  static isInstancedMeshAddedToScene = false;
 
   static ARROW_GEOMETRY?: THREE.CylinderGeometry;
   static TEXT_STYLE = lineV2TextStyle;
@@ -143,14 +142,23 @@ export class LineV2 extends Line2 {
     LineV2.arrows.mesh.geometry.computeBoundingBox();
   }
 
+  /**
+   * This method is called from the ThreeJSView class.
+   *
+   * Every time a new scene is created, the instanced meshes used for lines
+   * are also added.
+   */
   static addInstancedMeshesToScene(scene: THREE.Scene | ThreeJSView | THREE.Object3D) {
-    if (!LineV2.isInstancedMeshAddedToScene) {
       LineV2.labels.shouldDispatchMouseEvents = true;
-      scene.add(LineV2.labels.mesh);
-      scene.add(LineV2.arrows.mesh);
-    }
 
-    LineV2.isInstancedMeshAddedToScene = true;
+      /**
+       * addMeshToScene ensures that these meshes are only added once per scene.
+       */
+      LineV2.arrows.addMeshToScene(scene)
+      LineV2.labels.addMeshToScene(scene)
+
+      LineV2.arrows.mesh.position.z = 0;
+      LineV2.labels.mesh.position.z = 0;
   }
 
   constructor(settings: LineV2Settings) {
