@@ -2,6 +2,7 @@
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 const tailwindConfig = require('./tailwind.config');
+const withSideWatch = require('./config/with-side-watch');
 
 const isProduction = () => EmberApp.env() === 'production';
 
@@ -17,6 +18,9 @@ console.debug({ configureTailwind, configureCSSModules });
 module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
     ...configureCSSModules({ tailwindConfig }),
+    trees: {
+      app: withSideWatch('app', { watching: ['../package'] }),
+    },
     name: 'test-app',
   });
 
