@@ -1,5 +1,11 @@
 # @crowdstrike/graphics-core
 
+## 1.2.0
+
+### Minor Changes
+
+- [#50](https://github.com/CrowdStrike/graphics-core/pull/50) [`5a698c4`](https://github.com/CrowdStrike/graphics-core/commit/5a698c412d3e8a64ce580437c67b6bf93eb4d0ff) Thanks [@karimbeyrouti](https://github.com/karimbeyrouti)! - Optionally disable dynamic pixel density
+
 ## 1.1.2
 
 ### Patch Changes
