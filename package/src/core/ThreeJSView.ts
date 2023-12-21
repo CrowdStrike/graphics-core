@@ -40,6 +40,7 @@ export class ThreeJSViewParams {
   isOrthographic = true;
   itemsToDispose = [] as Disposable[];
   pixelDensity = 1;
+  shouldAutomaticallySetPixelDensity?:boolean = true;
   shouldUseTrackBall = true;
   webGLRendererOptions?: WebGLRendererParameters;
   width = 800;
@@ -100,6 +101,7 @@ export class ThreeJSView extends EventDispatcher {
   itemsToDispose: Disposable[] = [];
   frameCounter = 0;
   uuid: string;
+  shouldAutomaticallySetPixelDensity = true;
 
   constructor({
     clearColor = 0x000000,
@@ -114,6 +116,7 @@ export class ThreeJSView extends EventDispatcher {
       MaterialLibrary,
     ],
     pixelDensity = 1,
+    shouldAutomaticallySetPixelDensity = true,
     shouldUseTrackBall = true,
     webGLRendererOptions,
     width = 800,
@@ -130,6 +133,7 @@ export class ThreeJSView extends EventDispatcher {
       antialias: true,
     };
 
+    this.shouldAutomaticallySetPixelDensity = shouldAutomaticallySetPixelDensity;
     this.itemsToDispose = itemsToDispose;
     this.height = height;
     this.heightHalf = height * 0.5;
@@ -167,7 +171,7 @@ export class ThreeJSView extends EventDispatcher {
 
     this.camera.updateProjectionMatrix();
     this._containerElement = containerElement;
-    this._pixelDensity = calculatePixelDensity(pixelDensity);
+    this._pixelDensity = shouldAutomaticallySetPixelDensity ? calculatePixelDensity(pixelDensity) : pixelDensity;
     this.canvasRect = this.canvas.getBoundingClientRect();
     this._init(clearColor);
   }
@@ -286,7 +290,7 @@ export class ThreeJSView extends EventDispatcher {
     this.renderer.render(this.scene, this.camera);
     this.frameCounter++;
 
-    if (this.frameCounter % FiveSecondsAt60FPS === 1) {
+    if (this.shouldAutomaticallySetPixelDensity && this.frameCounter % FiveSecondsAt60FPS === 1) {
       let newPixelDensity = calculatePixelDensity(window.devicePixelRatio);
 
       if (this._pixelDensity !== newPixelDensity) {
