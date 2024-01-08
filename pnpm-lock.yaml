@@ -32,6 +32,7 @@ importers:
       '@babel/preset-typescript': 7.21.5
       '@babel/runtime': 7.21.5
       '@embroider/addon-dev': 3.0.0
+      '@embroider/addon-shim': ^1.0.0
       '@glimmer/component': 1.1.2
       '@nullvoxpopuli/eslint-configs': ^3.2.2
       '@types/three': 0.152.1
@@ -56,6 +57,7 @@ importers:
       typescript: 5.0.2
       webpack: 5.76.2
     dependencies:
+      '@embroider/addon-shim': 1.8.6
       gsap: 3.11.5
       three: 0.154.0
     devDependencies:

@@ -13,10 +13,6 @@
   },
   "license": "MIT",
   "author": "CrowdStrike UX Team",
-  "exports": {
-    ".": "./dist/index.js",
-    "./test-support": "./dist/test-support/index.js"
-  },
   "typesVersions": {
     "*": {
       "test-support": [
@@ -28,6 +24,7 @@
     }
   },
   "files": [
+    "addon-main.cjs",
     "dist",
     "src"
   ],
@@ -46,6 +43,7 @@
     "watch:js": "pnpm build:js --watch"
   },
   "dependencies": {
+    "@embroider/addon-shim": "^1.0.0",
     "gsap": "3.11.5",
     "three": "0.154.0"
   },
@@ -96,5 +94,18 @@
   "packageManager": "pnpm@7.3.0",
   "volta": {
     "extends": "../package.json"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./addon-main.js": "./addon-main.cjs"
+  },
+  "ember": {
+    "edition": "octane"
+  },
+  "ember-addon": {
+    "version": 2,
+    "type": "addon",
+    "main": "./addon-main.cjs",
+    "app-js": {}
   }
 }

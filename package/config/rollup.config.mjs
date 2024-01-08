@@ -20,7 +20,12 @@ export default defineConfig({
   plugins: [
     // These are the modules that users should be able to import from your
     // addon. Anything not listed here may get optimized away.
-    addon.publicEntrypoints(['**/*.js']),
+    addon.publicEntrypoints([
+      // For our own build we treat all JS modules as entry points, to not cause rollup-plugin-ts to mess things up badly when trying to tree-shake TS declarations
+      // but the actual importable modules are further restricted by the package.json entry points!
+      '**/*.js',
+      '**/*.ts',
+    ]),
 
     // This babel config should *not* apply presets or compile away ES modules.
     // It exists only to provide development niceties for you, like automatic
