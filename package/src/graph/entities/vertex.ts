@@ -240,7 +240,6 @@ export class GraphicsV2VertexController {
 
     // sets this.overlayContent (and by extension) this.overlays
     this.updateOverlayContent(overlays);
-
     this.update();
   }
 
