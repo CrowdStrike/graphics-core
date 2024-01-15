@@ -1,5 +1,11 @@
 # @crowdstrike/graphics-core
 
+## 1.2.1
+
+### Patch Changes
+
+- [#48](https://github.com/CrowdStrike/graphics-core/pull/48) [`6f26586`](https://github.com/CrowdStrike/graphics-core/commit/6f26586bb806d3ee1e3d61e168ec4bef3e3efdd9) Thanks [@zacoppotamus](https://github.com/zacoppotamus)! - InstancedMesh for Arrows in LineV2 get added to new scenes
+
 ## 1.2.0
 
 ### Minor Changes
