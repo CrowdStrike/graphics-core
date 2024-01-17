@@ -27,6 +27,7 @@ export default defineConfig({
       // For our own build we treat all JS modules as entry points, to not cause rollup-plugin-ts to mess things up badly when trying to tree-shake TS declarations
       // but the actual importable modules are further restricted by the package.json entry points!
       '**/*.ts',
+      '**/*.js',
     ]),
 
     // This babel config should *not* apply presets or compile away ES modules.

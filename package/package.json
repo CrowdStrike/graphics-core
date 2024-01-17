@@ -24,7 +24,7 @@
     }
   },
   "files": [
-    "addon-main.cjs",
+    "addon-main.js",
     "dist",
     "src"
   ],
@@ -98,7 +98,7 @@
   },
   "exports": {
     ".": "./dist/index.js",
-    "./addon-main.js": "./addon-main.cjs"
+    "./addon-main.js": "./addon-main.js"
   },
   "ember": {
     "edition": "octane"
@@ -106,7 +106,7 @@
   "ember-addon": {
     "version": 2,
     "type": "addon",
-    "main": "./addon-main.cjs",
+    "main": "addon-main.js",
     "app-js": {}
   }
 }
