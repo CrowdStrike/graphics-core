@@ -16,11 +16,19 @@ export default defineConfig({
       usePolling: true,
     },
   },
-  output: addon.output(),
+  output: {
+    ...addon.output(),
+    sourcemap: true,
+  },
   plugins: [
     // These are the modules that users should be able to import from your
     // addon. Anything not listed here may get optimized away.
-    addon.publicEntrypoints(['**/*.js']),
+    addon.publicEntrypoints([
+      // For our own build we treat all JS modules as entry points, to not cause rollup-plugin-ts to mess things up badly when trying to tree-shake TS declarations
+      // but the actual importable modules are further restricted by the package.json entry points!
+      '**/*.ts',
+      '**/*.js',
+    ]),
 
     // This babel config should *not* apply presets or compile away ES modules.
     // It exists only to provide development niceties for you, like automatic
@@ -33,22 +41,8 @@ export default defineConfig({
       // but we need the ember plugins converted first
       // (template compilation and co-location)
       transpiler: 'babel',
+      babelConfig: './babel.config.cjs',
       browserslist: ['last 2 firefox versions', 'last 2 chrome versions'],
-      tsconfig: {
-        fileName: 'tsconfig.json',
-        hook: (config) => ({
-          ...config,
-          declaration: true,
-          declarationMap: true,
-          // See: https://devblogs.microsoft.com/typescript/announcing-typescript-4-5/#beta-delta
-          // Allows us to use `exports` to define types per export
-          // However, it was declared as not ready
-          // as a result, we need extra / fallback references in the package.json
-          declarationDir: './dist',
-          // Retain docs (false is default)
-          removeComments: false,
-        }),
-      },
     }),
 
     // Follow the V2 Addon rules about dependencies. Your code can import from

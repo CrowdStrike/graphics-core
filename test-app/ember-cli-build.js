@@ -2,7 +2,10 @@
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 const tailwindConfig = require('./tailwind.config');
-const withSideWatch = require('./config/with-side-watch');
+const sideWatch = require('@embroider/broccoli-side-watch')
+const packageJson = require('./package');
+
+const path = require('path')
 
 const isProduction = () => EmberApp.env() === 'production';
 
@@ -19,7 +22,10 @@ module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
     ...configureCSSModules({ tailwindConfig }),
     trees: {
-      app: withSideWatch('app', { watching: ['../package'] }),
+      app: sideWatch('app', { watching: [path.parse(require.resolve('@crowdstrike/graphics-core')).dir] }),
+    },
+    autoImport: {
+      watchDependencies: Object.keys(packageJson.dependencies),
     },
     name: 'test-app',
   });

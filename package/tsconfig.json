@@ -1,14 +1,17 @@
 {
+  "extends": "@tsconfig/ember/tsconfig.json",
   "compilerOptions": {
     // Path resolution
     "baseUrl": "./src",
     "moduleResolution": "node",
     // types are built by rollup-plugin-ts
     "declarationDir": "./dist",
-    "emitDeclarationOnly": true,
+    // "emitDeclarationOnly": true,
     "declaration": true,
     // Build settings
     "noEmitOnError": false,
+    "noPropertyAccessFromIndexSignature": false,
+    "noUncheckedIndexedAccess": false,
     "module": "ESNext",
     "target": "ESNext",
     // Features

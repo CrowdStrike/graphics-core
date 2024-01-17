@@ -13,10 +13,6 @@
   },
   "license": "MIT",
   "author": "CrowdStrike UX Team",
-  "exports": {
-    ".": "./dist/index.js",
-    "./test-support": "./dist/test-support/index.js"
-  },
   "typesVersions": {
     "*": {
       "test-support": [
@@ -28,6 +24,7 @@
     }
   },
   "files": [
+    "addon-main.js",
     "dist",
     "src"
   ],
@@ -46,6 +43,7 @@
     "watch:js": "pnpm build:js --watch"
   },
   "dependencies": {
+    "@embroider/addon-shim": "^1.0.0",
     "gsap": "3.11.5",
     "three": "0.154.0"
   },
@@ -65,6 +63,7 @@
     "@embroider/addon-dev": "3.0.0",
     "@glimmer/component": "1.1.2",
     "@nullvoxpopuli/eslint-configs": "^3.2.2",
+    "@tsconfig/ember": "^3.0.0",
     "@types/three": "0.152.1",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
@@ -96,5 +95,18 @@
   "packageManager": "pnpm@7.3.0",
   "volta": {
     "extends": "../package.json"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./addon-main.js": "./addon-main.js"
+  },
+  "ember": {
+    "edition": "octane"
+  },
+  "ember-addon": {
+    "version": 2,
+    "type": "addon",
+    "main": "addon-main.js",
+    "app-js": {}
   }
 }
