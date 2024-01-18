@@ -34,6 +34,7 @@ importers:
       '@embroider/addon-dev': 3.0.0
       '@glimmer/component': 1.1.2
       '@nullvoxpopuli/eslint-configs': ^3.2.2
+      '@tsconfig/ember': 2.0.0
       '@types/three': 0.152.1
       '@typescript-eslint/eslint-plugin': ^5.62.0
       '@typescript-eslint/parser': ^5.62.0
@@ -74,6 +75,7 @@ importers:
       '@embroider/addon-dev': 3.0.0_rollup@3.27.0
       '@glimmer/component': 1.1.2_@babel+core@7.22.10
       '@nullvoxpopuli/eslint-configs': 3.2.2_hgjoicsblzgzh5gaydnel6rd3i
+      '@tsconfig/ember': 2.0.0
       '@types/three': 0.152.1
       '@typescript-eslint/eslint-plugin': 5.62.0_wp677gghdvugdvx74xl55z6mru
       '@typescript-eslint/parser': 5.62.0_qesohl5arz7pvqyycxtsqomlr4
@@ -116,6 +118,7 @@ importers:
       '@ember/string': 3.0.1
       '@ember/test-helpers': '>=3.0.3'
       '@ember/test-waiters': 3.0.2
+      '@embroider/broccoli-side-watch': 0.0.2-unstable.ba9fd29
       '@embroider/compat': 2.1.1
       '@embroider/core': 2.1.1
       '@embroider/test-setup': 2.1.1
@@ -223,6 +226,7 @@ importers:
       '@ember/string': 3.0.1
       '@ember/test-helpers': 3.2.1_f34pxifm3zluq7kmp52whzdd6u
       '@ember/test-waiters': 3.0.2
+      '@embroider/broccoli-side-watch': 0.0.2-unstable.ba9fd29
       '@embroider/compat': 2.1.1_@embroider+core@2.1.1
       '@embroider/core': 2.1.1
       '@embroider/test-setup': 2.1.1
@@ -2399,6 +2403,16 @@ packages:
     transitivePeerDependencies:
       - supports-color
       - webpack
+    dev: true
+
+  /@embroider/broccoli-side-watch/0.0.2-unstable.ba9fd29:
+    resolution: {integrity: sha512-jxMe47Rc2fUAwtKGsPy9x7gtYJpglTlbeRG5bgzs8njYZHbOiXRyhpNMcfJnn7f6Aoc4Xv4qXvTHeyye/6SyZw==}
+    dependencies:
+      broccoli-merge-trees: 4.2.0
+      broccoli-plugin: 4.0.7
+      broccoli-source: 3.0.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@embroider/compat/2.1.1_@embroider+core@2.1.1:
