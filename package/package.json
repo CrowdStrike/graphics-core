@@ -65,6 +65,7 @@
     "@embroider/addon-dev": "3.0.0",
     "@glimmer/component": "1.1.2",
     "@nullvoxpopuli/eslint-configs": "^3.2.2",
+    "@tsconfig/ember": "2.0.0",
     "@types/three": "0.152.1",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
