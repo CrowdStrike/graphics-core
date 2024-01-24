@@ -80,6 +80,7 @@ export class ArrowLineMesh extends LineMesh {
     style = undefined,
     { defaultScale = 0.25, offset = -30 } = {},
   ) {
+
     if (!style) {
       style = new TextStyle();
       style.name = 'arrow-line-label';
@@ -87,6 +88,13 @@ export class ArrowLineMesh extends LineMesh {
       style.fontColor = colourHex;
       style.fontName = 'Calibre';
       style.pixelDensity = 2;
+    }
+
+    // if a label already exists, update it in-place
+    if (this.label) {
+      LabelGenerator.update(this.label, txt, style)
+
+      return this.label;
     }
 
     this.label = LabelGenerator.make(txt, style, { offset: new THREE.Vector3(0, offset, 0) });

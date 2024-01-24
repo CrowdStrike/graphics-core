@@ -228,6 +228,10 @@ export class ArrowLineMeshTest extends ThreeJsComponentInterface {
       this._dtAcc = 0;
     }
 
+    if (Math.random() < .005) {
+      this.zRoArrowLine.setLabel(`angle: ${x.toFixed(1)}`, 0xffffff);
+    }
+
     this.zRoArrowLine.start.set(100, 0, 0);
     this.zRoArrowLine.end.set(100 + x, y, 0);
     this.zRoArrowLine.update();
