@@ -1,5 +1,13 @@
 # @crowdstrike/graphics-core
 
+## 1.2.2
+
+### Patch Changes
+
+- [#57](https://github.com/CrowdStrike/graphics-core/pull/57) [`03158af`](https://github.com/CrowdStrike/graphics-core/commit/03158af2051ecd7dac256dbbb5388634a24bd03f) Thanks [@zacoppotamus](https://github.com/zacoppotamus)! - update line label in place if it already exists
+
+- [#55](https://github.com/CrowdStrike/graphics-core/pull/55) [`09ffc1a`](https://github.com/CrowdStrike/graphics-core/commit/09ffc1ac11e77795a6c8b96d6fd7f7ede1b05cbf) Thanks [@zacoppotamus](https://github.com/zacoppotamus)! - Enable reloading for test-app using @embroider/broccoli-side-watch
+
 ## 1.2.1
 
 ### Patch Changes
