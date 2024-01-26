@@ -1,6 +1,6 @@
 {
   "name": "@crowdstrike/graphics-core",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "WebGL primitives and utility functions that power CrowdStrike's graphs.",
   "keywords": [
     "threejs",
