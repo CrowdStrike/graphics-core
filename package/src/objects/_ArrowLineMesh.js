@@ -92,7 +92,8 @@ export class ArrowLineMesh extends LineMesh {
 
     // if a label already exists, update it in-place
     if (this.label) {
-      LabelGenerator.update(this.label, txt, style)
+      LabelGenerator.update(this.label, txt, style, { offset: new THREE.Vector3(0, offset, 0) })
+      this.label.scale.set(defaultScale, defaultScale, defaultScale);
 
       return this.label;
     }
