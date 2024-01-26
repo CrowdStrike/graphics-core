@@ -1,5 +1,11 @@
 # @crowdstrike/graphics-core
 
+## 1.2.3
+
+### Patch Changes
+
+- [#58](https://github.com/CrowdStrike/graphics-core/pull/58) [`fd15f19`](https://github.com/CrowdStrike/graphics-core/commit/fd15f196f5dd0bf636318be419411c80bcfb99e5) Thanks [@zacoppotamus](https://github.com/zacoppotamus)! - add offset on LabelGenerator.update
+
 ## 1.2.2
 
 ### Patch Changes
