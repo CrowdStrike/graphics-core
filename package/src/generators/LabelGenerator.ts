@@ -80,8 +80,11 @@ export class LabelGenerator {
     label: LabelMesh,
     txt: string,
     style = label.style,
-    width = label.width,
-    height = label.height,
+    {
+      width = label.width,
+      height = label.height,
+      offset = new THREE.Vector3()
+    } = {}
   ) {
     if ((txt === label.text && style === label.style) || !style) {
       return;
@@ -92,7 +95,7 @@ export class LabelGenerator {
     let oldWidth = label.textGenerator?.textWidth;
 
     if (newWidth !== oldWidth && style?.autoResize === true) {
-      label.geometry = GeomCache.getCachedPlaneGeometry(textGenerator.textWidth, height);
+      label.geometry = GeomCache.getCachedPlaneGeometry(textGenerator.textWidth, height, offset);
       label.needsUpdate = true;
     }
 
