@@ -261,7 +261,6 @@ export class VertexPlaygroundDemo {
     this.controls.throwDampingFactor = 0.1;
     this.controls.throwThreshold = 2;
 
-    // @ts-expect-error expected callback func parameters are wrong
     this.controls.addEventListener(MouseControlsEvent.ZOOM_COMPLETE, this.onZoom, this);
 
     this.threeJsView = threeJsView;
@@ -277,15 +276,11 @@ export class VertexPlaygroundDemo {
     threeJsView.camera.far = 6000000;
     threeJsView.camera.updateProjectionMatrix();
 
-    // @ts-expect-error expected callback func parameters are wrong
+
     threeJsView.mousePicker.addEventListener(MousePickerEvents.MOUSE_UP, this.onMouseUp, this);
-    // @ts-expect-error expected callback func parameters are wrong
     threeJsView.mousePicker.addEventListener(MousePickerEvents.MOUSE_DOWN, this.onMouseDown, this);
-    // @ts-expect-error expected callback func parameters are wrong
     threeJsView.mousePicker.addEventListener(MousePickerEvents.ROLL_OUT, this.onRollOut, this);
-    // @ts-expect-error expected callback func parameters are wrong
     threeJsView.mousePicker.addEventListener(MousePickerEvents.ROLL_OVER, this.onRollOver, this);
-    // @ts-expect-error expected callback func parameters are wrong
     threeJsView.mousePicker.addEventListener(MousePickerEvents.MOUSE_WHEEL, this.onZoom, this);
 
     const loader = new THREE.TextureLoader();
@@ -663,7 +658,7 @@ export class VertexPlaygroundDemo {
     }
   }
 
-  onMouseUp(e: MousePickerEvents | Event) {
+  onMouseUp(e: MousePickerEvents) {
     const { instanceId } = e as MousePickerEvents;
 
     if (instanceId === null) return;
@@ -723,13 +718,13 @@ export class VertexPlaygroundDemo {
     }
   }
 
-  onMouseDown(e: MousePickerEvents | Event) {
+  onMouseDown(e: MousePickerEvents ) {
     const { instanceId } = e as MousePickerEvents;
 
     if (instanceId === null) return;
   }
 
-  onRollOut(e: MousePickerEvents | Event) {
+  onRollOut(e: MousePickerEvents ) {
     const { instanceId } = e as MousePickerEvents;
 
     if (instanceId === this.rolledOverIdx) {
@@ -779,7 +774,7 @@ export class VertexPlaygroundDemo {
     }
   }
 
-  onRollOver(e: MousePickerEvents | Event) {
+  onRollOver(e: MousePickerEvents ) {
     const { instanceId } = e as MousePickerEvents;
 
     if (instanceId === null) {
@@ -865,28 +860,24 @@ export class VertexPlaygroundDemo {
 
     this.threeJsView?.mousePicker.removeEventListener(
       MousePickerEvents.MOUSE_UP,
-      // @ts-expect-error expected callback func parameters are wrong
       this.onMouseUp,
       this,
     );
 
     this.threeJsView?.mousePicker.removeEventListener(
       MousePickerEvents.MOUSE_DOWN,
-      // @ts-expect-error expected callback func parameters are wrong
       this.onMouseDown,
       this,
     );
 
     this.threeJsView?.mousePicker.removeEventListener(
       MousePickerEvents.ROLL_OUT,
-      // @ts-expect-error expected callback func parameters are wrong
       this.onRollOut,
       this,
     );
 
     this.threeJsView?.mousePicker.removeEventListener(
       MousePickerEvents.ROLL_OVER,
-      // @ts-expect-error expected callback func parameters are wrong
       this.onRollOver,
       this,
     );

@@ -243,15 +243,11 @@ export class MouseControls extends RenderableObject {
     this._minScale = 0.4;
     this._mousePicker.removeEventListener(
       MousePickerEvents.MOUSE_WHEEL,
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
       this._onMouseWheel,
       this,
     );
     this._mousePicker.removeEventListener(
       MousePickerEvents.START_DRAG,
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
       this._onStartDrag,
       this,
     );
@@ -262,8 +258,6 @@ export class MouseControls extends RenderableObject {
     );
     this._mousePicker.removeEventListener(
       MousePickerEvents.TOUCH_ZOOM,
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
       this._onTouchZoom,
       this,
     );
@@ -279,15 +273,11 @@ export class MouseControls extends RenderableObject {
   didToggleActiveState(currentState: boolean) {
     this._mousePicker.removeEventListener(
       MousePickerEvents.MOUSE_WHEEL,
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
       this._onMouseWheel,
       this,
     );
     this._mousePicker.removeEventListener(
       MousePickerEvents.START_DRAG,
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
       this._onStartDrag,
       this,
     );
@@ -298,8 +288,6 @@ export class MouseControls extends RenderableObject {
     );
     this._mousePicker.removeEventListener(
       MousePickerEvents.TOUCH_ZOOM,
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
       this._onTouchZoom,
       this,
     );
@@ -307,15 +295,11 @@ export class MouseControls extends RenderableObject {
     if (currentState) {
       this._mousePicker.addEventListener(
         MousePickerEvents.MOUSE_WHEEL,
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
         this._onMouseWheel,
         this,
       );
       this._mousePicker.addEventListener(
         MousePickerEvents.START_DRAG,
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
         this._onStartDrag,
         this,
       );
@@ -326,8 +310,6 @@ export class MouseControls extends RenderableObject {
       );
       this._mousePicker.addEventListener(
         MousePickerEvents.TOUCH_ZOOM,
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
         this._onTouchZoom,
         this,
       );

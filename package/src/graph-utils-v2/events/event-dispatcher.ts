@@ -1,7 +1,7 @@
 import type { Event } from './event';
 
-interface EventValue {
-  listener: (e: Event) => void;
+interface EventValue<E extends Event = Event> {
+  listener: (e: E) => void;
   scope: unknown;
   type: string;
   priority: number;
@@ -21,9 +21,9 @@ export class EventDispatcher {
     this._target = null;
   }
 
-  addEventListener(
+  addEventListener<E extends Event = Event>(
     type: string,
-    listener: (e: Event) => void,
+    listener: (e: E) => void,
     scope: unknown = null,
     priority = 0,
   ) {
@@ -32,46 +32,46 @@ export class EventDispatcher {
     }
 
     if (this.getEventListenerIndex(type, listener) === -1) {
-      let lv: EventValue = {
+      let lv: EventValue<E> = {
         listener,
         scope,
         type,
         priority,
       };
 
-      this.listeners[type]?.push(lv);
+      this.listeners[type]?.push(lv as EventValue);
       this.listeners[type]?.sort((a, b) => a.priority - b.priority);
     }
   }
 
-  addOneEventListener(
+  addOneEventListener<E extends Event = Event>(
     type: string,
-    listener: (e: Event) => void,
+    listener: (e: E) => void,
     scope: unknown = null,
     priority = 0,
   ) {
-    if (!this.hasEventListener(type, listener, scope)) {
+    if (!this.hasEventListener<E>(type, listener, scope)) {
       // code from hasEventListener inlined for a (small) performance gain
       if (this.listeners[type] === undefined) {
         this.listeners[type] = [];
       }
 
-      if (this.getEventListenerIndex(type, listener) === -1) {
-        let lv: EventValue = {
+      if (this.getEventListenerIndex<E>(type, listener) === -1) {
+        let lv: EventValue<E> = {
           listener,
           scope,
           type,
           priority,
         };
 
-        this.listeners[type]?.push(lv);
+        this.listeners[type]?.push(lv as EventValue);
         this.listeners[type]?.sort((a, b) => a.priority - b.priority);
       }
     }
   }
 
-  removeEventListener(type: string, listener: (e: Event) => void, scope: unknown = null) {
-    let index = this.getEventListenerIndex(type, listener, scope);
+  removeEventListener<E extends Event = Event>(type: string, listener: (e: E) => void, scope: unknown = null) {
+    let index = this.getEventListenerIndex<E>(type, listener, scope);
 
     if (index !== -1) {
       this.listeners[type]?.splice(index, 1);
@@ -104,7 +104,7 @@ export class EventDispatcher {
     }
   }
 
-  getEventListenerIndex(type: string, listener: (e: Event) => void, scope: unknown = null) {
+  getEventListenerIndex<E extends Event = Event>(type: string, listener: (e: E) => void, scope: unknown = null) {
     if (!this.listeners) {
       return -1;
     }
@@ -127,9 +127,9 @@ export class EventDispatcher {
     return -1;
   }
 
-  hasEventListener(type: string, listener: (e: Event) => void, scope: unknown = null) {
+  hasEventListener<E extends Event = Event>(type: string, listener: (e: E) => void, scope: unknown = null) {
     if (listener !== null) {
-      return this.getEventListenerIndex(type, listener, scope) !== -1;
+      return this.getEventListenerIndex<E>(type, listener, scope) !== -1;
     } else {
       if (this.listeners[type] !== undefined) {
         let l = this.listeners[type] as EventValue[];
