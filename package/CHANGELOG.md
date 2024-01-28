@@ -1,5 +1,11 @@
 # @crowdstrike/graphics-core
 
+## 1.3.0
+
+### Minor Changes
+
+- [#60](https://github.com/CrowdStrike/graphics-core/pull/60) [`2bd3dc7`](https://github.com/CrowdStrike/graphics-core/commit/2bd3dc7d0aa9bcd0ddc6a966170c81df2175759d) Thanks [@karimbeyrouti](https://github.com/karimbeyrouti)! - better types for the event dispatcher
+
 ## 1.2.3
 
 ### Patch Changes
