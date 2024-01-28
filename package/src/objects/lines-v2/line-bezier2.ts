@@ -2,19 +2,16 @@
  * This is an implementation of a quadratic bezier curve
  */
 
-import { QuadraticBezierCurve3, Vector3 } from "three";
-import * as THREE from "three";
+import { QuadraticBezierCurve3, Vector3 } from 'three';
+import * as THREE from 'three';
 
-import { NumberUtils } from "../../graph-utils-v2/utils/number-utils";
-import { ThreeGeomUtils } from "../../utils/kurst/utils/ThreeGeomUtils";
-import { DefaultLineV2Settings, LineV2 } from "./line-base";
+import { NumberUtils } from '../../graph-utils-v2/utils/number-utils';
+import { ThreeGeomUtils } from '../../utils/kurst/utils/ThreeGeomUtils';
+import { DefaultLineV2Settings, LineV2 } from './line-base';
 
-import type { Curve } from "three";
+import type { Curve } from 'three';
 
-export type BezierControlPointSettings = [
-  offset: number,
-  intersectsLineAt: number
-];
+export type BezierControlPointSettings = [offset: number, intersectsLineAt: number];
 
 export class DefaultLineBezier2Settings extends DefaultLineV2Settings {
   numCurvePoints = 150;
@@ -23,9 +20,7 @@ export class DefaultLineBezier2Settings extends DefaultLineV2Settings {
 
 export type LineBezier2Settings = Partial<DefaultLineBezier2Settings>;
 
-export class LineBezier2<
-  T extends Curve<Vector3> = QuadraticBezierCurve3
-> extends LineV2 {
+export class LineBezier2<T extends Curve<Vector3> = QuadraticBezierCurve3> extends LineV2 {
   static _debugGeometry = new THREE.CircleGeometry(4);
   static _debugMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
 
@@ -57,7 +52,7 @@ export class LineBezier2<
   constructor(settings: LineBezier2Settings) {
     super({ ...new DefaultLineBezier2Settings(), ...settings });
 
-    this.lineType = "quadratic";
+    this.lineType = 'quadratic';
 
     this.enableDebugging(this.showDebugMode);
 
@@ -100,10 +95,7 @@ export class LineBezier2<
     this.setTotalLineSegmentInstanceCounts();
   }
 
-  public setColor(
-    color: THREE.Color | number,
-    endColor?: THREE.Color | number
-  ) {
+  public setColor(color: THREE.Color | number, endColor?: THREE.Color | number) {
     if (!this.curvePoints) {
       return;
     }
@@ -146,7 +138,7 @@ export class LineBezier2<
       // store the direction vector in this.direction
       this.updateDirection(LineBezier2.tmpVec, LineBezier2.tmpVec2);
 
-      if (typeof this.startArrowInstanceIdx === "number") {
+      if (typeof this.startArrowInstanceIdx === 'number') {
         this.align(LineV2.mesh);
 
         if (this.startArrowRotation !== 0) {
@@ -154,22 +146,19 @@ export class LineBezier2<
           LineV2.mesh.quaternion;
         }
 
-        LineV2.arrows.setRotation(
-          this.startArrowInstanceIdx,
-          LineV2.mesh.quaternion
-        );
+        LineV2.arrows.setRotation(this.startArrowInstanceIdx, LineV2.mesh.quaternion);
 
         LineV2.arrows.setPosition(
           this.startArrowInstanceIdx,
           LineBezier2.tmpVec2.x,
           LineBezier2.tmpVec2.y,
-          LineBezier2.tmpVec2.z + 0.1
+          LineBezier2.tmpVec2.z + 0.1,
         );
         LineV2.arrows.setScale(
           this.startArrowInstanceIdx,
           this.getWidthAtLinePercentage(this.startArrowPosition),
           this.getWidthAtLinePercentage(this.startArrowPosition),
-          0.1
+          0.1,
         );
       }
 
@@ -185,7 +174,7 @@ export class LineBezier2<
       // store the direction vector in this.direction
       this.updateDirection(LineBezier2.tmpVec2, LineBezier2.tmpVec);
 
-      if (typeof this.endArrowInstanceIdx === "number") {
+      if (typeof this.endArrowInstanceIdx === 'number') {
         this.align(LineV2.mesh);
 
         if (this.endArrowRotation !== 0) {
@@ -193,22 +182,19 @@ export class LineBezier2<
           LineV2.mesh.quaternion;
         }
 
-        LineV2.arrows.setRotation(
-          this.endArrowInstanceIdx,
-          LineV2.mesh.quaternion
-        );
+        LineV2.arrows.setRotation(this.endArrowInstanceIdx, LineV2.mesh.quaternion);
 
         LineV2.arrows.setPosition(
           this.endArrowInstanceIdx,
           LineBezier2.tmpVec.x,
           LineBezier2.tmpVec.y,
-          LineBezier2.tmpVec.z + 0.1
+          LineBezier2.tmpVec.z + 0.1,
         );
         LineV2.arrows.setScale(
           this.endArrowInstanceIdx,
           this.getWidthAtLinePercentage(this.endArrowPosition),
           this.getWidthAtLinePercentage(this.endArrowPosition),
-          0.1
+          0.1,
         );
       }
     } else {
@@ -224,11 +210,7 @@ export class LineBezier2<
 
         // align the mesh to this.direction vector
         this.align(this.startArrowMesh);
-        this.startArrowMesh.position.set(
-          LineBezier2.tmpVec2.x,
-          LineBezier2.tmpVec2.y,
-          LineBezier2.tmpVec2.z
-        );
+        this.startArrowMesh.position.set(LineBezier2.tmpVec2.x, LineBezier2.tmpVec2.y, LineBezier2.tmpVec2.z);
       }
 
       if (this.endArrowMesh) {
@@ -243,11 +225,7 @@ export class LineBezier2<
 
         // align the mesh to this.direction vector
         this.align(this.endArrowMesh);
-        this.endArrowMesh.position.set(
-          LineBezier2.tmpVec.x,
-          LineBezier2.tmpVec.y,
-          LineBezier2.tmpVec.z
-        );
+        this.endArrowMesh.position.set(LineBezier2.tmpVec.x, LineBezier2.tmpVec.y, LineBezier2.tmpVec.z);
       }
     }
   }
@@ -257,11 +235,9 @@ export class LineBezier2<
     let labelPaddingBottom = -20;
 
     let dir = this._controlPoint1Offset > 0 ? 1 : -1;
-    let offset =
-      ((this.lineWidth + this.endLineWidth) / 2) * dir + this.labelSize * dir;
+    let offset = ((this.lineWidth + this.endLineWidth) / 2) * dir + this.labelSize * dir;
 
-    offset +=
-      this._controlPoint1Offset > 0 ? labelPaddingTop : labelPaddingBottom;
+    offset += this._controlPoint1Offset > 0 ? labelPaddingTop : labelPaddingBottom;
 
     return offset;
   }
@@ -279,19 +255,19 @@ export class LineBezier2<
       // if angle is > 0 the slope around the center is upwards
       let angle = Math.atan2(
         LineBezier2.tmpVec2.y - LineBezier2.tmpVec.y,
-        LineBezier2.tmpVec2.x - LineBezier2.tmpVec.x
+        LineBezier2.tmpVec2.x - LineBezier2.tmpVec.x,
       );
 
       let offset = this.getLabelOffsetFromMidpoint();
 
       this.updateDirection(LineBezier2.tmpVec2, LineBezier2.tmpVec);
 
-      if (typeof this.labelInstanceIdx === "number") {
+      if (typeof this.labelInstanceIdx === 'number') {
         LineV2.labels.setPosition(
           this.labelInstanceIdx,
           (Math.sin(angle) * offset) / 2 + midPoint.x,
           (-Math.cos(angle) * offset) / 2 + midPoint.y,
-          this.position.z + 1
+          this.position.z + 1,
         );
         this.align(LineBezier2.mesh);
 
@@ -303,10 +279,7 @@ export class LineBezier2<
 
         LineV2.labels.setRotation(
           this.labelInstanceIdx,
-          this.qt.setFromAxisAngle(
-            this.vec3.set(0, 0, 1),
-            LineBezier2.mesh.rotation.z
-          )
+          this.qt.setFromAxisAngle(this.vec3.set(0, 0, 1), LineBezier2.mesh.rotation.z),
         );
         LineV2.labels.mesh.position.z = this.position.z + 1;
       }
@@ -314,15 +287,10 @@ export class LineBezier2<
   }
 
   protected makeCurve() {
-    if (!this.allControlPointsSet)
-      throw new Error("LineBezier2: no control points defined on this curve");
+    if (!this.allControlPointsSet) throw new Error('LineBezier2: no control points defined on this curve');
 
     // TODO: fix me ?
-    this.curve = new QuadraticBezierCurve3(
-      this.start,
-      this.controlPoint1,
-      this.end
-    ) as unknown as T;
+    this.curve = new QuadraticBezierCurve3(this.start, this.controlPoint1, this.end) as unknown as T;
 
     this._splineLength = this.curve.getLength();
 
@@ -362,10 +330,7 @@ export class LineBezier2<
     this.start.x = this.start.x + NumberUtils.random(-20, 20);
     this.start.y = this.start.y + NumberUtils.random(-20, 20);
     this.end.y = this.end.y + NumberUtils.random(-20, 20);
-    this.setControlPoint1Offsets(
-      this._controlPoint1Offset,
-      this._controlPoint1IntersectsLineAt
-    );
+    this.setControlPoint1Offsets(this._controlPoint1Offset, this._controlPoint1IntersectsLineAt);
     this.updateCurve();
     this.updateArrows();
   }
@@ -390,10 +355,7 @@ export class LineBezier2<
       if (this._controlPoint1Mesh) {
         this._controlPoint1Mesh.visible = true;
       } else {
-        this._controlPoint1Mesh = new THREE.Mesh(
-          LineBezier2._debugGeometry,
-          LineBezier2._debugMaterial
-        );
+        this._controlPoint1Mesh = new THREE.Mesh(LineBezier2._debugGeometry, LineBezier2._debugMaterial);
         this._controlPoint1Mesh.position.copy(this._controlPoint1);
         this.add(this._controlPoint1Mesh);
       }
@@ -420,29 +382,13 @@ export class LineBezier2<
    * of the line the control point is
    * @returns
    */
-  protected setControlPointOffsets(
-    offset: number,
-    intersectsLineAt: number,
-    target: THREE.Vector3
-  ) {
-    const midPoint = ThreeGeomUtils.pointInBetween(
-      this.start,
-      this.end,
-      LineBezier2.tmpVec,
-      intersectsLineAt
-    );
+  protected setControlPointOffsets(offset: number, intersectsLineAt: number, target: THREE.Vector3) {
+    const midPoint = ThreeGeomUtils.pointInBetween(this.start, this.end, LineBezier2.tmpVec, intersectsLineAt);
 
-    let angle = Math.atan2(
-      this.end.y - this.start.y,
-      this.end.x - this.start.x
-    );
+    let angle = Math.atan2(this.end.y - this.start.y, this.end.x - this.start.x);
 
     target.set(midPoint.x, midPoint.y, midPoint.z);
-    target.set(
-      Math.sin(angle) * offset + midPoint.x,
-      -Math.cos(angle) * offset + midPoint.y,
-      midPoint.z
-    );
+    target.set(Math.sin(angle) * offset + midPoint.x, -Math.cos(angle) * offset + midPoint.y, midPoint.z);
 
     return this;
   }

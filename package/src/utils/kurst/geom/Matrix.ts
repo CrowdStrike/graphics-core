@@ -559,10 +559,7 @@ export class Matrix {
    * @return The point resulting from applying the Matrix transformation.
    */
   transformPoint(point: Point): Point {
-    return new Point(
-      point.x * this.a + point.y * this.c + this.tx,
-      point.x * this.b + point.y * this.d + this.ty,
-    );
+    return new Point(point.x * this.a + point.y * this.c + this.tx, point.x * this.b + point.y * this.d + this.ty);
   }
 
   /**

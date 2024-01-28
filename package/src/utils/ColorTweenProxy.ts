@@ -16,12 +16,7 @@ export class ColorTweenProxy {
   targetColor: THREE.Color;
   id;
 
-  constructor({
-    id,
-    color,
-    onUpdate = () => undefined,
-    onComplete = () => undefined,
-  }: ColorTweenProxyParams) {
+  constructor({ id, color, onUpdate = () => undefined, onComplete = () => undefined }: ColorTweenProxyParams) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     this._onUpdate = onUpdate;

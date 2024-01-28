@@ -37,18 +37,10 @@ export class BitmapComposer {
     this.padding = padding;
     this.width = width;
     this.height = height;
-    this._spriteRegion = BitmapComposer.spriteSheetGenerator.requestRegion(
-      width + padding,
-      height + padding,
-    );
+    this._spriteRegion = BitmapComposer.spriteSheetGenerator.requestRegion(width + padding, height + padding);
   }
 
-  draw(
-    bitmapSrc: BitmapData,
-    destRect: Rectangle,
-    targetColor: number | null = null,
-    alpha: number | null = null,
-  ) {
+  draw(bitmapSrc: BitmapData, destRect: Rectangle, targetColor: number | null = null, alpha: number | null = null) {
     if (!this._spriteRegion || !BitmapComposer._TMP_BITMAP.context) {
       return;
     }
@@ -79,18 +71,11 @@ export class BitmapComposer {
     // Color transform bitmap if specified
     if (targetColor) {
       BitmapComposer._TMP_DEST_CT.color = targetColor; // Static CT keeps mem usage low
-      BitmapComposer._TMP_BITMAP.colorTransform(
-        BitmapComposer._TMP_BITMAP.rect,
-        BitmapComposer._TMP_DEST_CT,
-      );
+      BitmapComposer._TMP_BITMAP.colorTransform(BitmapComposer._TMP_BITMAP.rect, BitmapComposer._TMP_DEST_CT);
     }
 
     // Blit to sprite sheet bitmap
-    bitmap?.copyPixels(
-      BitmapComposer._TMP_BITMAP,
-      BitmapComposer._TMP_BITMAP.rect,
-      BitmapComposer._TMP_DEST_RECT,
-    );
+    bitmap?.copyPixels(BitmapComposer._TMP_BITMAP, BitmapComposer._TMP_BITMAP.rect, BitmapComposer._TMP_DEST_RECT);
     BitmapComposer._TMP_BITMAP.height = BitmapComposer._TMP_BITMAP.width = 10;
   }
 

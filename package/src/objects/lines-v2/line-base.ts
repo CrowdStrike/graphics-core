@@ -51,7 +51,6 @@ lineV2TextStyle.fontName = 'Helvetica Neue';
 lineV2TextStyle.pixelDensity = 2;
 
 export class LineV2 extends Line2 {
-
   static ARROW_GEOMETRY?: THREE.CylinderGeometry;
   static TEXT_STYLE = lineV2TextStyle;
   static HALF_PI = Math.PI / 2;
@@ -149,16 +148,16 @@ export class LineV2 extends Line2 {
    * are also added.
    */
   static addInstancedMeshesToScene(scene: THREE.Scene | ThreeJSView | THREE.Object3D) {
-      LineV2.labels.shouldDispatchMouseEvents = true;
+    LineV2.labels.shouldDispatchMouseEvents = true;
 
-      /**
-       * addMeshToScene ensures that these meshes are only added once per scene.
-       */
-      LineV2.arrows.addMeshToScene(scene)
-      LineV2.labels.addMeshToScene(scene)
+    /**
+     * addMeshToScene ensures that these meshes are only added once per scene.
+     */
+    LineV2.arrows.addMeshToScene(scene);
+    LineV2.labels.addMeshToScene(scene);
 
-      LineV2.arrows.mesh.position.z = 0;
-      LineV2.labels.mesh.position.z = 0;
+    LineV2.arrows.mesh.position.z = 0;
+    LineV2.labels.mesh.position.z = 0;
   }
 
   constructor(settings: LineV2Settings) {
@@ -218,13 +217,9 @@ export class LineV2 extends Line2 {
 
     this.endLineWidth = this.settings.endWidth;
 
-    this.setStart(
-      LineV2.tmpVec.set(this.settings.start[0], this.settings.start[1], this.settings.start[2]),
-    );
+    this.setStart(LineV2.tmpVec.set(this.settings.start[0], this.settings.start[1], this.settings.start[2]));
 
-    this.setEnd(
-      LineV2.tmpVec.set(this.settings.end[0], this.settings.end[1], this.settings.end[2]),
-    );
+    this.setEnd(LineV2.tmpVec.set(this.settings.end[0], this.settings.end[1], this.settings.end[2]));
 
     this.setColor(this.settings.color, this.settings.endColor);
   }
@@ -430,19 +425,9 @@ export class LineV2 extends Line2 {
           this.vec3.copy(this.start);
         }
 
-        LineV2.arrows.setPosition(
-          this.startArrowInstanceIdx,
-          this.vec3.x,
-          this.vec3.y,
-          this.vec3.z + 1,
-        );
+        LineV2.arrows.setPosition(this.startArrowInstanceIdx, this.vec3.x, this.vec3.y, this.vec3.z + 1);
 
-        LineV2.arrows.setScale(
-          this.startArrowInstanceIdx,
-          this.startArrowScale,
-          this.startArrowScale,
-          0.1,
-        );
+        LineV2.arrows.setScale(this.startArrowInstanceIdx, this.startArrowScale, this.startArrowScale, 0.1);
       }
 
       // this updates this.direction
@@ -464,19 +449,9 @@ export class LineV2 extends Line2 {
           this.vec3.copy(this.end);
         }
 
-        LineV2.arrows.setPosition(
-          this.endArrowInstanceIdx,
-          this.vec3.x,
-          this.vec3.y,
-          this.vec3.z + 1,
-        );
+        LineV2.arrows.setPosition(this.endArrowInstanceIdx, this.vec3.x, this.vec3.y, this.vec3.z + 1);
 
-        LineV2.arrows.setScale(
-          this.endArrowInstanceIdx,
-          this.endArrowScale,
-          this.endArrowScale,
-          0.1,
-        );
+        LineV2.arrows.setScale(this.endArrowInstanceIdx, this.endArrowScale, this.endArrowScale, 0.1);
       }
     } else {
       if (this.startArrowMesh) {
@@ -704,12 +679,7 @@ export class LineV2 extends Line2 {
     this.material.linewidth = v;
 
     if (this.useInstancedArrows && typeof this.startArrowInstanceIdx === 'number') {
-      LineV2.arrows.setScale(
-        this.startArrowInstanceIdx,
-        this.startArrowScale,
-        this.startArrowScale,
-        0.3,
-      );
+      LineV2.arrows.setScale(this.startArrowInstanceIdx, this.startArrowScale, this.startArrowScale, 0.3);
 
       return;
     }

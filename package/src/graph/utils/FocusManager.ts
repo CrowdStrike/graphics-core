@@ -69,8 +69,7 @@ export class FocusManager {
   private _onBlur(e: FocusEvent) {
     let { relatedTarget } = e;
     let jsSelector = this.accessibilityJsSelector;
-    let isAccessible =
-      relatedTarget && (relatedTarget as HTMLElement).dataset['jsSelector'] === jsSelector;
+    let isAccessible = relatedTarget && (relatedTarget as HTMLElement).dataset['jsSelector'] === jsSelector;
 
     if (isAccessible && jsSelector) {
       return;

@@ -1,10 +1,10 @@
-import * as THREE from "three";
+import * as THREE from 'three';
 
-import { Event } from "../graph-utils-v2/events/event";
-import { EventDispatcher } from "../graph-utils-v2/events/event-dispatcher";
-import { MeshBasicTintMaterial } from "../materials/MeshBasicTintMaterial";
-import { BitmapData } from "../utils/kurst/display/BitmapData";
-import { Rectangle } from "../utils/kurst/geom/Rectangle";
+import { Event } from '../graph-utils-v2/events/event';
+import { EventDispatcher } from '../graph-utils-v2/events/event-dispatcher';
+import { MeshBasicTintMaterial } from '../materials/MeshBasicTintMaterial';
+import { BitmapData } from '../utils/kurst/display/BitmapData';
+import { Rectangle } from '../utils/kurst/geom/Rectangle';
 
 interface FrameInfo {
   x: number;
@@ -30,7 +30,7 @@ export class TextureAtlasLoader extends EventDispatcher {
   private _isLoaded = false;
   private isTextureLoaded = false;
 
-  constructor(crossOrigin = "use-credentials") {
+  constructor(crossOrigin = 'use-credentials') {
     super();
     this._textureLoader = new THREE.TextureLoader(); // Texture loaded
     this._textureLoader.setCrossOrigin(crossOrigin);
@@ -84,7 +84,7 @@ export class TextureAtlasLoader extends EventDispatcher {
         () => this._onTextureLoaded(),
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         () => {},
-        () => this._onTextureLoadError()
+        () => this._onTextureLoadError(),
       );
     }
   }
@@ -115,12 +115,7 @@ export class TextureAtlasLoader extends EventDispatcher {
       let bitmap = new BitmapData(frameInfo.w, frameInfo.h, true);
       let texture = this.getLoadedTexture();
       let image = texture?.image;
-      let sourceRect = new Rectangle(
-        frameInfo.x,
-        frameInfo.y,
-        frameInfo.w,
-        frameInfo.h
-      );
+      let sourceRect = new Rectangle(frameInfo.x, frameInfo.y, frameInfo.w, frameInfo.h);
 
       bitmap.copyPixels(image, sourceRect, bitmap.rect);
       this._bitmapCache[name] = bitmap;
@@ -136,20 +131,14 @@ export class TextureAtlasLoader extends EventDispatcher {
       let txFrame = txData.frame;
       let material = new MeshBasicTintMaterial({
         map: tx,
-        color: "#ffffff",
+        color: '#ffffff',
         transparent: true,
         side: THREE.DoubleSide,
       });
 
       if (tx?.image !== undefined) {
-        material.setRepeat(
-          txFrame.w / tx.image.width,
-          txFrame.h / tx.image.height
-        );
-        material.setOffset(
-          txFrame.x / tx.image.width,
-          1 - txFrame.h / tx.image.height - txFrame.y / tx.image.height
-        );
+        material.setRepeat(txFrame.w / tx.image.width, txFrame.h / tx.image.height);
+        material.setOffset(txFrame.x / tx.image.width, 1 - txFrame.h / tx.image.height - txFrame.y / tx.image.height);
       }
 
       return material;
@@ -205,8 +194,7 @@ export class TextureAtlasLoader extends EventDispatcher {
       tx.wrapS = tx.wrapT = THREE.RepeatWrapping;
       tx.repeat.set(txFrame.w / tx.image.width, txFrame.h / tx.image.height);
       tx.offset.x = txFrame.x / tx.image.width;
-      tx.offset.y =
-        1 - txFrame.h / tx.image.height - txFrame.y / tx.image.height;
+      tx.offset.y = 1 - txFrame.h / tx.image.height - txFrame.y / tx.image.height;
       tx.needsUpdate = true;
       this._texturesCache[name] = tx;
     }

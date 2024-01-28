@@ -25,10 +25,7 @@ export class InstancedMeshAttributes<
 
     const attributes = {
       // 1-step
-      instanceOpacity: new THREE.InstancedBufferAttribute(
-        new Float32Array(instanceCount).fill(1),
-        1,
-      ),
+      instanceOpacity: new THREE.InstancedBufferAttribute(new Float32Array(instanceCount).fill(1), 1),
       // 4-step
       color: new THREE.InstancedBufferAttribute(new Float32Array(instanceCount * 4).fill(1), 4),
     };
@@ -62,8 +59,7 @@ export class InstancedMeshAttributes<
   }
 
   setColor(idx: number, color: number | THREE.Color) {
-    const [r, g, b, a] =
-      color instanceof THREE.Color ? color.toArray() : this.color.setHex(color).toArray();
+    const [r, g, b, a] = color instanceof THREE.Color ? color.toArray() : this.color.setHex(color).toArray();
 
     this.addAttributeTask(() => {
       this.mesh.geometry.attributes.color.setXYZW(idx, r, g, b, a);

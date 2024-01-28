@@ -204,12 +204,7 @@ export class Vector3D {
    *          parameter.
    */
   crossProduct(a: Vector3D): Vector3D {
-    return new Vector3D(
-      this.y * a.z - this.z * a.y,
-      this.z * a.x - this.x * a.z,
-      this.x * a.y - this.y * a.x,
-      1,
-    );
+    return new Vector3D(this.y * a.z - this.z * a.y, this.z * a.x - this.x * a.z, this.x * a.y - this.y * a.x, 1);
   }
 
   /**
@@ -299,10 +294,7 @@ export class Vector3D {
    */
   equals(toCompare: Vector3D, allFour = false): boolean {
     return (
-      this.x == toCompare.x &&
-      this.y == toCompare.y &&
-      this.z == toCompare.z &&
-      (!allFour || this.w == toCompare.w)
+      this.x == toCompare.x && this.y == toCompare.y && this.z == toCompare.z && (!allFour || this.w == toCompare.w)
     );
   }
 

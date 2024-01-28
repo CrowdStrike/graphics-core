@@ -40,25 +40,13 @@ export class ArrowLineMesh extends LineMesh {
     this._quaternion = new THREE.Quaternion(); // Rotation of arrow
 
     this.endArrowMesh = new THREE.Mesh(ArrowLineMesh.CYLINDER_GEOMETRY, arrowMaterial);
-    this.endArrowMesh.scale.set(
-      this.settings.arrowScale,
-      this.settings.arrowScale,
-      this.settings.arrowScale,
-    );
+    this.endArrowMesh.scale.set(this.settings.arrowScale, this.settings.arrowScale, this.settings.arrowScale);
 
     this.handleMesh = new THREE.Mesh(ArrowLineMesh.HANDLE_GEOMETRY, arrowMaterial);
-    this.handleMesh.scale.set(
-      this.settings.handleScale.x,
-      this.settings.handleScale.y,
-      this.settings.handleScale.z,
-    );
+    this.handleMesh.scale.set(this.settings.handleScale.x, this.settings.handleScale.y, this.settings.handleScale.z);
 
     this.startArrowMesh = new THREE.Mesh(ArrowLineMesh.CYLINDER_GEOMETRY, arrowMaterial);
-    this.startArrowMesh.scale.set(
-      this.settings.arrowScale,
-      this.settings.arrowScale,
-      this.settings.arrowScale,
-    );
+    this.startArrowMesh.scale.set(this.settings.arrowScale, this.settings.arrowScale, this.settings.arrowScale);
 
     if (this.settings.hasEndArrow) {
       this.add(this.endArrowMesh);
@@ -74,13 +62,7 @@ export class ArrowLineMesh extends LineMesh {
     }
   }
 
-  setLabel(
-    txt,
-    colourHex = 0xffffff,
-    style = undefined,
-    { defaultScale = 0.25, offset = -30 } = {},
-  ) {
-
+  setLabel(txt, colourHex = 0xffffff, style = undefined, { defaultScale = 0.25, offset = -30 } = {}) {
     if (!style) {
       style = new TextStyle();
       style.name = 'arrow-line-label';
@@ -92,7 +74,7 @@ export class ArrowLineMesh extends LineMesh {
 
     // if a label already exists, update it in-place
     if (this.label) {
-      LabelGenerator.update(this.label, txt, style, { offset: new THREE.Vector3(0, offset, 0) })
+      LabelGenerator.update(this.label, txt, style, { offset: new THREE.Vector3(0, offset, 0) });
       this.label.scale.set(defaultScale, defaultScale, defaultScale);
 
       return this.label;
@@ -175,11 +157,7 @@ export class ArrowLineMesh extends LineMesh {
         curve.getPointAt(startPosition, this._arrowPoint);
         this._updateDirection(this._arrowEndPoint, this._arrowPoint);
         this._align(this.startArrowMesh);
-        this.startArrowMesh.position.set(
-          this._arrowPoint.x,
-          this._arrowPoint.y,
-          this._arrowPoint.z,
-        );
+        this.startArrowMesh.position.set(this._arrowPoint.x, this._arrowPoint.y, this._arrowPoint.z);
       }
 
       if (this.label && this.isCurveShapeC) {
@@ -235,13 +213,7 @@ export class ArrowLineMesh extends LineMesh {
 
       if (this.settings.hasHandle) {
         this._updateDirection(this.start, this.end);
-        this._positionInBetween(
-          this.handleMesh,
-          this.start,
-          this.end,
-          this.settings.handlePosition,
-          0,
-        );
+        this._positionInBetween(this.handleMesh, this.start, this.end, this.settings.handlePosition, 0);
         this._align(this.handleMesh, this.start, this.end);
       }
 

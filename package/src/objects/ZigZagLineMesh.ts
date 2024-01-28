@@ -4,10 +4,7 @@ import type { ZigZagLineMeshSettings } from './settings/ZigZagLineMeshSettings';
 import type * as THREE from 'three';
 
 export class ZigZagLineMesh extends LineMesh {
-  constructor(
-    material: THREE.LineBasicMaterial | THREE.LineDashedMaterial,
-    settings: ZigZagLineMeshSettings,
-  ) {
+  constructor(material: THREE.LineBasicMaterial | THREE.LineDashedMaterial, settings: ZigZagLineMeshSettings) {
     super(material, settings);
   }
 

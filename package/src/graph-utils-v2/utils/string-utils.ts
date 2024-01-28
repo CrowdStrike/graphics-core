@@ -101,8 +101,6 @@ export class StringUtils {
     let frontChars = Math.ceil(len / 2);
     let backChars = Math.floor(len / 2);
 
-    return `${str.substring(0, frontChars).trim()}${truncationLabel}${str
-      .substring(str.length - backChars)
-      .trim()}`;
+    return `${str.substring(0, frontChars).trim()}${truncationLabel}${str.substring(str.length - backChars).trim()}`;
   }
 }

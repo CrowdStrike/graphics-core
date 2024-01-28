@@ -151,10 +151,7 @@ export class GraphicsV2EdgeController<
   }
 
   private isLineCoplanarOnAxis(axis: 'x' | 'y') {
-    return (
-      this.line.start.getComponent(axis === 'x' ? 0 : 1) ===
-      this.line.end.getComponent(axis === 'x' ? 0 : 1)
-    );
+    return this.line.start.getComponent(axis === 'x' ? 0 : 1) === this.line.end.getComponent(axis === 'x' ? 0 : 1);
   }
 
   isLineCoplanarOnX() {

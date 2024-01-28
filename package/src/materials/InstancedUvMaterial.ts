@@ -1,9 +1,6 @@
 import * as THREE from 'three';
 
-import {
-  InstancedUvFragmentShader,
-  InstancedUvVertexShader,
-} from '../shaders/InstancedUvMaterialShader';
+import { InstancedUvFragmentShader, InstancedUvVertexShader } from '../shaders/InstancedUvMaterialShader';
 
 // eslint-disable-next-line import/namespace
 interface BasicTintShaderParameters extends THREE.ShaderMaterialParameters {

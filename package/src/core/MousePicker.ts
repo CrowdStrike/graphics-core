@@ -1,11 +1,11 @@
-import * as THREE from "three";
+import * as THREE from 'three';
 
-import { InstancedMeshWithController } from "../entities/instanced-attributes";
-import { MousePickerEvents } from "../events/MousePickerEvents";
-import { EventDispatcher } from "../graph-utils-v2/events/event-dispatcher";
-import { ThreeGeomUtils } from "../utils/kurst/utils/ThreeGeomUtils";
+import { InstancedMeshWithController } from '../entities/instanced-attributes';
+import { MousePickerEvents } from '../events/MousePickerEvents';
+import { EventDispatcher } from '../graph-utils-v2/events/event-dispatcher';
+import { ThreeGeomUtils } from '../utils/kurst/utils/ThreeGeomUtils';
 
-import type { ThreeJSView } from "./ThreeJSView";
+import type { ThreeJSView } from './ThreeJSView';
 
 const OBJECT_MIN_DRAG_DISTANCE = 3;
 
@@ -19,68 +19,33 @@ interface TouchEventCallback {
 
 type PinchPoints = [THREE.Vector2, THREE.Vector2];
 
-type SupportedIntersectedMesh =
-  | THREE.Object3D<Event>
-  | THREE.InstancedMesh
-  | InstancedMeshWithController;
+type SupportedIntersectedMesh = THREE.Object3D<Event> | THREE.InstancedMesh | InstancedMeshWithController;
 
 export class MousePicker extends EventDispatcher {
   static TOUCH_DRAG_STATE = 0;
   static TOUCH_ZOOM_STATE = 5;
 
-  private _canvasClick: MousePickerEvents = new MousePickerEvents(
-    MousePickerEvents.CANVAS_CLICK
-  );
-  private _canvasDown: MousePickerEvents = new MousePickerEvents(
-    MousePickerEvents.CANVAS_MOUSE_DOWN
-  );
+  private _canvasClick: MousePickerEvents = new MousePickerEvents(MousePickerEvents.CANVAS_CLICK);
+  private _canvasDown: MousePickerEvents = new MousePickerEvents(MousePickerEvents.CANVAS_MOUSE_DOWN);
 
-  private _canvasUp: MousePickerEvents = new MousePickerEvents(
-    MousePickerEvents.CANVAS_MOUSE_UP
-  );
-  _doubleClick: MousePickerEvents = new MousePickerEvents(
-    MousePickerEvents.DOUBLE_CLICK
-  );
-  private _mouseDown: MousePickerEvents = new MousePickerEvents(
-    MousePickerEvents.MOUSE_DOWN
-  );
-  private _mouseUp: MousePickerEvents = new MousePickerEvents(
-    MousePickerEvents.MOUSE_UP
-  );
-  private _mouseWheel: MousePickerEvents = new MousePickerEvents(
-    MousePickerEvents.MOUSE_WHEEL
-  );
-  private _rightClickEvent: MousePickerEvents = new MousePickerEvents(
-    MousePickerEvents.RIGHT_CLICK
-  );
+  private _canvasUp: MousePickerEvents = new MousePickerEvents(MousePickerEvents.CANVAS_MOUSE_UP);
+  _doubleClick: MousePickerEvents = new MousePickerEvents(MousePickerEvents.DOUBLE_CLICK);
+  private _mouseDown: MousePickerEvents = new MousePickerEvents(MousePickerEvents.MOUSE_DOWN);
+  private _mouseUp: MousePickerEvents = new MousePickerEvents(MousePickerEvents.MOUSE_UP);
+  private _mouseWheel: MousePickerEvents = new MousePickerEvents(MousePickerEvents.MOUSE_WHEEL);
+  private _rightClickEvent: MousePickerEvents = new MousePickerEvents(MousePickerEvents.RIGHT_CLICK);
 
-  private _rollOutEvent: MousePickerEvents = new MousePickerEvents(
-    MousePickerEvents.ROLL_OUT
-  );
-  private _rollOverEvent: MousePickerEvents = new MousePickerEvents(
-    MousePickerEvents.ROLL_OVER
-  );
-  private _startDrag: MousePickerEvents = new MousePickerEvents(
-    MousePickerEvents.START_DRAG
-  );
-  private _stopDrag: MousePickerEvents = new MousePickerEvents(
-    MousePickerEvents.STOP_DRAG
-  );
-  private _tapDrag: MousePickerEvents = new MousePickerEvents(
-    MousePickerEvents.TAP_DRAG
-  );
-  private _touchZoom: MousePickerEvents = new MousePickerEvents(
-    MousePickerEvents.TOUCH_ZOOM
-  );
-  _startDragObject: MousePickerEvents =
-    new MousePickerEvents(MousePickerEvents.START_DRAG_OBJECT);
+  private _rollOutEvent: MousePickerEvents = new MousePickerEvents(MousePickerEvents.ROLL_OUT);
+  private _rollOverEvent: MousePickerEvents = new MousePickerEvents(MousePickerEvents.ROLL_OVER);
+  private _startDrag: MousePickerEvents = new MousePickerEvents(MousePickerEvents.START_DRAG);
+  private _stopDrag: MousePickerEvents = new MousePickerEvents(MousePickerEvents.STOP_DRAG);
+  private _tapDrag: MousePickerEvents = new MousePickerEvents(MousePickerEvents.TAP_DRAG);
+  private _touchZoom: MousePickerEvents = new MousePickerEvents(MousePickerEvents.TOUCH_ZOOM);
+  _startDragObject: MousePickerEvents = new MousePickerEvents(MousePickerEvents.START_DRAG_OBJECT);
 
-  _stopDragObject: MousePickerEvents =
-    new MousePickerEvents(MousePickerEvents.STOP_DRAG_OBJECT);
+  _stopDragObject: MousePickerEvents = new MousePickerEvents(MousePickerEvents.STOP_DRAG_OBJECT);
 
-  _dragObject: MousePickerEvents = new MousePickerEvents(
-    MousePickerEvents.DRAG_OBJECT
-  );
+  _dragObject: MousePickerEvents = new MousePickerEvents(MousePickerEvents.DRAG_OBJECT);
 
   // private:delegates (note this is optimised for performance) - delegates are faster than apply / bind
   private _lastMouseDownEvent?: MouseEvent | TouchEvent;
@@ -118,16 +83,10 @@ export class MousePicker extends EventDispatcher {
 
   private _mousePercentFromCenter = new THREE.Vector2(-1, -1); // initial values -1 otherwise we get intersections by default in the center of the scene
   private _pinchPointDictionaryByID: Record<number, THREE.Vector2> = {};
-  private _pinchPoints: [THREE.Vector2, THREE.Vector2] = [
-    new THREE.Vector2(),
-    new THREE.Vector2(),
-  ];
+  private _pinchPoints: [THREE.Vector2, THREE.Vector2] = [new THREE.Vector2(), new THREE.Vector2()];
   private _pinchStartPointDictionaryByID: Record<string, THREE.Vector2> = {};
   private _startDragObjectPosition = new THREE.Vector2();
-  private _pinchStartPoints: PinchPoints = [
-    new THREE.Vector2(),
-    new THREE.Vector2(),
-  ];
+  private _pinchStartPoints: PinchPoints = [new THREE.Vector2(), new THREE.Vector2()];
   private _raycaster: THREE.Raycaster = new THREE.Raycaster();
   private _tapAndDragIID: ReturnType<typeof setInterval> | null = null;
   private _threeView: ThreeJSView;
@@ -162,7 +121,7 @@ export class MousePicker extends EventDispatcher {
     // private
     this._pickingPlane = new THREE.Mesh(
       new THREE.PlaneGeometry(600, 600, 1),
-      new THREE.MeshBasicMaterial({ color: 0x00ff00, side: THREE.DoubleSide })
+      new THREE.MeshBasicMaterial({ color: 0x00ff00, side: THREE.DoubleSide }),
     );
     this._pickingPlane.matrixAutoUpdate = true;
     this._pickingPlaneArray = [this._pickingPlane];
@@ -191,47 +150,17 @@ export class MousePicker extends EventDispatcher {
   }
 
   dispose() {
-    this._threeView.canvas.removeEventListener(
-      "mouseover",
-      this._mouseOverDelegate as MouseEventCallback
-    );
-    this._threeView.canvas.removeEventListener(
-      "mouseout",
-      this._mouseOutDelegate as MouseEventCallback
-    );
-    this._threeView.canvas.removeEventListener(
-      "touchstart",
-      this._touchStartDelegate as TouchEventCallback
-    );
-    this._threeView.canvas.removeEventListener(
-      "touchend",
-      this._touchEndDelegate as TouchEventCallback
-    );
-    this._threeView.canvas.removeEventListener(
-      "touchmove",
-      this._touchMoveDelegate as TouchEventCallback
-    );
-    this._threeView.canvas.removeEventListener(
-      "mousedown",
-      this._mouseDownDelegate as MouseEventCallback
-    );
-    this._threeView.canvas.removeEventListener(
-      "contextmenu",
-      this._rightClickDelegate as MouseEventCallback
-    );
-    this._threeView.canvas.removeEventListener(
-      "mousemove",
-      this._mouseMoveDelegate as MouseEventCallback
-    );
-    this._threeView.canvas.removeEventListener(
-      "wheel",
-      this._mouseWheelDelegate as MouseEventCallback
-    );
+    this._threeView.canvas.removeEventListener('mouseover', this._mouseOverDelegate as MouseEventCallback);
+    this._threeView.canvas.removeEventListener('mouseout', this._mouseOutDelegate as MouseEventCallback);
+    this._threeView.canvas.removeEventListener('touchstart', this._touchStartDelegate as TouchEventCallback);
+    this._threeView.canvas.removeEventListener('touchend', this._touchEndDelegate as TouchEventCallback);
+    this._threeView.canvas.removeEventListener('touchmove', this._touchMoveDelegate as TouchEventCallback);
+    this._threeView.canvas.removeEventListener('mousedown', this._mouseDownDelegate as MouseEventCallback);
+    this._threeView.canvas.removeEventListener('contextmenu', this._rightClickDelegate as MouseEventCallback);
+    this._threeView.canvas.removeEventListener('mousemove', this._mouseMoveDelegate as MouseEventCallback);
+    this._threeView.canvas.removeEventListener('wheel', this._mouseWheelDelegate as MouseEventCallback);
 
-    window.removeEventListener(
-      "mouseup",
-      this._windowMouseUpDelegate as MouseEventCallback
-    );
+    window.removeEventListener('mouseup', this._windowMouseUpDelegate as MouseEventCallback);
 
     this._startDragObject.reset();
     this._stopDragObject.reset();
@@ -321,35 +250,22 @@ export class MousePicker extends EventDispatcher {
 
     // if the mouse is down on the canvas - check if we need to start tracking a drag event ( and start the event )
     if (this._isCanvasClickAction) {
-      let distanceFromCenter = this._lastCanvasMouseDownPoint.distanceTo(
-        this._mousePercentFromCenter
-      );
+      let distanceFromCenter = this._lastCanvasMouseDownPoint.distanceTo(this._mousePercentFromCenter);
 
       if (distanceFromCenter > this.dragTolerance && !this._dragActive) {
         this._startDrag.mouse.x = this.mouse.x;
         this._startDrag.mouse.y = this.mouse.y;
         this._startDrag.isTouchEvent = this._isTouchMouseMove;
         this._startDrag.intersectionPoint = this.intersectionPoint;
-        this._startDrag.event = this._lastMouseDownEvent as
-          | MouseEvent
-          | undefined;
+        this._startDrag.event = this._lastMouseDownEvent as MouseEvent | undefined;
         this.dispatchEvent(this._startDrag);
         this._dragActive = true;
       }
     }
 
-    this._raycaster.setFromCamera(
-      this._mousePercentFromCenter,
-      this._threeView.camera
-    );
-    this._intersects = this._raycaster.intersectObjects(
-      this._threeView.container.children,
-      true
-    );
-    this._intersectsBG = this._raycaster.intersectObjects(
-      this._pickingPlaneArray,
-      false
-    );
+    this._raycaster.setFromCamera(this._mousePercentFromCenter, this._threeView.camera);
+    this._intersects = this._raycaster.intersectObjects(this._threeView.container.children, true);
+    this._intersectsBG = this._raycaster.intersectObjects(this._pickingPlaneArray, false);
 
     if (this._intersectsBG.length > 0) {
       this.intersectionPoint = this._intersectsBG[0].point;
@@ -357,11 +273,7 @@ export class MousePicker extends EventDispatcher {
 
     let mousePosition = this._threeView.project(this.mouse);
 
-    this._pickingPlane.position.set(
-      mousePosition.x,
-      mousePosition.y,
-      mousePosition.z
-    );
+    this._pickingPlane.position.set(mousePosition.x, mousePosition.y, mousePosition.z);
     this._pickingPlane.updateMatrixWorld();
 
     // filter out instanced meshes that don't receive mouse events
@@ -372,21 +284,17 @@ export class MousePicker extends EventDispatcher {
 
       // needs to be undefined - instanceId can be 0
       if (i.instanceId !== undefined) {
-        isVisible = i.object.attributesController?.getVisibilityAt(
-          i.instanceId
-        );
+        isVisible = i.object.attributesController?.getVisibilityAt(i.instanceId);
       }
 
-      let dispatchesMouseEvents =
-        i.object.attributesController.shouldDispatchMouseEvents === true;
+      let dispatchesMouseEvents = i.object.attributesController.shouldDispatchMouseEvents === true;
 
       return isVisible && dispatchesMouseEvents;
     });
 
     // Detect & dispatch roll over / roll out events on 3D objects using raycast info
     if (this._intersects.length > 0) {
-      let isDifferentObjectIntersected =
-        this._intersects[0].object !== this.currentIntersected;
+      let isDifferentObjectIntersected = this._intersects[0].object !== this.currentIntersected;
 
       if (isDifferentObjectIntersected && this.currentIntersected !== null) {
         // Roll out currently selected
@@ -402,8 +310,7 @@ export class MousePicker extends EventDispatcher {
       // Roll over new selected object
       if (this._intersects[0].object !== this.currentIntersected) {
         this.currentIntersected = this._intersects[0].object;
-        this.currentIntersectedInstanceId =
-          this._intersects[0]?.instanceId ?? null;
+        this.currentIntersectedInstanceId = this._intersects[0]?.instanceId ?? null;
 
         this._rollOverEvent.object = this.currentIntersected;
         this._rollOverEvent.instanceId = this.currentIntersectedInstanceId;
@@ -424,11 +331,7 @@ export class MousePicker extends EventDispatcher {
       }
     }
 
-    if (
-      !this._isCanvasClickAction &&
-      this._isMouseDownOnCanvas &&
-      !this._isDraggingObject
-    ) {
+    if (!this._isCanvasClickAction && this._isMouseDownOnCanvas && !this._isDraggingObject) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error
       let distanceFromMouseDown = this.mouse.distanceTo(this._mouseDown.mouse);
@@ -470,66 +373,27 @@ export class MousePicker extends EventDispatcher {
    * @private
    */
   private _initMouseHandlers() {
-    this._threeView.canvas.addEventListener(
-      "mouseover",
-      this._mouseOverDelegate
-    );
-    this._threeView.canvas.addEventListener("mouseout", this._mouseOutDelegate);
-    this._threeView.canvas.addEventListener(
-      "touchstart",
-      this._touchStartDelegate
-    );
-    this._threeView.canvas.addEventListener("touchend", this._touchEndDelegate);
-    this._threeView.canvas.addEventListener(
-      "touchmove",
-      this._touchMoveDelegate
-    );
-    this._threeView.canvas.addEventListener(
-      "mousedown",
-      this._mouseDownDelegate
-    );
-    this._threeView.canvas.addEventListener(
-      "contextmenu",
-      this._rightClickDelegate
-    );
-    this._threeView.canvas.addEventListener("mouseup", this._mouseUpDelegate);
-    window.addEventListener("mouseup", this._windowMouseUpDelegate);
+    this._threeView.canvas.addEventListener('mouseover', this._mouseOverDelegate);
+    this._threeView.canvas.addEventListener('mouseout', this._mouseOutDelegate);
+    this._threeView.canvas.addEventListener('touchstart', this._touchStartDelegate);
+    this._threeView.canvas.addEventListener('touchend', this._touchEndDelegate);
+    this._threeView.canvas.addEventListener('touchmove', this._touchMoveDelegate);
+    this._threeView.canvas.addEventListener('mousedown', this._mouseDownDelegate);
+    this._threeView.canvas.addEventListener('contextmenu', this._rightClickDelegate);
+    this._threeView.canvas.addEventListener('mouseup', this._mouseUpDelegate);
+    window.addEventListener('mouseup', this._windowMouseUpDelegate);
   }
 
   _disposeMouseHandlers() {
-    this._threeView.canvas.removeEventListener(
-      "mouseover",
-      this._mouseOverDelegate
-    );
-    this._threeView.canvas.removeEventListener(
-      "mouseout",
-      this._mouseOutDelegate
-    );
-    this._threeView.canvas.removeEventListener(
-      "touchstart",
-      this._touchStartDelegate
-    );
-    this._threeView.canvas.removeEventListener(
-      "touchend",
-      this._touchEndDelegate
-    );
-    this._threeView.canvas.removeEventListener(
-      "touchmove",
-      this._touchMoveDelegate
-    );
-    this._threeView.canvas.removeEventListener(
-      "mousedown",
-      this._mouseDownDelegate
-    );
-    this._threeView.canvas.removeEventListener(
-      "contextmenu",
-      this._rightClickDelegate
-    );
-    this._threeView.canvas.removeEventListener(
-      "mouseup",
-      this._mouseUpDelegate
-    );
-    window.removeEventListener("mouseup", this._windowMouseUpDelegate);
+    this._threeView.canvas.removeEventListener('mouseover', this._mouseOverDelegate);
+    this._threeView.canvas.removeEventListener('mouseout', this._mouseOutDelegate);
+    this._threeView.canvas.removeEventListener('touchstart', this._touchStartDelegate);
+    this._threeView.canvas.removeEventListener('touchend', this._touchEndDelegate);
+    this._threeView.canvas.removeEventListener('touchmove', this._touchMoveDelegate);
+    this._threeView.canvas.removeEventListener('mousedown', this._mouseDownDelegate);
+    this._threeView.canvas.removeEventListener('contextmenu', this._rightClickDelegate);
+    this._threeView.canvas.removeEventListener('mouseup', this._mouseUpDelegate);
+    window.removeEventListener('mouseup', this._windowMouseUpDelegate);
   }
 
   _onTouchStart(e: TouchEvent) {
@@ -562,10 +426,8 @@ export class MousePicker extends EventDispatcher {
         this._pinchStartPoints[c].y = this._getTouchEventYOffset(touchEvent);
         this._pinchPoints[c].x = this._pinchStartPoints[c].x;
         this._pinchPoints[c].y = this._pinchStartPoints[c].y;
-        this._pinchStartPointDictionaryByID[touchEvent.identifier] =
-          this._pinchStartPoints[c];
-        this._pinchPointDictionaryByID[touchEvent.identifier] =
-          this._pinchPoints[c];
+        this._pinchStartPointDictionaryByID[touchEvent.identifier] = this._pinchStartPoints[c];
+        this._pinchPointDictionaryByID[touchEvent.identifier] = this._pinchPoints[c];
       }
 
       this._touchState = MousePicker.TOUCH_ZOOM_STATE;
@@ -618,28 +480,16 @@ export class MousePicker extends EventDispatcher {
             }
 
             if (touchMatchFound) {
-              this._touchZoom.startDistance =
-                this._pinchStartPoints[0].distanceTo(this._pinchStartPoints[1]);
-              this._touchZoom.currentDistance = this._pinchPoints[0].distanceTo(
-                this._pinchPoints[1]
-              );
-              this._touchZoom.touchDiffDistance =
-                this._touchZoom.currentDistance - this._previousDistance;
-              this._setCenterOfPinchEvent(
-                this._pinchPoints[0],
-                this._pinchPoints[1]
-              );
+              this._touchZoom.startDistance = this._pinchStartPoints[0].distanceTo(this._pinchStartPoints[1]);
+              this._touchZoom.currentDistance = this._pinchPoints[0].distanceTo(this._pinchPoints[1]);
+              this._touchZoom.touchDiffDistance = this._touchZoom.currentDistance - this._previousDistance;
+              this._setCenterOfPinchEvent(this._pinchPoints[0], this._pinchPoints[1]);
               this.dispatchEvent(this._touchZoom);
               this._previousDistance = this._touchZoom.currentDistance;
             }
           } else {
-            this._setCenterOfPinchEvent(
-              this._pinchPoints[0],
-              this._pinchPoints[1]
-            );
-            this._touchZoom.currentDistance = this._pinchPoints[0].distanceTo(
-              this._pinchPoints[1]
-            );
+            this._setCenterOfPinchEvent(this._pinchPoints[0], this._pinchPoints[1]);
+            this._touchZoom.currentDistance = this._pinchPoints[0].distanceTo(this._pinchPoints[1]);
             this._previousDistance = this._touchZoom.currentDistance;
             this._isPinchActionStarted = true;
           }
@@ -817,22 +667,13 @@ export class MousePicker extends EventDispatcher {
   }
 
   _onMouseOut() {
-    this._threeView.canvas.removeEventListener(
-      "mousemove",
-      this._mouseMoveDelegate
-    );
-    this._threeView.canvas.removeEventListener(
-      "wheel",
-      this._mouseWheelDelegate
-    );
+    this._threeView.canvas.removeEventListener('mousemove', this._mouseMoveDelegate);
+    this._threeView.canvas.removeEventListener('wheel', this._mouseWheelDelegate);
   }
 
   _onMouseOver() {
-    this._threeView.canvas.addEventListener(
-      "mousemove",
-      this._mouseMoveDelegate
-    );
-    this._threeView.canvas.addEventListener("wheel", this._mouseWheelDelegate);
+    this._threeView.canvas.addEventListener('mousemove', this._mouseMoveDelegate);
+    this._threeView.canvas.addEventListener('wheel', this._mouseWheelDelegate);
   }
 
   _onMouseWheel(e: MouseEvent) {
@@ -856,10 +697,7 @@ export class MousePicker extends EventDispatcher {
       clearTimeout(this._doubleTapIID);
     }
 
-    this._doubleTapIID = setTimeout(
-      () => this._startDoubleTapDelayComplete(),
-      this.doubleTapEnabledDelay
-    );
+    this._doubleTapIID = setTimeout(() => this._startDoubleTapDelayComplete(), this.doubleTapEnabledDelay);
     this._hasDoubleClickDelayExpired = true;
   }
 
@@ -873,10 +711,7 @@ export class MousePicker extends EventDispatcher {
       clearTimeout(this._tapAndDragIID);
     }
 
-    this._tapAndDragIID = setTimeout(
-      () => this._tapAndDragDelayComplete(),
-      this.doubleTapEnabledDelay
-    );
+    this._tapAndDragIID = setTimeout(() => this._tapAndDragDelayComplete(), this.doubleTapEnabledDelay);
     this._isTapDragActionDelayEnabled = true;
   }
 
@@ -949,12 +784,8 @@ export class MousePicker extends EventDispatcher {
   }
 
   _updateMousePercentFromCenter() {
-    this._mousePercentFromCenter.x =
-      (this.mouse.x / this._clientRect.width) * 2 - 1;
-    this._mousePercentFromCenter.y = -(
-      (this.mouse.y / this._clientRect.height) * 2 -
-      1
-    );
+    this._mousePercentFromCenter.x = (this.mouse.x / this._clientRect.width) * 2 - 1;
+    this._mousePercentFromCenter.y = -((this.mouse.y / this._clientRect.height) * 2 - 1);
   }
 
   get intersects() {

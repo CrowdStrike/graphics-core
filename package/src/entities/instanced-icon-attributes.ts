@@ -11,25 +11,21 @@
  *
  * TODO Delete lookup maps on remove()
  */
-import gsap, { Power3 } from "gsap";
-import * as THREE from "three";
+import gsap, { Power3 } from 'gsap';
+import * as THREE from 'three';
 
-import { SvgMeshGenerator } from "../generators/SvgMeshGenerator";
-import { RequestAnimationFrame } from "../graph-utils-v2/utils/request-animation-frame";
-import { InstancedMultiUvMaterial } from "../materials/InstancedMultiUvMaterial";
-import { InstancedAttributes } from "./instanced-attributes";
+import { SvgMeshGenerator } from '../generators/SvgMeshGenerator';
+import { RequestAnimationFrame } from '../graph-utils-v2/utils/request-animation-frame';
+import { InstancedMultiUvMaterial } from '../materials/InstancedMultiUvMaterial';
+import { InstancedAttributes } from './instanced-attributes';
 
-import type { ThreeJSView } from "../core/ThreeJSView";
-import type { InstancedUvMaterial } from "../materials/InstancedUvMaterial";
-import type { NormalizedBbox } from "../textures/sprite-sheets/SpriteRegion";
-import type {
-  EntityWithId,
-  InstancedMeshWithController,
-  UiBadgeConfiguration,
-} from "./instanced-attributes";
-import type { InstancedInteractionAttributes } from "./instanced-interaction-attributes";
-import type { InstancedTextAttributes } from "./instanced-text-attributes";
-import type { PlaneGeometry } from "three";
+import type { ThreeJSView } from '../core/ThreeJSView';
+import type { InstancedUvMaterial } from '../materials/InstancedUvMaterial';
+import type { NormalizedBbox } from '../textures/sprite-sheets/SpriteRegion';
+import type { EntityWithId, InstancedMeshWithController, UiBadgeConfiguration } from './instanced-attributes';
+import type { InstancedInteractionAttributes } from './instanced-interaction-attributes';
+import type { InstancedTextAttributes } from './instanced-text-attributes';
+import type { PlaneGeometry } from 'three';
 
 const BASE_ICON_SIZE = 24;
 const PLANE_GEOMETRY_WIDTH = 1;
@@ -40,10 +36,7 @@ export interface InstancedIconConfiguration {
   textureAtlas?: HTMLCanvasElement | THREE.Texture;
 }
 
-export class InstancedIconAttributes extends InstancedAttributes<
-  PlaneGeometry,
-  InstancedUvMaterial
-> {
+export class InstancedIconAttributes extends InstancedAttributes<PlaneGeometry, InstancedUvMaterial> {
   readonly color = new THREE.Color();
   readonly vector = new THREE.Vector3();
   readonly translation3 = new THREE.Vector3();
@@ -69,63 +62,35 @@ export class InstancedIconAttributes extends InstancedAttributes<
   // This is needed because otherwise TS complains when I try to
   // do this.mesh.geometry.parameters, saying that it doesn't exist
   // in type THREE.PlaneGeometry.
-  declare mesh: InstancedMeshWithController<
-    THREE.PlaneGeometry,
-    InstancedMultiUvMaterial
-  >;
+  declare mesh: InstancedMeshWithController<THREE.PlaneGeometry, InstancedMultiUvMaterial>;
 
-  readonly uiLayers: Map<
-    string,
-    | InstancedIconAttributes
-    | InstancedTextAttributes
-    | InstancedInteractionAttributes
-  > = new Map();
+  readonly uiLayers: Map<string, InstancedIconAttributes | InstancedTextAttributes | InstancedInteractionAttributes> =
+    new Map();
 
   uiLayersAreRegistered = false;
 
-  constructor(
-    iconConfig: InstancedIconConfiguration,
-    uiConfig?: UiBadgeConfiguration
-  ) {
+  constructor(iconConfig: InstancedIconConfiguration, uiConfig?: UiBadgeConfiguration) {
     const instanceCount = 10000;
 
     const attributes = {
       // 1-step
-      instanceOpacity: new THREE.InstancedBufferAttribute(
-        new Float32Array(instanceCount).fill(1),
-        1
-      ),
+      instanceOpacity: new THREE.InstancedBufferAttribute(new Float32Array(instanceCount).fill(1), 1),
       // 3-step [x, y, z]
-      offset: new THREE.InstancedBufferAttribute(
-        new Float32Array(instanceCount * 3).fill(0),
-        3
-      ),
+      offset: new THREE.InstancedBufferAttribute(new Float32Array(instanceCount * 3).fill(0), 3),
       // 4-step [r, g, b, a]
-      instanceColor: new THREE.InstancedBufferAttribute(
-        new Float32Array(instanceCount * 4).fill(1),
-        4
-      ),
+      instanceColor: new THREE.InstancedBufferAttribute(new Float32Array(instanceCount * 4).fill(1), 4),
       // 1-step
-      texIdx: new THREE.InstancedBufferAttribute(
-        new Float32Array(instanceCount).fill(0),
-        1
-      ),
+      texIdx: new THREE.InstancedBufferAttribute(new Float32Array(instanceCount).fill(0), 1),
       // 4-step [x, y, width, height] - all normalized [0, 1]
-      uvOffset: new THREE.InstancedBufferAttribute(
-        new Float32Array(instanceCount * 4).fill(0),
-        4
-      ),
+      uvOffset: new THREE.InstancedBufferAttribute(new Float32Array(instanceCount * 4).fill(0), 4),
     };
 
-    const geometry = new THREE.PlaneGeometry(
-      PLANE_GEOMETRY_WIDTH,
-      PLANE_GEOMETRY_HEIGHT
-    );
+    const geometry = new THREE.PlaneGeometry(PLANE_GEOMETRY_WIDTH, PLANE_GEOMETRY_HEIGHT);
 
-    geometry.setAttribute("instanceColor", attributes.instanceColor);
-    geometry.setAttribute("instanceOpacity", attributes.instanceOpacity);
-    geometry.setAttribute("texIdx", attributes.texIdx);
-    geometry.setAttribute("uvOffset", attributes.uvOffset);
+    geometry.setAttribute('instanceColor', attributes.instanceColor);
+    geometry.setAttribute('instanceOpacity', attributes.instanceOpacity);
+    geometry.setAttribute('texIdx', attributes.texIdx);
+    geometry.setAttribute('uvOffset', attributes.uvOffset);
 
     let texture: THREE.Texture | undefined = undefined;
 
@@ -133,12 +98,7 @@ export class InstancedIconAttributes extends InstancedAttributes<
       if (iconConfig.textureAtlas instanceof HTMLCanvasElement) {
         const { textureAtlas } = iconConfig;
 
-        texture = new THREE.CanvasTexture(
-          textureAtlas,
-          THREE.UVMapping,
-          THREE.RepeatWrapping,
-          THREE.RepeatWrapping
-        );
+        texture = new THREE.CanvasTexture(textureAtlas, THREE.UVMapping, THREE.RepeatWrapping, THREE.RepeatWrapping);
       } else if (iconConfig.textureAtlas?.isTexture) {
         texture = iconConfig.textureAtlas;
       }
@@ -152,26 +112,20 @@ export class InstancedIconAttributes extends InstancedAttributes<
        * SvgMeshGenerator.freezeSpritesheet()
        */
       if (!SvgMeshGenerator?.spriteSheet?.firstBitmap?.canvas) {
-        throw new Error("No bitmap available");
+        throw new Error('No bitmap available');
       }
 
       if (SvgMeshGenerator.spriteSheet.bitmaps.length > 1) {
         throw new Error(
-          "SvgMeshGenerator.spriteSheet contains more than one bitmap – InstancedIconEntity currently uses InstancedUvMaterial which can only leverage one bitmap. This might be caused because we're trying to cache many more icons than can fit in a single bitmap"
+          "SvgMeshGenerator.spriteSheet contains more than one bitmap – InstancedIconEntity currently uses InstancedUvMaterial which can only leverage one bitmap. This might be caused because we're trying to cache many more icons than can fit in a single bitmap",
         );
       }
 
       // TODO Specify which Canvas will be made into a texture
       // and provided to the map parameter.
-      const textureAtlas = SvgMeshGenerator.spriteSheet?.firstBitmap
-        ?.canvas as HTMLCanvasElement;
+      const textureAtlas = SvgMeshGenerator.spriteSheet?.firstBitmap?.canvas as HTMLCanvasElement;
 
-      texture = new THREE.CanvasTexture(
-        textureAtlas,
-        THREE.UVMapping,
-        THREE.RepeatWrapping,
-        THREE.RepeatWrapping
-      );
+      texture = new THREE.CanvasTexture(textureAtlas, THREE.UVMapping, THREE.RepeatWrapping, THREE.RepeatWrapping);
     }
 
     const material = new InstancedMultiUvMaterial({
@@ -195,8 +149,7 @@ export class InstancedIconAttributes extends InstancedAttributes<
     this.mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
 
     if (iconConfig?.maxTextureArraySize) {
-      InstancedIconAttributes.MAX_TEXTURE_ARRAY_SIZE =
-        iconConfig?.maxTextureArraySize;
+      InstancedIconAttributes.MAX_TEXTURE_ARRAY_SIZE = iconConfig?.maxTextureArraySize;
     }
 
     // This helps with the recursive structure we have
@@ -212,20 +165,15 @@ export class InstancedIconAttributes extends InstancedAttributes<
   }
 
   getUiLayer<
-    T extends
+    T extends InstancedIconAttributes | InstancedTextAttributes | InstancedInteractionAttributes =
       | InstancedIconAttributes
       | InstancedTextAttributes
-      | InstancedInteractionAttributes =
-      | InstancedIconAttributes
-      | InstancedTextAttributes
-      | InstancedInteractionAttributes
+      | InstancedInteractionAttributes,
   >(name: string): T {
     const layer = this.uiLayers.get(name);
 
     if (!layer) {
-      throw new Error(
-        `instanced-icon-attributes: Requested UI layer doesn't exist: ${name}`
-      );
+      throw new Error(`instanced-icon-attributes: Requested UI layer doesn't exist: ${name}`);
     }
 
     return layer as T;
@@ -273,7 +221,7 @@ export class InstancedIconAttributes extends InstancedAttributes<
     // the absolute height
     height: number,
     // the below numbers are normalized
-    bbox: NormalizedBbox
+    bbox: NormalizedBbox,
   ) {
     const iconScaleX = width / PLANE_GEOMETRY_WIDTH;
     const iconScaleY = height / PLANE_GEOMETRY_HEIGHT;
@@ -341,11 +289,7 @@ export class InstancedIconAttributes extends InstancedAttributes<
     this.mesh.getMatrixAt(idx, this.matrix);
     this.matrix.decompose(this.translation3, this.q, this.s);
 
-    return [
-      this.translation3.x,
-      this.translation3.y,
-      this.translation3.z,
-    ] as const;
+    return [this.translation3.x, this.translation3.y, this.translation3.z] as const;
   }
 
   // this is either called from the InstancedPositionVector3 proxy
@@ -354,7 +298,7 @@ export class InstancedIconAttributes extends InstancedAttributes<
     this.vector.set(
       x + (this.uiConfig ? this.uiConfig.offset.x * this.zoomPercent : 0),
       y + (this.uiConfig ? this.uiConfig.offset.y * this.zoomPercent : 0),
-      z
+      z,
     );
 
     this.mesh.getMatrixAt(idx, this.matrix);
@@ -389,11 +333,7 @@ export class InstancedIconAttributes extends InstancedAttributes<
     this.mesh.getMatrixAt(idx, this.matrix);
     this.matrix.decompose(this.translation3, this.q, this.s);
 
-    this.s.set(
-      (baseScaleX / baseScaleY) * scalar * this.zoomPercent,
-      scalar * this.zoomPercent,
-      1
-    );
+    this.s.set((baseScaleX / baseScaleY) * scalar * this.zoomPercent, scalar * this.zoomPercent, 1);
     this.matrix.compose(this.translation3, this.q, this.s);
     this.mesh.setMatrixAt(idx, this.matrix);
 
@@ -405,12 +345,7 @@ export class InstancedIconAttributes extends InstancedAttributes<
 
           // if we don't update positions as well, then any uiLayer-configured
           // offset won't be zoom-specific.
-          uiLayer.setPosition(
-            idx,
-            this.translation3.x,
-            this.translation3.y,
-            this.translation3.z
-          );
+          uiLayer.setPosition(idx, this.translation3.x, this.translation3.y, this.translation3.z);
         }
       }
     }
@@ -439,13 +374,7 @@ export class InstancedIconAttributes extends InstancedAttributes<
     this.setScale(idx, BASE_ICON_SIZE / PLANE_GEOMETRY_WIDTH, true);
   }
 
-  animatePosition(
-    idx: number,
-    x: number,
-    y: number,
-    duration = 1,
-    recurse = true
-  ) {
+  animatePosition(idx: number, x: number, y: number, duration = 1, recurse = true) {
     const [originX, originY, originZ] = this.getPosition(idx);
 
     // TODO Kill existing animations
@@ -463,14 +392,14 @@ export class InstancedIconAttributes extends InstancedAttributes<
         ease: Power3.easeInOut,
         duration,
         onUpdate(context) {
-          const x = +gsap.getProperty(this.targets()[0], "x");
-          const y = +gsap.getProperty(this.targets()[0], "y");
-          const z = +gsap.getProperty(this.targets()[0], "z");
+          const x = +gsap.getProperty(this.targets()[0], 'x');
+          const y = +gsap.getProperty(this.targets()[0], 'y');
+          const z = +gsap.getProperty(this.targets()[0], 'z');
 
           context.setPosition(idx, x, y, z, recurse);
         },
         onUpdateParams: [this],
-      }
+      },
     );
   }
 
@@ -481,10 +410,7 @@ export class InstancedIconAttributes extends InstancedAttributes<
     // previously present but there seemed to be some asynchronous issues,
     // where the uiOverlay icon didn't appear on initial load.
     this.addAttributeTask(() => {
-      this.mesh.geometry.attributes.instanceOpacity.setX(
-        idx,
-        Number(isVisible)
-      );
+      this.mesh.geometry.attributes.instanceOpacity.setX(idx, Number(isVisible));
     });
 
     if (!this.isUiElement && recurse) {
@@ -496,13 +422,9 @@ export class InstancedIconAttributes extends InstancedAttributes<
   }
 
   getVisibilityAt(idx: number) {
-    const isTransparent = Boolean(
-      this.mesh.geometry.attributes.instanceOpacity.getX(idx) ?? 1
-    );
+    const isTransparent = Boolean(this.mesh.geometry.attributes.instanceOpacity.getX(idx) ?? 1);
 
-    const isDiscarded = Boolean(
-      this.mesh.geometry.attributes.instanceDisplay.getX(idx)
-    );
+    const isDiscarded = Boolean(this.mesh.geometry.attributes.instanceDisplay.getX(idx));
 
     return isTransparent && isDiscarded;
   }
@@ -560,15 +482,11 @@ export class InstancedIconAttributes extends InstancedAttributes<
 
     // Anything that extends InstancedAttributes includes the ability
     // to display a geometry or not at the shader level.
-    const attributeAffectsDisplay =
-      !!this.mesh.geometry.attributes.instanceDisplay;
+    const attributeAffectsDisplay = !!this.mesh.geometry.attributes.instanceDisplay;
 
     for (let idx = 0; idx < this.size; idx++) {
       // Is it hidden?
-      if (
-        attributeAffectsDisplay &&
-        this.mesh.geometry.attributes.instanceDisplay.getX(idx) === 0
-      ) {
+      if (attributeAffectsDisplay && this.mesh.geometry.attributes.instanceDisplay.getX(idx) === 0) {
         continue;
       }
 
@@ -595,9 +513,6 @@ export class InstancedIconAttributes extends InstancedAttributes<
   get allLayerNames() {
     if (this.isUiElement) return;
 
-    return [
-      this.name,
-      ...[...(this.uiLayers.values() ?? [])].map((a) => a.name),
-    ];
+    return [this.name, ...[...(this.uiLayers.values() ?? [])].map((a) => a.name)];
   }
 }

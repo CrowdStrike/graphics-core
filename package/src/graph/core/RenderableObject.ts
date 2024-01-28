@@ -1,6 +1,6 @@
-import { EventDispatcher } from "../../graph-utils-v2/events/event-dispatcher";
+import { EventDispatcher } from '../../graph-utils-v2/events/event-dispatcher';
 
-import type { ThreeJSView } from "../../core/ThreeJSView";
+import type { ThreeJSView } from '../../core/ThreeJSView';
 
 interface RenderableObjectParams {
   threeView: ThreeJSView;

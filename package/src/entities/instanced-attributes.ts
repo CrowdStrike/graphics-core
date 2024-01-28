@@ -14,11 +14,11 @@
  * TODO Handle resizing of the InstancedMesh and attributes.
  * At the moment we enable a max instance count of 10000
  */
-import * as THREE from "three";
+import * as THREE from 'three';
 
-import { RequestAnimationFrame } from "../graph-utils-v2/utils/request-animation-frame";
+import { RequestAnimationFrame } from '../graph-utils-v2/utils/request-animation-frame';
 
-import type { ThreeJSView } from "../core/ThreeJSView";
+import type { ThreeJSView } from '../core/ThreeJSView';
 
 /**
  * UI layers are used for attaching other instanced elements
@@ -48,7 +48,7 @@ interface Task {
 
 export class InstancedMeshWithController<
   Geometry extends THREE.BufferGeometry = THREE.BufferGeometry,
-  Material extends THREE.Material = THREE.Material
+  Material extends THREE.Material = THREE.Material,
 > extends THREE.InstancedMesh {
   isInstancedMeshWithController = true;
   attributesController: InstancedAttributes<Geometry, Material>;
@@ -58,7 +58,7 @@ export class InstancedMeshWithController<
     geometry: Geometry,
     material: Material,
     instanceCount: number,
-    controller: InstancedAttributes<Geometry, Material>
+    controller: InstancedAttributes<Geometry, Material>,
   ) {
     super(geometry, material, instanceCount);
 
@@ -66,11 +66,11 @@ export class InstancedMeshWithController<
   }
 }
 
-export const UNKNOWN_INSTANCE_IDX = Symbol("Unknown Instance Index");
+export const UNKNOWN_INSTANCE_IDX = Symbol('Unknown Instance Index');
 
 export class InstancedAttributes<
   Geometry extends THREE.BufferGeometry = THREE.BufferGeometry,
-  Material extends THREE.Material = THREE.Material
+  Material extends THREE.Material = THREE.Material,
 > {
   raf?: RequestAnimationFrame;
 
@@ -118,12 +118,7 @@ export class InstancedAttributes<
     count: number;
     attributes: Record<string, THREE.InstancedBufferAttribute>;
   }) {
-    this.mesh = new InstancedMeshWithController<Geometry, Material>(
-      geometry,
-      material,
-      count,
-      this
-    );
+    this.mesh = new InstancedMeshWithController<Geometry, Material>(geometry, material, count, this);
     // Update the instance matrix on every frame
     this.mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
     this.mesh.name = this.name;
@@ -133,11 +128,8 @@ export class InstancedAttributes<
 
     // keep track of which instances we show and attach to mesh
     this.mesh.geometry.setAttribute(
-      "instanceDisplay",
-      new THREE.InstancedBufferAttribute(
-        new Float32Array(this.maxInstanceCount).fill(0),
-        1
-      )
+      'instanceDisplay',
+      new THREE.InstancedBufferAttribute(new Float32Array(this.maxInstanceCount).fill(0), 1),
     );
 
     this.indexPool = Array.from(Array(this.maxInstanceCount).keys());
@@ -166,7 +158,7 @@ export class InstancedAttributes<
     }
 
     if (instanceIdx === undefined) {
-      throw new Error("reached limit count for instanced object");
+      throw new Error('reached limit count for instanced object');
     }
 
     this.idDict.set(id, instanceIdx);

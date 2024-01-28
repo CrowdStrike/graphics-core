@@ -7,10 +7,7 @@ import type * as THREE from 'three';
 
 export interface ILineMesh extends THREE.Line {
   // eslint-disable-next-line @typescript-eslint/no-misused-new
-  new (
-    material: THREE.LineBasicMaterial | THREE.LineDashedMaterial,
-    settings: LineMeshSettings,
-  ): ILineMeshType;
+  new (material: THREE.LineBasicMaterial | THREE.LineDashedMaterial, settings: LineMeshSettings): ILineMeshType;
 }
 
 export interface ILineMeshType extends THREE.Line<THREE.BufferGeometry, THREE.LineBasicMaterial> {

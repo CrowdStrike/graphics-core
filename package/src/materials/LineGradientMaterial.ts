@@ -484,11 +484,7 @@ class LineGradientMaterial extends THREE.ShaderMaterial {
 
   constructor(parameters: LineGradientShaderParameters) {
     super({
-      uniforms: THREE.UniformsUtils.merge([
-        THREE.UniformsLib.common,
-        THREE.UniformsLib.fog,
-        lineGradientUniforms,
-      ]),
+      uniforms: THREE.UniformsUtils.merge([THREE.UniformsLib.common, THREE.UniformsLib.fog, lineGradientUniforms]),
 
       vertexShader: lineGradientVertexShader,
       fragmentShader: lineGradientFragmentShader,

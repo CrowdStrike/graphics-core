@@ -1,15 +1,12 @@
-import * as THREE from "three";
+import * as THREE from 'three';
 
-import { TextStyle } from "../data/TextStyle";
-import { Color } from "../graph-utils-v2/geom/color";
+import { TextStyle } from '../data/TextStyle';
+import { Color } from '../graph-utils-v2/geom/color';
 
-import type {
-  LineBasicMaterialParameters,
-  LineDashedMaterialParameters,
-} from "three";
-import type { LineMaterial } from "three/examples/jsm/lines/LineMaterial";
+import type { LineBasicMaterialParameters, LineDashedMaterialParameters } from 'three';
+import type { LineMaterial } from 'three/examples/jsm/lines/LineMaterial';
 
-const NODE_LOADING_COLOR = "#e0e0e0";
+const NODE_LOADING_COLOR = '#e0e0e0';
 
 export const LINE_MATERIALS = {
   DEFAULT: 0xd8d8d8,
@@ -20,10 +17,7 @@ export const LINE_MATERIALS = {
 export class MaterialLibrary {
   static _textStyleDictionary: Record<string, TextStyle> = {};
   static _nodeMaterialDictionary: Record<string, THREE.MeshBasicMaterial> = {};
-  static _lineMaterialDictionary: Record<
-    string,
-    THREE.LineBasicMaterial | THREE.LineDashedMaterial
-  > = {};
+  static _lineMaterialDictionary: Record<string, THREE.LineBasicMaterial | THREE.LineDashedMaterial> = {};
 
   static _line2MaterialDictionary: Record<string, LineMaterial> = {};
   static _tempColor = new Color();
@@ -37,15 +31,9 @@ export class MaterialLibrary {
   }
 
   static dispose() {
-    Object.values(MaterialLibrary._lineMaterialDictionary).forEach((material) =>
-      material.dispose()
-    );
-    Object.values(MaterialLibrary._line2MaterialDictionary).forEach(
-      (material) => material.dispose()
-    );
-    Object.values(MaterialLibrary._nodeMaterialDictionary).forEach((material) =>
-      material.dispose()
-    );
+    Object.values(MaterialLibrary._lineMaterialDictionary).forEach((material) => material.dispose());
+    Object.values(MaterialLibrary._line2MaterialDictionary).forEach((material) => material.dispose());
+    Object.values(MaterialLibrary._nodeMaterialDictionary).forEach((material) => material.dispose());
 
     MaterialLibrary._textStyleDictionary = {};
     MaterialLibrary._nodeMaterialDictionary = {};
@@ -60,19 +48,15 @@ export class MaterialLibrary {
   static getNodeMaterialByColor(colorString: string) {
     if (!MaterialLibrary._nodeMaterialDictionary[colorString]) {
       MaterialLibrary._tempColor.setStyle(colorString);
-      MaterialLibrary._nodeMaterialDictionary[colorString] =
-        new THREE.MeshBasicMaterial({
-          color: MaterialLibrary._tempColor.getHex(),
-        });
+      MaterialLibrary._nodeMaterialDictionary[colorString] = new THREE.MeshBasicMaterial({
+        color: MaterialLibrary._tempColor.getHex(),
+      });
     }
 
     return MaterialLibrary._nodeMaterialDictionary[colorString];
   }
 
-  static getMeshLambertMaterialByColor(
-    colorString: string,
-    emissiveColorString = "#000000"
-  ) {
+  static getMeshLambertMaterialByColor(colorString: string, emissiveColorString = '#000000') {
     let id = `MeshLambertMaterial-${colorString}-${emissiveColorString}`;
 
     if (!MaterialLibrary._nodeMaterialDictionary[id]) {
@@ -84,11 +68,10 @@ export class MaterialLibrary {
 
       let emissive = MaterialLibrary._tempColor.getHex();
 
-      MaterialLibrary._nodeMaterialDictionary[id] =
-        new THREE.MeshLambertMaterial({
-          color,
-          emissive,
-        });
+      MaterialLibrary._nodeMaterialDictionary[id] = new THREE.MeshLambertMaterial({
+        color,
+        emissive,
+      });
     }
 
     return MaterialLibrary._nodeMaterialDictionary[id];
@@ -96,23 +79,17 @@ export class MaterialLibrary {
 
   static getLineMaterial(
     lineColor: number,
-    {
-      shouldUseVertexColors = false,
-      isDashedLine = false,
-      dashSize = 3,
-      gapSize = 1,
-    } = {}
+    { shouldUseVertexColors = false, isDashedLine = false, dashSize = 3, gapSize = 1 } = {},
   ) {
     let materialKey = `${lineColor}-${shouldUseVertexColors}-${isDashedLine}-${dashSize}-${gapSize}`;
 
     if (!MaterialLibrary._lineMaterialDictionary[materialKey]) {
-      MaterialLibrary._lineMaterialDictionary[materialKey] =
-        MaterialLibrary.createNewLineMaterial(lineColor, {
-          shouldUseVertexColors,
-          isDashedLine,
-          dashSize,
-          gapSize,
-        });
+      MaterialLibrary._lineMaterialDictionary[materialKey] = MaterialLibrary.createNewLineMaterial(lineColor, {
+        shouldUseVertexColors,
+        isDashedLine,
+        dashSize,
+        gapSize,
+      });
     }
 
     return MaterialLibrary._lineMaterialDictionary[materialKey];
@@ -120,12 +97,7 @@ export class MaterialLibrary {
 
   static createNewLineMaterial(
     lineColor: number,
-    {
-      shouldUseVertexColors = false,
-      isDashedLine = false,
-      dashSize = 3,
-      gapSize = 1,
-    } = {}
+    { shouldUseVertexColors = false, isDashedLine = false, dashSize = 3, gapSize = 1 } = {},
   ) {
     let lineBasicMaterialProperties = shouldUseVertexColors
       ? MaterialLibrary._getLineMaterialPropertiesForVertexColors()
@@ -134,22 +106,14 @@ export class MaterialLibrary {
     let lineMaterial;
 
     if (isDashedLine) {
-      let dashedLineProperties = Object.assign(
-        {},
-        lineBasicMaterialProperties,
-        {
-          dashSize,
-          gapSize,
-        }
-      );
+      let dashedLineProperties = Object.assign({}, lineBasicMaterialProperties, {
+        dashSize,
+        gapSize,
+      });
 
-      lineMaterial = new THREE.LineDashedMaterial(
-        dashedLineProperties as LineDashedMaterialParameters
-      );
+      lineMaterial = new THREE.LineDashedMaterial(dashedLineProperties as LineDashedMaterialParameters);
     } else {
-      lineMaterial = new THREE.LineBasicMaterial(
-        lineBasicMaterialProperties as LineBasicMaterialParameters
-      );
+      lineMaterial = new THREE.LineBasicMaterial(lineBasicMaterialProperties as LineBasicMaterialParameters);
     }
 
     return lineMaterial;
@@ -171,7 +135,7 @@ export class MaterialLibrary {
 
   static getNodeTextStyle(
     colorString: string,
-    { fontSize = 28, fontName = "Calibre", pixelDensity = 1 } = {}
+    { fontSize = 28, fontName = 'Calibre', pixelDensity = 1 } = {},
   ): TextStyle {
     let key = `${colorString}-${fontSize}-${fontName}-${pixelDensity}`;
 

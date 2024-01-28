@@ -26,12 +26,10 @@ const instancedDisplayAttributesFragParams = `
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
-THREE.ShaderChunk['instanced_display_attributes_pars_vertex'] =
-  instancedDisplayAttributesVertParams;
+THREE.ShaderChunk['instanced_display_attributes_pars_vertex'] = instancedDisplayAttributesVertParams;
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
 THREE.ShaderChunk['instanced_display_attributes_vertex'] = instancedDisplayAttributesVert;
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
-THREE.ShaderChunk['instanced_display_attributes_pars_fragment'] =
-  instancedDisplayAttributesFragParams;
+THREE.ShaderChunk['instanced_display_attributes_pars_fragment'] = instancedDisplayAttributesFragParams;

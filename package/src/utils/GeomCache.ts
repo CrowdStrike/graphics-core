@@ -9,11 +9,7 @@ export class GeomCache {
    * get a cached BoxGeometry object if one is available
    * @returns {THREE.PlaneGeometry}
    */
-  static getCachedPlaneGeometry(
-    w: number,
-    h: number,
-    offset = new THREE.Vector3(),
-  ): THREE.PlaneGeometry {
+  static getCachedPlaneGeometry(w: number, h: number, offset = new THREE.Vector3()): THREE.PlaneGeometry {
     let geom;
     let k = `${w}:${h}:${offset.x}:${offset.y}:${offset.z}`;
 

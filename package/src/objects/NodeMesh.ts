@@ -15,10 +15,7 @@ import type { Scene } from 'three/src/scenes/Scene';
 export class NodeMesh extends THREE.Mesh {
   defaultLabelScale = 0.25;
   isCameraFacing = false;
-  label: undefined | LabelMesh = LabelGenerator.make(
-    '',
-    MaterialLibrary.getNodeTextStyle('#000000'),
-  );
+  label: undefined | LabelMesh = LabelGenerator.make('', MaterialLibrary.getNodeTextStyle('#000000'));
 
   constructor(geometry?: BufferGeometry, material?: Material | Material[]) {
     super(geometry, material);

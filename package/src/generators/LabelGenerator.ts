@@ -42,11 +42,7 @@ export class LabelGenerator {
 
     LabelGenerator._updateMaterialRepeatOffset(material, spriteRegion);
 
-    let geometry = GeomCache.getCachedPlaneGeometry(
-      spriteRegion.rect.width,
-      spriteRegion.rect.height,
-      offset,
-    );
+    let geometry = GeomCache.getCachedPlaneGeometry(spriteRegion.rect.width, spriteRegion.rect.height, offset);
     let label = new LabelMeshClass(geometry, material) as LabelMesh;
 
     label.texture = texture;
@@ -80,11 +76,7 @@ export class LabelGenerator {
     label: LabelMesh,
     txt: string,
     style = label.style,
-    {
-      width = label.width,
-      height = label.height,
-      offset = new THREE.Vector3()
-    } = {}
+    { width = label.width, height = label.height, offset = new THREE.Vector3() } = {},
   ) {
     if ((txt === label.text && style === label.style) || !style) {
       return;
@@ -103,10 +95,7 @@ export class LabelGenerator {
       throw new Error('LabelGenerator.update text generator has no spriteRegion');
     }
 
-    LabelGenerator._updateMaterialRepeatOffset(
-      label.material as MeshBasicTintMaterial,
-      textGenerator.spriteRegion,
-    );
+    LabelGenerator._updateMaterialRepeatOffset(label.material as MeshBasicTintMaterial, textGenerator.spriteRegion);
 
     label.texture = this._getCachedTexture(textGenerator);
 
@@ -128,9 +117,7 @@ export class LabelGenerator {
 
   static _getCachedTexture(textGenerator: TextGenerator) {
     if (LabelGenerator._textureByGeneratorCache[textGenerator.uuid] === undefined) {
-      LabelGenerator._textureByGeneratorCache[textGenerator.uuid] = new THREE.Texture(
-        textGenerator.canvas,
-      );
+      LabelGenerator._textureByGeneratorCache[textGenerator.uuid] = new THREE.Texture(textGenerator.canvas);
 
       const t = LabelGenerator._textureByGeneratorCache[textGenerator.uuid] as THREE.Texture;
 

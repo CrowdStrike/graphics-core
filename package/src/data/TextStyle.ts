@@ -1,22 +1,22 @@
 /**
  * Text style for the text generator
  */
-import { NumberUtils } from "../graph-utils-v2/utils/number-utils";
+import { NumberUtils } from '../graph-utils-v2/utils/number-utils';
 
 export class TextStyle {
-  static ALIGN_LEFT = "left-align";
-  static ALIGN_RIGHT = "right-align";
-  static ALIGN_CENTER = "center-align";
-  static ALIGN_NONE = "none";
+  static ALIGN_LEFT = 'left-align';
+  static ALIGN_RIGHT = 'right-align';
+  static ALIGN_CENTER = 'center-align';
+  static ALIGN_NONE = 'none';
 
   _idc = NumberUtils.generateUUID();
   alignment = TextStyle.ALIGN_LEFT;
   autoResize = true;
   backgroundColor?: number; // 0x4400ffff; // Good colour for debugging text
   fontColor = 0x111111;
-  fontName = "Calibre";
+  fontName = 'Calibre';
   fontSize = 12;
-  name = "";
+  name = '';
   padding = 0;
   pixelDensity = 1;
 
@@ -29,15 +29,14 @@ export class TextStyle {
   }
 
   dispose() {
-    this._idc = "";
-    this.alignment = "";
+    this._idc = '';
+    this.alignment = '';
     this.backgroundColor = undefined;
-    this.fontName = "";
-    this.name = "";
+    this.fontName = '';
+    this.name = '';
     this.padding = 0;
     this.pixelDensity = 1;
   }
-
 
   clone() {
     let s = new TextStyle();

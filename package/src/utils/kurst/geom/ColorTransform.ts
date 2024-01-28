@@ -1,4 +1,4 @@
-import { ColorUtils } from "../../../graph-utils-v2/utils/color-utils";
+import { ColorUtils } from '../../../graph-utils-v2/utils/color-utils';
 /**
  * The ColorTransform class lets you adjust the color values in a display
  * object. The color adjustment or <i>color transformation</i> can be applied
@@ -154,7 +154,7 @@ export class ColorTransform {
     redOffset = 0,
     greenOffset = 0,
     blueOffset = 0,
-    alphaOffset = 0
+    alphaOffset = 0,
   ) {
     this.redMultiplier = redMultiplier;
     this.greenMultiplier = greenMultiplier;

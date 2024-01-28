@@ -321,9 +321,7 @@ export class Color {
    * @returns {string}
    */
   getStyle(): string {
-    return (
-      'rgb(' + ((this.r * 255) | 0) + ',' + ((this.g * 255) | 0) + ',' + ((this.b * 255) | 0) + ')'
-    );
+    return 'rgb(' + ((this.r * 255) | 0) + ',' + ((this.g * 255) | 0) + ',' + ((this.b * 255) | 0) + ')';
   }
 
   /**

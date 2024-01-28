@@ -52,15 +52,9 @@ export class LineBezier3 extends LineBezier2<CubicBezierCurve3> {
   public makeCurve() {
     // We need this check here because we're calling super(),
     // which in turn calls makeCurve().
-    if (!this.allControlPointsSet)
-      throw new Error('LineBezier3: no control points defined on this curve');
+    if (!this.allControlPointsSet) throw new Error('LineBezier3: no control points defined on this curve');
 
-    this.curve = new CubicBezierCurve3(
-      this.start,
-      this.controlPoint1,
-      this.controlPoint2,
-      this.end,
-    );
+    this.curve = new CubicBezierCurve3(this.start, this.controlPoint1, this.controlPoint2, this.end);
 
     this._splineLength = this.curve.getLength();
 
@@ -84,15 +78,8 @@ export class LineBezier3 extends LineBezier2<CubicBezierCurve3> {
       if (this._controlPoint2Mesh) {
         this._controlPoint2Mesh.visible = true;
       } else {
-        this._controlPoint2Mesh = new THREE.Mesh(
-          LineBezier2._debugGeometry,
-          LineBezier2._debugMaterial,
-        );
-        this._controlPoint2Mesh.position.set(
-          this._controlPoint2.x,
-          this._controlPoint2.y,
-          this._controlPoint2.z,
-        );
+        this._controlPoint2Mesh = new THREE.Mesh(LineBezier2._debugGeometry, LineBezier2._debugMaterial);
+        this._controlPoint2Mesh.position.set(this._controlPoint2.x, this._controlPoint2.y, this._controlPoint2.z);
 
         this.add(this._controlPoint2Mesh);
       }
