@@ -67,29 +67,13 @@ export default class FalconGraphViewComponent extends Component<Args> {
 
       const EVENTS = EmberComponentInterfaceEvents;
 
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
       eci.removeEventListener(EVENTS.ENTITIES_ADDED, this.onEntitiesAdded, this);
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
       eci.removeEventListener(EVENTS.DOUBLE_CLICK, this.onDoubleClick, this);
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
       eci.removeEventListener(EVENTS.MOUSE_DOWN, this.onMouseDown, this);
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
       eci.removeEventListener(EVENTS.ROLL_OVER, this.onRollOver, this);
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
       eci.removeEventListener(EVENTS.ROLL_OUT, this.onRollOut, this);
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
       eci.removeEventListener(EVENTS.GRAPH_VIEW_ACTION, this.onGraphViewAction, this);
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
       eci.removeEventListener(EVENTS.GRAPH_VIEW_ENTER, this.onGraphViewEnter, this);
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
       eci.removeEventListener(EVENTS.GRAPH_VIEW_SUSPENDED, this.onGraphViewSuspended, this);
 
       if (this.shouldAutoRender) {
@@ -158,29 +142,13 @@ export default class FalconGraphViewComponent extends Component<Args> {
 
     const EVENTS = EmberComponentInterfaceEvents;
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
     eInterface.addEventListener(EVENTS.ENTITIES_ADDED, this.onEntitiesAdded, this);
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
     eInterface.addEventListener(EVENTS.DOUBLE_CLICK, this.onDoubleClick, this);
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
     eInterface.addEventListener(EVENTS.MOUSE_DOWN, this.onMouseDown, this);
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
     eInterface.addEventListener(EVENTS.ROLL_OVER, this.onRollOver, this);
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
     eInterface.addEventListener(EVENTS.ROLL_OUT, this.onRollOut, this);
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
     eInterface.addEventListener(EVENTS.GRAPH_VIEW_ACTION, this.onGraphViewAction, this);
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
     eInterface.addEventListener(EVENTS.GRAPH_VIEW_ENTER, this.onGraphViewEnter, this);
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
     eInterface.addEventListener(EVENTS.GRAPH_VIEW_SUSPENDED, this.onGraphViewSuspended, this);
 
     if (!assetId) {

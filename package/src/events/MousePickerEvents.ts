@@ -33,6 +33,8 @@ export class MousePickerEvents extends Event {
   startDistance: number | null = null; // number - distance between two touch points at start of pinch
   currentDistance: number | null = null; // number - current distance between two touch points
   touchDiffDistance: number | null = null; // difference change between start and current touch point
+  x = -1;
+  y = -1;
 
   constructor(type: string) {
     super(type);

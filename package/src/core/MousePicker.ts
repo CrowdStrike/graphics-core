@@ -72,12 +72,10 @@ export class MousePicker extends EventDispatcher {
   private _touchZoom: MousePickerEvents = new MousePickerEvents(
     MousePickerEvents.TOUCH_ZOOM
   );
-  _startDragObject: MousePickerEvents & { x?: number; y?: number } =
+  _startDragObject: MousePickerEvents =
     new MousePickerEvents(MousePickerEvents.START_DRAG_OBJECT);
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
-  _stopDragObject: MousePickerEvents & { x: number; y: number } =
+  _stopDragObject: MousePickerEvents =
     new MousePickerEvents(MousePickerEvents.STOP_DRAG_OBJECT);
 
   _dragObject: MousePickerEvents = new MousePickerEvents(
