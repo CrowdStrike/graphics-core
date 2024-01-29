@@ -8,14 +8,14 @@ import {
   TextureAtlasLoader,
 } from '@crowdstrike/graphics-core';
 import atlasTextureURL from 'test-app-for-graphics-core/assets/indicators.png';
-import spritesMap from 'test-app-for-graphics-core/utils/indicators'
+import spritesMap from 'test-app-for-graphics-core/utils/indicators';
 import { ThreeJsComponentInterface } from 'test-app-for-graphics-core/utils/threejs-component-interface';
 
 import type { Atlas, IconMesh } from '@crowdstrike/graphics-core';
 import type { EmberComponentInterfaceParams } from 'test-app-for-graphics-core/utils/ember-component-interface';
 
 export class IconMeshPool extends ObjectPoolInterface<IconMesh> {
-  iconDefinition: IconDefinition
+  iconDefinition: IconDefinition;
 
   constructor({ iconDefinition }: { iconDefinition: IconDefinition }) {
     super();
@@ -44,7 +44,7 @@ export class PoolTest extends ThreeJsComponentInterface {
     _theme;
   };
 
-  _atlasLoader: TextureAtlasLoader
+  _atlasLoader: TextureAtlasLoader;
   iconPool: IconMeshPool | null;
   icons: IconMesh[];
 

@@ -16,7 +16,7 @@ import {
   GL_MAX_TEXTURE_IMAGE_UNITS,
   InstancedMultiUvMaterial,
   LabelGenerator,
-  NumberUtils ,
+  NumberUtils,
   setupScene,
   TextGenerator,
   TextStyle,
@@ -131,7 +131,7 @@ export class LabelGeneratorModifier extends Modifier<Args> {
       for (let i = 0; i < textTextures.length; i++) {
         if (i >= GL_MAX_TEXTURE_IMAGE_UNITS) {
           throw new Error(
-            `InstancedMultiUvMaterialShader: more textures generated (${textTextures.length}) than are supported by the WebGL2 shader's texture array (${GL_MAX_TEXTURE_IMAGE_UNITS})`
+            `InstancedMultiUvMaterialShader: more textures generated (${textTextures.length}) than are supported by the WebGL2 shader's texture array (${GL_MAX_TEXTURE_IMAGE_UNITS})`,
           );
         } else {
           canvasTextures.push(textTextures[i] as THREE.Texture);
@@ -157,7 +157,7 @@ export class LabelGeneratorModifier extends Modifier<Args> {
     // Specify to the shader which regions of the texture to sample for each label instance.
     geometry.attributes['uvOffset'] = new THREE.InstancedBufferAttribute(
       new Float32Array(generatedLabelsArray.flatMap((l) => l.bbox)),
-      4
+      4,
     );
     geometry.attributes['uvOffset'].needsUpdate = true;
 
@@ -165,9 +165,9 @@ export class LabelGeneratorModifier extends Modifier<Args> {
       new Float32Array(
         Array(STRINGS_TO_RENDER * 3)
           .fill(0)
-          .flatMap(() => [1, 1, 1])
+          .flatMap(() => [1, 1, 1]),
       ),
-      3
+      3,
     );
     geometry.attributes['instanceColor'].needsUpdate = true;
 
@@ -175,15 +175,15 @@ export class LabelGeneratorModifier extends Modifier<Args> {
       new Float32Array(
         Array(STRINGS_TO_RENDER)
           .fill(1)
-          .map(() => NumberUtils.random(0.4, 1))
+          .map(() => NumberUtils.random(0.4, 1)),
       ),
-      1
+      1,
     );
     geometry.attributes['instanceOpacity'].needsUpdate = true;
 
     geometry.attributes['instanceDisplay'] = new THREE.InstancedBufferAttribute(
       new Float32Array(Array(STRINGS_TO_RENDER).fill(1)),
-      1
+      1,
     );
     geometry.attributes['instanceDisplay'].needsUpdate = true;
 
@@ -192,9 +192,9 @@ export class LabelGeneratorModifier extends Modifier<Args> {
         // Get texture array index of relevant dynamic sprite sheet generator
         generatedLabelsArray.flatMap((l) => {
           return l.textureIdx;
-        })
+        }),
       ),
-      1
+      1,
     );
     geometry.attributes['texIdx'].needsUpdate = true;
 

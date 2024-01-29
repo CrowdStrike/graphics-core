@@ -276,7 +276,6 @@ export class VertexPlaygroundDemo {
     threeJsView.camera.far = 6000000;
     threeJsView.camera.updateProjectionMatrix();
 
-
     threeJsView.mousePicker.addEventListener(MousePickerEvents.MOUSE_UP, this.onMouseUp, this);
     threeJsView.mousePicker.addEventListener(MousePickerEvents.MOUSE_DOWN, this.onMouseDown, this);
     threeJsView.mousePicker.addEventListener(MousePickerEvents.ROLL_OUT, this.onRollOut, this);
@@ -718,13 +717,13 @@ export class VertexPlaygroundDemo {
     }
   }
 
-  onMouseDown(e: MousePickerEvents ) {
+  onMouseDown(e: MousePickerEvents) {
     const { instanceId } = e as MousePickerEvents;
 
     if (instanceId === null) return;
   }
 
-  onRollOut(e: MousePickerEvents ) {
+  onRollOut(e: MousePickerEvents) {
     const { instanceId } = e as MousePickerEvents;
 
     if (instanceId === this.rolledOverIdx) {
@@ -774,7 +773,7 @@ export class VertexPlaygroundDemo {
     }
   }
 
-  onRollOver(e: MousePickerEvents ) {
+  onRollOver(e: MousePickerEvents) {
     const { instanceId } = e as MousePickerEvents;
 
     if (instanceId === null) {

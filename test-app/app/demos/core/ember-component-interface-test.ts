@@ -8,7 +8,7 @@ export class EmberComponentInterfaceTest extends ThreeJsComponentInterface {
     _theme;
   };
 
-  mesh: THREE.Mesh
+  mesh: THREE.Mesh;
 
   constructor(settings: EmberComponentInterfaceParams) {
     super(settings);

@@ -1,13 +1,8 @@
-import {
-  LineMesh,
-  LineMeshSettings,
-  VERTEX_LAYOUT_MODE,
-} from '@crowdstrike/graphics-core';
+import { LineMesh, LineMeshSettings, VERTEX_LAYOUT_MODE } from '@crowdstrike/graphics-core';
 import { ThreeJsComponentInterface } from 'test-app-for-graphics-core/utils/threejs-component-interface';
 import * as THREE from 'three';
 
-import type {
-  ILineMesh} from '@crowdstrike/graphics-core';
+import type { ILineMesh } from '@crowdstrike/graphics-core';
 import type { EmberComponentInterfaceParams } from 'test-app-for-graphics-core/utils/ember-component-interface';
 
 export class LineMeshBezierTest extends ThreeJsComponentInterface {

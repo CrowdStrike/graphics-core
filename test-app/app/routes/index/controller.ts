@@ -29,7 +29,7 @@ export default class LabelGeneratorModifierController extends Controller {
   @action
   isFiltered(tags: string[]) {
     if (!this.activeFilter) {
-      return false
+      return false;
     }
 
     return tags.includes(this.activeFilter);

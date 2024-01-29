@@ -1,4 +1,4 @@
-import { ZigZagLineMesh , ZigZagLineMeshSettings } from '@crowdstrike/graphics-core';
+import { ZigZagLineMesh, ZigZagLineMeshSettings } from '@crowdstrike/graphics-core';
 import { ThreeJsComponentInterface } from 'test-app-for-graphics-core/utils/threejs-component-interface';
 import * as THREE from 'three';
 
@@ -56,7 +56,8 @@ export class ZigZagLineMeshTest extends ThreeJsComponentInterface {
 
     this.anglePosition += 0.04;
     this.angleDistance += 0.01;
-    (this.zigZagLine.settings as ZigZagLineMeshSettings).xDistance = Math.sin(this.angleDistance) * 8;
+    (this.zigZagLine.settings as ZigZagLineMeshSettings).xDistance =
+      Math.sin(this.angleDistance) * 8;
     this.zigZagLine.end.y = -Math.abs(Math.sin(this.anglePosition) * 100);
 
     if (this._dtAcc > 250) {

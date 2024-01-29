@@ -15,7 +15,8 @@
       {{#each this.demoTags as |tag|}}
         <button
           {{on 'mouseup' (fn this.onDemoFilter tag)}}
-          class='m-2 border-2 rounded-md py-1 px-2 cursor-pointer hover:text-positive text-blue {{if (this.isFiltered tag) 'text-positive' }}'
+          class='m-2 border-2 rounded-md py-1 px-2 cursor-pointer hover:text-positive text-blue
+            {{if (this.isFiltered tag) "text-positive"}}'
           type='button'
         >{{tag}}</button>
       {{/each}}

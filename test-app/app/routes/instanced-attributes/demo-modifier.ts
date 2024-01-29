@@ -11,7 +11,12 @@
  */
 import { registerDestructor } from '@ember/destroyable';
 
-import { MousePickerEvents, setupScene, TextGenerator, TextStyle } from '@crowdstrike/graphics-core';
+import {
+  MousePickerEvents,
+  setupScene,
+  TextGenerator,
+  TextStyle,
+} from '@crowdstrike/graphics-core';
 import * as dat from 'dat.gui';
 import Modifier from 'ember-modifier';
 import iconCoordinates from 'test-app-for-graphics-core/utils/coordinates';
@@ -22,7 +27,7 @@ import {
 
 import type {
   DynamicSpriteSheetGenerator,
-  Event ,
+  Event,
   InstancedIconAttributes,
   InstancedInteractionAttributes,
   InstancedTextAttributes,
@@ -195,7 +200,7 @@ export class LabelGeneratorModifier extends Modifier<Args> {
 
         if (badgeFrameMod === 0 && Math.random() < 0.4) {
           const { x, y, w, h, width, height, key } = oneOf(
-            iconCoordinateArray
+            iconCoordinateArray,
           ) as IconCoordinates & { key: string };
 
           badgesAttributes.changeIcon(idx, width, height, [x, y, w, h]);
@@ -277,22 +282,22 @@ export class LabelGeneratorModifier extends Modifier<Args> {
     this.threeJsView?.mousePicker.removeEventListener(
       MousePickerEvents.MOUSE_UP,
       this.onMouseUp,
-      this
+      this,
     );
     this.threeJsView?.mousePicker.removeEventListener(
       MousePickerEvents.MOUSE_DOWN,
       this.onMouseDown,
-      this
+      this,
     );
     this.threeJsView?.mousePicker.removeEventListener(
       MousePickerEvents.ROLL_OUT,
       this.onRollOut,
-      this
+      this,
     );
     this.threeJsView?.mousePicker.removeEventListener(
       MousePickerEvents.ROLL_OVER,
       this.onRollOver,
-      this
+      this,
     );
 
     // recreate the static DynamicSpriteSheetGenerator

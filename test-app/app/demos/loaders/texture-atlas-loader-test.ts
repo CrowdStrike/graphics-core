@@ -12,7 +12,7 @@ export class TextureAtlasLoaderTest extends ThreeJsComponentInterface {
     _theme;
   };
 
-  _atlasLoader: TextureAtlasLoader
+  _atlasLoader: TextureAtlasLoader;
 
   constructor(settings: EmberComponentInterfaceParams) {
     super(settings);

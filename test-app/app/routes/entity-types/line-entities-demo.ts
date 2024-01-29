@@ -72,12 +72,11 @@ export class LineEntitiesDemo {
 
   layout: Layout;
   lines: (LineV2 | LineBezier2 | LineBezier3)[] = [];
-  entities:
-    | (
-        | GraphicsV2EdgeController<LineBezier3, LineBezier3Settings>
-        | GraphicsV2EdgeController<LineBezier2, LineBezier2Settings>
-        | GraphicsV2EdgeController<LineV2, LineV2Settings>
-      )[] = [];
+  entities: (
+    | GraphicsV2EdgeController<LineBezier3, LineBezier3Settings>
+    | GraphicsV2EdgeController<LineBezier2, LineBezier2Settings>
+    | GraphicsV2EdgeController<LineV2, LineV2Settings>
+  )[] = [];
 
   tmpColor = new THREE.Color(0xffffff);
   tmpColor2 = new THREE.Color(0xffffff);
@@ -380,6 +379,6 @@ export class LineEntitiesDemo {
     window.removeEventListener('resize', this.resizeDelegate);
     this.threeJsView?.dispose();
     this.isDisposed = true;
-    this.gui?.destroy()
+    this.gui?.destroy();
   }
 }

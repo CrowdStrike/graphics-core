@@ -11,9 +11,9 @@ export class BarMeshTest extends ThreeJsComponentInterface {
 
   counter: number;
   dtAcc: number;
-  barMesh: BarMesh
-  barMeshH: BarMesh
-  barMeshD: BarMesh
+  barMesh: BarMesh;
+  barMeshH: BarMesh;
+  barMeshD: BarMesh;
 
   constructor(settings: EmberComponentInterfaceParams) {
     super(settings);

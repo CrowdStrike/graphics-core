@@ -4,7 +4,7 @@ import {
   InstancedInteractionAttributes,
   InstancedTextAlignment,
   InstancedTextAttributes,
-  NumberUtils ,
+  NumberUtils,
   TextGenerator,
   TextStyle,
 } from '@crowdstrike/graphics-core';
@@ -60,8 +60,8 @@ export const generateIconGridWithOverlays = async (numIconsToRender = ALL_ICONS_
           y: 12,
         },
         scale: 0.5,
-      }
-    )
+      },
+    ),
   );
 
   baseIconAttributes.uiLayers.set(
@@ -82,8 +82,8 @@ export const generateIconGridWithOverlays = async (numIconsToRender = ALL_ICONS_
           y: 0,
         },
         scale: 1,
-      }
-    )
+      },
+    ),
   );
 
   baseIconAttributes.uiLayers.set(
@@ -104,8 +104,8 @@ export const generateIconGridWithOverlays = async (numIconsToRender = ALL_ICONS_
           y: 0,
         },
         scale: 1,
-      }
-    )
+      },
+    ),
   );
 
   baseIconAttributes.uiLayers.set(
@@ -119,8 +119,8 @@ export const generateIconGridWithOverlays = async (numIconsToRender = ALL_ICONS_
           y: 0,
         },
         scale: 1,
-      }
-    )
+      },
+    ),
   );
 
   baseIconAttributes.uiLayersAreRegistered = true;
@@ -140,7 +140,7 @@ export const generateIconGridWithOverlays = async (numIconsToRender = ALL_ICONS_
 
   for (let [id, { x, y, w, h, width, height }] of Object.entries(iconCoordinates).slice(
     0,
-    numIconsToRender
+    numIconsToRender,
   )) {
     const idx = baseIconAttributes.add({ id });
     const posX = ~~(idx / 20) * 200;
