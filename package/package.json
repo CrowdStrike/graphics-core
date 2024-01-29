@@ -37,7 +37,7 @@
     "build:js": "rollup -c ./config/rollup.config.mjs",
     "lint": "concurrently 'pnpm:lint:js'",
     "lint:fix": "concurrently 'pnpm:lint:js:fix'",
-    "lint:js": "eslint .",
+    "lint:js": "eslint .; prettier . --cache --log-level=error --write",
     "lint:js:fix": "eslint . --fix",
     "prepack": "pnpm build",
     "prepublishOnly": "pnpm build",
