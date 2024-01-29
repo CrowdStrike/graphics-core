@@ -1,8 +1,8 @@
-import { TextStyle } from "../../data/TextStyle";
-import { NumberUtils } from "../../graph-utils-v2/utils/number-utils";
-import { DynamicSpriteSheetGenerator } from "../sprite-sheets/DynamicSpriteSheetGenerator";
+import { TextStyle } from '../../data/TextStyle';
+import { NumberUtils } from '../../graph-utils-v2/utils/number-utils';
+import { DynamicSpriteSheetGenerator } from '../sprite-sheets/DynamicSpriteSheetGenerator';
 
-import type { SpriteRegion } from "../../textures/sprite-sheets/SpriteRegion";
+import type { SpriteRegion } from '../../textures/sprite-sheets/SpriteRegion';
 
 /**
  * Text generator, generate text on a canvas. Uses the DynamicSpriteSheetGenerator to
@@ -13,7 +13,7 @@ export class TextGenerator {
   static _scratchCanvasContext: CanvasRenderingContext2D | undefined;
   uuid = NumberUtils.generateUUID();
   style: TextStyle | undefined;
-  text = "";
+  text = '';
   _width: number;
   _height: number;
   _spriteSheetGenerator: DynamicSpriteSheetGenerator | undefined;
@@ -32,11 +32,9 @@ export class TextGenerator {
     }
 
     if (!TextGenerator._scratchCanvasContext) {
-      let tempCanvas = document.createElement("canvas");
+      let tempCanvas = document.createElement('canvas');
 
-      TextGenerator._scratchCanvasContext = tempCanvas.getContext(
-        "2d"
-      ) as CanvasRenderingContext2D;
+      TextGenerator._scratchCanvasContext = tempCanvas.getContext('2d') as CanvasRenderingContext2D;
     }
 
     this._width = width;
@@ -45,9 +43,9 @@ export class TextGenerator {
   }
 
   dispose() {
-    this.uuid = "";
+    this.uuid = '';
     this.style?.dispose();
-    this.text = "";
+    this.text = '';
 
     if (TextGenerator._spriteSheetGenerator) {
       TextGenerator._spriteSheetGenerator.dispose();
@@ -77,28 +75,17 @@ export class TextGenerator {
     this.text = txt;
 
     if (!this._spriteRegionData) {
-      this._spriteRegionData = this._spriteSheetGenerator?.requestRegion(
-        this.textWidth,
-        this.textHeight,
-        2048
-      );
+      this._spriteRegionData = this._spriteSheetGenerator?.requestRegion(this.textWidth, this.textHeight, 2048);
     }
 
     this.clear();
 
-    if (
-      !this.style ||
-      !this._spriteRegionData ||
-      !this._spriteRegionData.bitmap
-    ) {
+    if (!this.style || !this._spriteRegionData || !this._spriteRegionData.bitmap) {
       return;
     }
 
     if (this.style?.backgroundColor) {
-      this._spriteRegionData.bitmap.fillRect(
-        this._spriteRegionData.rect,
-        this.style.backgroundColor
-      );
+      this._spriteRegionData.bitmap.fillRect(this._spriteRegionData.rect, this.style.backgroundColor);
     }
 
     let ctx = this._spriteRegionData.bitmap.context;
@@ -120,7 +107,7 @@ export class TextGenerator {
         ctx.fillText(
           this.text,
           xOffset + (rect.width - metrics.width) / 2,
-          yOffset + (rect.height / 2 + this.style.calcFontSize() / 2)
+          yOffset + (rect.height / 2 + this.style.calcFontSize() / 2),
         );
 
         break;
@@ -129,7 +116,7 @@ export class TextGenerator {
         ctx.fillText(
           this.text,
           xOffset + this.style.calcPadding(),
-          yOffset + (rect.height / 2 + this.style.calcFontSize() / 2)
+          yOffset + (rect.height / 2 + this.style.calcFontSize() / 2),
         );
 
         break;
@@ -138,7 +125,7 @@ export class TextGenerator {
         ctx.fillText(
           this.text,
           xOffset + (rect.width - metrics.width - this.style.calcPadding()),
-          yOffset + (rect.height / 2 + this.style.calcFontSize() / 2)
+          yOffset + (rect.height / 2 + this.style.calcFontSize() / 2),
         );
 
         break;
@@ -154,12 +141,7 @@ export class TextGenerator {
 
     let { rect } = this._spriteRegionData;
 
-    this._spriteRegionData?.bitmap?.context?.clearRect(
-      rect.x,
-      rect.y,
-      rect.width,
-      rect.height
-    );
+    this._spriteRegionData?.bitmap?.context?.clearRect(rect.x, rect.y, rect.width, rect.height);
   }
 
   /**
@@ -196,12 +178,8 @@ export class TextGenerator {
       return;
     }
 
-    TextGenerator._scratchCanvasContext.font = `${this.style.calcFontSize()}px ${
-      this.style.fontName
-    }`;
-    TextGenerator._scratchCanvasContext.fillStyle = `#${this.style.fontColor.toString(
-      16
-    )}`;
+    TextGenerator._scratchCanvasContext.font = `${this.style.calcFontSize()}px ${this.style.fontName}`;
+    TextGenerator._scratchCanvasContext.fillStyle = `#${this.style.fontColor.toString(16)}`;
 
     return TextGenerator._scratchCanvasContext.measureText(this.text);
   }

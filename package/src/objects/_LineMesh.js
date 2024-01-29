@@ -282,8 +282,7 @@ export class LineMesh extends THREE.Line {
 
   get isCurveShapeC() {
     return (
-      this.settings.drawMode === VERTEX_LAYOUT_MODE.CURVE_C ||
-      this.settings.drawMode === VERTEX_LAYOUT_MODE.CURVE_ARC
+      this.settings.drawMode === VERTEX_LAYOUT_MODE.CURVE_C || this.settings.drawMode === VERTEX_LAYOUT_MODE.CURVE_ARC
     );
   }
 

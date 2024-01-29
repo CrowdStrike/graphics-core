@@ -43,8 +43,8 @@
  * <code>drawRect()</code> method of the Graphics class.</p>
  */
 
-import { NumberUtils } from "../../../graph-utils-v2/utils/number-utils";
-import { Point } from "./Point";
+import { NumberUtils } from '../../../graph-utils-v2/utils/number-utils';
+import { Point } from './Point';
 
 export class Rectangle {
   private _size: Point = new Point();
@@ -214,12 +214,7 @@ export class Rectangle {
    *         specified point; otherwise <code>false</code>.
    */
   contains(x: number, y: number): boolean {
-    return (
-      this.x <= x &&
-      this.x + this.width >= x &&
-      this.y <= y &&
-      this.y + this.height >= y
-    );
+    return this.x <= x && this.x + this.width >= x && this.y <= y && this.y + this.height >= y;
   }
 
   /**
@@ -234,12 +229,7 @@ export class Rectangle {
    *         specified point; otherwise <code>false</code>.
    */
   containsPoint(point: Point): boolean {
-    return (
-      this.x <= point.x &&
-      this.x + this.width >= point.x &&
-      this.y <= point.y &&
-      this.y + this.height >= point.y
-    );
+    return this.x <= point.x && this.x + this.width >= point.x && this.y <= point.y && this.y + this.height >= point.y;
   }
 
   /**
@@ -277,10 +267,7 @@ export class Rectangle {
    */
   equals(toCompare: Rectangle): boolean {
     return (
-      this.x == toCompare.x &&
-      this.y == toCompare.y &&
-      this.width == toCompare.width &&
-      this.height == toCompare.height
+      this.x == toCompare.x && this.y == toCompare.y && this.width == toCompare.width && this.height == toCompare.height
     );
   }
 
@@ -468,17 +455,7 @@ export class Rectangle {
    *         <code>width</code>, and <code>height</code>.
    */
   toString(): string {
-    return (
-      "[Rectangle] (x=" +
-      this.x +
-      ", y=" +
-      this.y +
-      ", width=" +
-      this.width +
-      ", height=" +
-      this.height +
-      ")"
-    );
+    return '[Rectangle] (x=' + this.x + ', y=' + this.y + ', width=' + this.width + ', height=' + this.height + ')';
   }
 
   /**

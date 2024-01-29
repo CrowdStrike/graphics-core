@@ -69,17 +69,14 @@ export const generateHorizontalUiSlots = (shouldShowDescription = true): SlotsCo
 
   const badgeBelowSlotConfigIdx = slots.map((s) => s.name).indexOf('badge_below');
 
-  slots[badgeBelowSlotConfigIdx].locations = slots[badgeBelowSlotConfigIdx].locations.map(
-    (l, idx) => startFromPoint(l, { x: 24, y: shouldShowDescription ? 34 : 23 }, idx + 1),
+  slots[badgeBelowSlotConfigIdx].locations = slots[badgeBelowSlotConfigIdx].locations.map((l, idx) =>
+    startFromPoint(l, { x: 24, y: shouldShowDescription ? 34 : 23 }, idx + 1),
   );
 
   return slots;
 };
 
-const centerAlignNamedSlotLayers = (
-  slotLayers: Coordinates[],
-  alignOn: 'x' | 'y' = 'x',
-): Coordinates[] => {
+const centerAlignNamedSlotLayers = (slotLayers: Coordinates[], alignOn: 'x' | 'y' = 'x'): Coordinates[] => {
   // assumes ordered layers
   const translateEach = (slotLayers[slotLayers.length - 1][alignOn] - slotLayers[0][alignOn]) / 2;
 
@@ -107,9 +104,7 @@ const startFromPoint = (
   return out;
 };
 
-export const generateVerticalUiSlots = (
-  layerOffsets = DEFAULT_UI_OFFSETS,
-): SlotsConfiguration[] => {
+export const generateVerticalUiSlots = (layerOffsets = DEFAULT_UI_OFFSETS): SlotsConfiguration[] => {
   return [
     {
       name: 'label',
@@ -145,10 +140,7 @@ export const generateVerticalUiSlots = (
       scale: 0.5,
       shouldDispatchMouseEvents: true,
       locations: [
-        centerAlignNamedSlotLayers(
-          [layerOffsets[GraphicsV2VertexController.getLayerSlotName('badge_below', 0)]],
-          'x',
-        ),
+        centerAlignNamedSlotLayers([layerOffsets[GraphicsV2VertexController.getLayerSlotName('badge_below', 0)]], 'x'),
         centerAlignNamedSlotLayers(
           [
             layerOffsets[GraphicsV2VertexController.getLayerSlotName('badge_below', 0)],

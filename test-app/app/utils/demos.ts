@@ -76,7 +76,8 @@ export const DEMO_LIST = [
     route: 'demo-viewer',
     id: 'LabelGeneratorTest',
     name: 'generators/LabelGenerator',
-    description: 'An example of rendering of using LabelGenerator to render text to an offscreen canvas',
+    description:
+      'An example of rendering of using LabelGenerator to render text to an offscreen canvas',
     tags: [DEMO_TAGS.SPRITESHEET],
     settings: {
       isOrthographic: false,
@@ -163,7 +164,8 @@ export const DEMO_LIST = [
     route: 'demo-viewer',
     id: 'ZigZagLineMesh',
     name: 'objects/ZigZagLineMesh',
-    description: 'ZigZagLineMesh is used to debug lines by writing line positions to the vertex array buffer',
+    description:
+      'ZigZagLineMesh is used to debug lines by writing line positions to the vertex array buffer',
     tags: [DEMO_TAGS.PRIMITIVE],
     settings: { isOrthographic: false },
   },
@@ -184,7 +186,8 @@ export const DEMO_LIST = [
     route: 'demo-viewer',
     id: 'DynamicSpriteSheetDemo',
     name: 'textures/sprite-sheets/DynamicSpriteSheetDemo',
-    description: 'DynamicSpriteSheetGenerator packs a spritesheet and renders strings to an offscreen canvas',
+    description:
+      'DynamicSpriteSheetGenerator packs a spritesheet and renders strings to an offscreen canvas',
     tags: [DEMO_TAGS.SPRITESHEET, DEMO_TAGS.TEXTURE_SAMPLING],
     settings: {
       isOrthographic: false,
@@ -218,25 +221,29 @@ export const DEMO_LIST = [
   {
     route: 'vertex-playground',
     name: 'Vertex Playground',
-    description: 'A controller that enables the instanced rendering of multiple layers of UI. This can be useful for rendering information-rich vertices on a graph',
+    description:
+      'A controller that enables the instanced rendering of multiple layers of UI. This can be useful for rendering information-rich vertices on a graph',
     tags: [DEMO_TAGS.INSTANCED_RENDERING, DEMO_TAGS.TEXTURE_SAMPLING],
   },
   {
     route: 'instanced-attributes',
     name: 'Instanced Attributes',
-    description: 'InstancedAttributes and its children allow for efficiently rendered and sampling from a paged spritesheet',
+    description:
+      'InstancedAttributes and its children allow for efficiently rendered and sampling from a paged spritesheet',
     tags: [DEMO_TAGS.INSTANCED_RENDERING, DEMO_TAGS.TEXTURE_SAMPLING],
   },
   {
     route: 'label-generator',
     name: 'InstancedMultiUvMaterial for Paged Texture Sampling',
-    description: 'Demonstrates the use of InstancedMultiUvMaterial to sample from an array of textures',
+    description:
+      'Demonstrates the use of InstancedMultiUvMaterial to sample from an array of textures',
     tags: [DEMO_TAGS.CUSTOM_GLSL, DEMO_TAGS.INSTANCED_RENDERING, DEMO_TAGS.TEXTURE_SAMPLING],
   },
   {
     route: 'multi-texture-shader',
     name: 'Multi-Texture Shader',
-    description: 'Render 1M instances of the same VideoTexture sampled across different regions in each instance',
+    description:
+      'Render 1M instances of the same VideoTexture sampled across different regions in each instance',
     tags: [DEMO_TAGS.CUSTOM_GLSL, DEMO_TAGS.INSTANCED_RENDERING, DEMO_TAGS.TEXTURE_SAMPLING],
   },
   {
@@ -248,13 +255,17 @@ export const DEMO_LIST = [
   {
     route: 'edge-types',
     name: 'LineV2 Primitive',
-    description: 'A customizable line for rendering straight lines, cubic, or quadratic bezier curves. Includes options for color gradients, dash offsets, labels, modulated line width, and more',
+    description:
+      'A customizable line for rendering straight lines, cubic, or quadratic bezier curves. Includes options for color gradients, dash offsets, labels, modulated line width, and more',
     tags: [DEMO_TAGS.CUSTOM_GLSL, DEMO_TAGS.PRIMITIVE],
   },
   {
     route: 'entity-types',
     name: 'Entity Types',
-    description: 'A demo illustrating how to handle coplanarity of multiple lines for the lines above',
+    description:
+      'A demo illustrating how to handle coplanarity of multiple lines for the lines above',
     tags: [DEMO_TAGS.PRIMITIVE],
   },
 ];
+
+export type DemoType = (typeof DEMO_LIST)[number];

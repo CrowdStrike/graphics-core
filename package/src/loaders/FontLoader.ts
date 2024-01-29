@@ -1,4 +1,4 @@
-import { StringUtils } from "../graph-utils-v2/utils/string-utils";
+import { StringUtils } from '../graph-utils-v2/utils/string-utils';
 
 export class FontLoader {
   fontNames: string[];
@@ -21,7 +21,7 @@ export class FontLoader {
           }),
         )
           .then((e) => this.onFontLoaded(e))
-          .catch((e) => this.onFontLoadedError(e))
+          .catch((e: ErrorEvent) => this.onFontLoadedError(e))
           .finally(() => this.dispose());
       }
 
@@ -39,9 +39,7 @@ export class FontLoader {
       if (result[0] === undefined) {
         errorFlag = true;
       } else {
-        fontsThatWorked.push(
-          (result[0] as Record<string, unknown>).family as string,
-        );
+        fontsThatWorked.push((result[0] as Record<string, unknown>).family as string);
       }
     });
 
@@ -49,15 +47,10 @@ export class FontLoader {
       let fontString = this.fontNames.toString(); // work backwards - strip all loaded fonts that worked from the string / leave only fonts that had issues.
 
       fontsThatWorked.forEach((workingFont) => {
-        fontString = StringUtils.replaceChar(fontString, workingFont, "");
+        fontString = StringUtils.replaceChar(fontString, workingFont, '');
       });
 
-      throw new Error(
-        `Error loading fonts: ${StringUtils.removeLeadingAndTrailingChars(
-          fontString,
-          ",",
-        )}`,
-      );
+      throw new Error(`Error loading fonts: ${StringUtils.removeLeadingAndTrailingChars(fontString, ',')}`);
     }
 
     this._isLoaded = true;
@@ -65,7 +58,7 @@ export class FontLoader {
     return true;
   }
 
-  onFontLoadedError(e: any) {
+  onFontLoadedError(e: ErrorEvent) {
     this._isLoaded = true;
     throw new Error(e.error);
   }

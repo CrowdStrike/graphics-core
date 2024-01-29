@@ -1,16 +1,12 @@
-import gsap, { Power3 } from "gsap";
-import * as THREE from "three";
+import { gsap, Power3 } from 'gsap';
+import * as THREE from 'three';
 
-import { RequestAnimationFrame } from "../graph-utils-v2/utils/request-animation-frame";
-import { InstancedCircleMaterial } from "../materials/InstancedCircleMaterial";
-import { InstancedAttributes } from "./instanced-attributes";
+import { RequestAnimationFrame } from '../graph-utils-v2/utils/request-animation-frame';
+import { InstancedCircleMaterial } from '../materials/InstancedCircleMaterial';
+import { InstancedAttributes } from './instanced-attributes';
 
-import type { ThreeJSView } from "../core/ThreeJSView";
-import type {
-  EntityWithId,
-  InstancedMeshWithController,
-  UiBadgeConfiguration,
-} from "./instanced-attributes";
+import type { ThreeJSView } from '../core/ThreeJSView';
+import type { EntityWithId, InstancedMeshWithController, UiBadgeConfiguration } from './instanced-attributes';
 
 const PLANE_GEOMETRY_WIDTH = 1;
 
@@ -18,10 +14,7 @@ export interface InstancedInteractionIconConfiguration {
   size: number;
 }
 
-export class InstancedInteractionAttributes extends InstancedAttributes<
-  THREE.PlaneGeometry,
-  InstancedCircleMaterial
-> {
+export class InstancedInteractionAttributes extends InstancedAttributes<THREE.PlaneGeometry, InstancedCircleMaterial> {
   readonly color = new THREE.Color();
   readonly vector = new THREE.Vector3();
   readonly translation3 = new THREE.Vector3();
@@ -41,53 +34,32 @@ export class InstancedInteractionAttributes extends InstancedAttributes<
   isUiElement = false;
   uiConfig?: UiBadgeConfiguration;
 
-  declare mesh: InstancedMeshWithController<
-    THREE.PlaneGeometry,
-    InstancedCircleMaterial
-  >;
+  declare mesh: InstancedMeshWithController<THREE.PlaneGeometry, InstancedCircleMaterial>;
 
   // uiConfig is only necessary if this class is to be used as a badge
-  constructor(
-    config: InstancedInteractionIconConfiguration,
-    uiConfig?: UiBadgeConfiguration
-  ) {
+  constructor(config: InstancedInteractionIconConfiguration, uiConfig?: UiBadgeConfiguration) {
     const instanceCount = 10000;
 
     const attributes = {
       // 1-step
-      instanceOpacity: new THREE.InstancedBufferAttribute(
-        new Float32Array(instanceCount).fill(1),
-        1
-      ),
+      instanceOpacity: new THREE.InstancedBufferAttribute(new Float32Array(instanceCount).fill(1), 1),
       // 3-step [x, y, z]
-      color: new THREE.InstancedBufferAttribute(
-        new Float32Array(instanceCount * 3).fill(1),
-        3
-      ),
+      color: new THREE.InstancedBufferAttribute(new Float32Array(instanceCount * 3).fill(1), 3),
       // 3-step [x, y, z]
-      ringColor: new THREE.InstancedBufferAttribute(
-        new Float32Array(instanceCount * 3).fill(1),
-        3
-      ),
+      ringColor: new THREE.InstancedBufferAttribute(new Float32Array(instanceCount * 3).fill(1), 3),
       // 1-step
-      isHovered: new THREE.InstancedBufferAttribute(
-        new Float32Array(instanceCount).fill(0),
-        1
-      ),
+      isHovered: new THREE.InstancedBufferAttribute(new Float32Array(instanceCount).fill(0), 1),
       // 1-step
-      isSelected: new THREE.InstancedBufferAttribute(
-        new Float32Array(instanceCount).fill(0),
-        1
-      ),
+      isSelected: new THREE.InstancedBufferAttribute(new Float32Array(instanceCount).fill(0), 1),
     };
 
     const geometry = new THREE.PlaneGeometry(1, 1);
 
-    geometry.setAttribute("instanceOpacity", attributes.instanceOpacity);
-    geometry.setAttribute("color", attributes.color);
-    geometry.setAttribute("ringColor", attributes.ringColor);
-    geometry.setAttribute("isHovered", attributes.isHovered);
-    geometry.setAttribute("isSelected", attributes.isSelected);
+    geometry.setAttribute('instanceOpacity', attributes.instanceOpacity);
+    geometry.setAttribute('color', attributes.color);
+    geometry.setAttribute('ringColor', attributes.ringColor);
+    geometry.setAttribute('isHovered', attributes.isHovered);
+    geometry.setAttribute('isSelected', attributes.isSelected);
 
     const material = new InstancedCircleMaterial();
 
@@ -159,21 +131,14 @@ export class InstancedInteractionAttributes extends InstancedAttributes<
     // previously present but there seemed to be some asynchronous issues,
     // where the uiOverlay icon didn't appear on initial load.
     this.addAttributeTask(() => {
-      this.mesh.geometry.attributes.instanceOpacity.setX(
-        idx,
-        Number(isVisible)
-      );
+      this.mesh.geometry.attributes.instanceOpacity.setX(idx, Number(isVisible));
     });
   }
 
   getVisibilityAt(idx: number) {
-    const isTransparent = Boolean(
-      this.mesh.geometry.attributes.instanceOpacity.getX(idx) ?? 1
-    );
+    const isTransparent = Boolean(this.mesh.geometry.attributes.instanceOpacity.getX(idx) ?? 1);
 
-    const isDiscarded = Boolean(
-      this.mesh.geometry.attributes.instanceDisplay.getX(idx)
-    );
+    const isDiscarded = Boolean(this.mesh.geometry.attributes.instanceDisplay.getX(idx));
 
     return isTransparent && isDiscarded;
   }
@@ -236,15 +201,12 @@ export class InstancedInteractionAttributes extends InstancedAttributes<
           duration: 0.4,
           onUpdate(context) {
             context.addAttributeTask(() => {
-              context.mesh.geometry.attributes.isSelected.setX(
-                idx,
-                +gsap.getProperty(this.targets()[0], "x")
-              );
+              context.mesh.geometry.attributes.isSelected.setX(idx, +gsap.getProperty(this.targets()[0], 'x'));
             });
           },
           onUpdateParams: [this],
-        }
-      )
+        },
+      ),
     );
   }
 
@@ -268,15 +230,12 @@ export class InstancedInteractionAttributes extends InstancedAttributes<
           duration: 0.4,
           onUpdate(context) {
             context.addAttributeTask(() => {
-              context.mesh.geometry.attributes.isHovered.setX(
-                idx,
-                +gsap.getProperty(this.targets()[0], "x")
-              );
+              context.mesh.geometry.attributes.isHovered.setX(idx, +gsap.getProperty(this.targets()[0], 'x'));
             });
           },
           onUpdateParams: [this],
-        }
-      )
+        },
+      ),
     );
   }
 

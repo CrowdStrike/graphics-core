@@ -1,12 +1,12 @@
-import { Color } from "three";
+import { Color } from 'three';
 
-import { NumberUtils } from "../graph-utils-v2/utils/number-utils";
-import { LineV2Skeleton } from "../objects/lines-v2/line";
-import { setupScene } from "../utils/scene";
+import { NumberUtils } from '../graph-utils-v2/utils/number-utils';
+import { LineV2Skeleton } from '../objects/lines-v2/line';
+import { setupScene } from '../utils/scene';
 
-import type { ThreeJSView } from "../core/ThreeJSView";
-import type { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import type Stats from "three/examples/jsm/libs/stats.module.js";
+import type { ThreeJSView } from '../core/ThreeJSView';
+import type { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import type Stats from 'three/examples/jsm/libs/stats.module.js';
 
 const MAX_LINES = 12000;
 const INCREMENT_MOD = 8;
@@ -20,11 +20,7 @@ export class LineV2Demo {
   isDisposed = false;
   lines: LineV2Skeleton[] = [];
   resizeDelegate = () => this.resize();
-  framesCallback?: (
-    fps: number,
-    numberOfEntities: number,
-    maxNumberOfEntities: number
-  ) => void;
+  framesCallback?: (fps: number, numberOfEntities: number, maxNumberOfEntities: number) => void;
   finishedAddingCallback?: () => void;
   shouldIncrementEntities = false;
   incrementCounter = 0;
@@ -60,20 +56,12 @@ export class LineV2Demo {
       }
     }
 
-    if (
-      this.incrementCounter % INCREMENT_MOD === 0 &&
-      this.shouldIncrementEntities &&
-      this.lines.length < MAX_LINES
-    ) {
+    if (this.incrementCounter % INCREMENT_MOD === 0 && this.shouldIncrementEntities && this.lines.length < MAX_LINES) {
       this.incrementCounter = 1;
       this.addLines(LINES_INCREMENT);
     }
 
-    if (
-      this.finishedAddingCallback &&
-      this.lines.length >= MAX_LINES &&
-      !this.hasFinished
-    ) {
+    if (this.finishedAddingCallback && this.lines.length >= MAX_LINES && !this.hasFinished) {
       this.finishedAddingCallback();
       this.hasFinished = true;
     }
@@ -89,10 +77,7 @@ export class LineV2Demo {
     this.threeJsView?.setSize(window.innerWidth, window.innerHeight);
     this.lines.forEach((line) => {
       if (this.threeJsView) {
-        line.material.resolution.set(
-          this.threeJsView.width,
-          this.threeJsView.height
-        );
+        line.material.resolution.set(this.threeJsView.width, this.threeJsView.height);
       }
     });
   }
@@ -106,14 +91,10 @@ export class LineV2Demo {
       finishedAddingCallback,
     }: {
       count?: number;
-      framesCallback?: (
-        fps: number,
-        numberOfEntities: number,
-        maxNumberOfEntities: number
-      ) => void;
+      framesCallback?: (fps: number, numberOfEntities: number, maxNumberOfEntities: number) => void;
       finishedAddingCallback?: () => void;
       shouldIncrementEntities?: boolean;
-    } = {}
+    } = {},
   ) {
     const { stats, controls, threeJsView } = setupScene(element);
 
@@ -125,7 +106,7 @@ export class LineV2Demo {
     this.controls = controls;
     controls.enableRotate = true;
 
-    window.addEventListener("resize", this.resizeDelegate);
+    window.addEventListener('resize', this.resizeDelegate);
     this.animate();
 
     threeJsView.camera.position.z = 18000;
@@ -158,10 +139,7 @@ export class LineV2Demo {
       line.start.set(p1.x, p1.y, p1.z);
       line.end.set(p2.x, p2.y, p2.z);
       line.update();
-      line.material.resolution.set(
-        this.threeJsView.width,
-        this.threeJsView.height
-      );
+      line.material.resolution.set(this.threeJsView.width, this.threeJsView.height);
       line.material.linewidth = NumberUtils.random(0.1, 6);
 
       this.lines.push(line);
@@ -170,7 +148,7 @@ export class LineV2Demo {
   }
 
   dispose() {
-    window.removeEventListener("resize", this.resizeDelegate);
+    window.removeEventListener('resize', this.resizeDelegate);
     this.threeJsView?.dispose();
     this.isDisposed = true;
   }

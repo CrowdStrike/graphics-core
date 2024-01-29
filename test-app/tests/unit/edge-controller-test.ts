@@ -2,7 +2,7 @@ import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
 import { GraphicsV2EdgeController, LineBezier3 } from '@crowdstrike/graphics-core';
-import sinon from 'sinon';
+import { spy } from 'sinon';
 
 import type { LineBezier3Settings } from '@crowdstrike/graphics-core';
 
@@ -69,7 +69,7 @@ module('Unit | graphics-core | edge-controller', function (hooks) {
   });
 
   test('disposal', async function (assert) {
-    const disposeSpy = sinon.spy(controller.line, 'dispose');
+    const disposeSpy = spy(controller.line, 'dispose');
 
     controller.dispose();
 

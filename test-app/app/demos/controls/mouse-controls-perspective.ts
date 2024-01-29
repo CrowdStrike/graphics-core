@@ -1,5 +1,5 @@
-import { MouseControls , MousePickerEvents , MouseUtils } from '@crowdstrike/graphics-core';
-import {ThreeJsComponentInterface} from 'test-app-for-graphics-core/utils/threejs-component-interface'
+import { MouseControls, MousePickerEvents, MouseUtils } from '@crowdstrike/graphics-core';
+import { ThreeJsComponentInterface } from 'test-app-for-graphics-core/utils/threejs-component-interface';
 import * as THREE from 'three';
 
 import type { EmberComponentInterfaceParams } from 'test-app-for-graphics-core/utils/ember-component-interface';
@@ -9,7 +9,7 @@ export class MouseControlsPerspective extends ThreeJsComponentInterface {
     _theme;
   };
 
-  mouseControls: MouseControls
+  mouseControls: MouseControls;
 
   constructor(settings: EmberComponentInterfaceParams) {
     super(settings);
@@ -25,7 +25,7 @@ export class MouseControlsPerspective extends ThreeJsComponentInterface {
       threeView: this.threeView,
       shouldDoubleRender: true,
       maxScale: 2.5,
-      minScale: 0.25
+      minScale: 0.25,
     });
 
     this.mouseControls.throwDampingFactor = 0.1;

@@ -1,24 +1,24 @@
-import * as THREE from "three";
-import { OrthographicCamera } from "three";
-import { TrackballControls } from "three/examples/jsm/controls/TrackballControls";
+import * as THREE from 'three';
+import { OrthographicCamera } from 'three';
+import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls';
 
-import { IconGenerator } from "../generators/IconGenerator";
-import { LabelGenerator } from "../generators/LabelGenerator";
-import { EventDispatcher } from "../graph-utils-v2/events/event-dispatcher";
-import { NumberUtils } from "../graph-utils-v2/utils/number-utils";
-import { LineMesh } from "../objects/LineMesh";
-import { LineMesh2 } from "../objects/LineMesh2";
-import { line2Dictionary } from "../objects/LineMesh2Hash";
-import { LineV2 } from "../objects/lines-v2/line-base";
-import { BitmapComposer } from "../textures/graphics/BitmapComposer";
-import { Rectangle } from "../utils/kurst/geom/Rectangle";
-import { GeometryUtils } from "../utils/kurst/utils/GeometryUtils";
-import { ThreeUtils } from "../utils/kurst/utils/ThreeUtils";
-import { MaterialLibrary } from "../utils/MaterialLibrary";
-import { MousePicker } from "./MousePicker";
+import { IconGenerator } from '../generators/IconGenerator';
+import { LabelGenerator } from '../generators/LabelGenerator';
+import { EventDispatcher } from '../graph-utils-v2/events/event-dispatcher';
+import { NumberUtils } from '../graph-utils-v2/utils/number-utils';
+import { LineMesh } from '../objects/LineMesh';
+import { LineMesh2 } from '../objects/LineMesh2';
+import { line2Dictionary } from '../objects/LineMesh2Hash';
+import { LineV2 } from '../objects/lines-v2/line-base';
+import { BitmapComposer } from '../textures/graphics/BitmapComposer';
+import { Rectangle } from '../utils/kurst/geom/Rectangle';
+import { GeometryUtils } from '../utils/kurst/utils/GeometryUtils';
+import { ThreeUtils } from '../utils/kurst/utils/ThreeUtils';
+import { MaterialLibrary } from '../utils/MaterialLibrary';
+import { MousePicker } from './MousePicker';
 
-import type { Object3D } from "three";
-import type { WebGLRendererParameters } from "three/src/renderers/WebGLRenderer";
+import type { Object3D } from 'three';
+import type { WebGLRendererParameters } from 'three/src/renderers/WebGLRenderer';
 
 interface FindClosestObjectToMouseResults {
   closestObjectDistance: number;
@@ -40,7 +40,7 @@ export class ThreeJSViewParams {
   isOrthographic = true;
   itemsToDispose = [] as Disposable[];
   pixelDensity = 1;
-  shouldAutomaticallySetPixelDensity?:boolean = true;
+  shouldAutomaticallySetPixelDensity?: boolean = true;
   shouldUseTrackBall = true;
   webGLRendererOptions?: WebGLRendererParameters;
   width = 800;
@@ -109,12 +109,7 @@ export class ThreeJSView extends EventDispatcher {
     height = 600,
     isFullScreen = true,
     isOrthographic = true,
-    itemsToDispose = [
-      LabelGenerator,
-      IconGenerator,
-      BitmapComposer,
-      MaterialLibrary,
-    ],
+    itemsToDispose = [LabelGenerator, IconGenerator, BitmapComposer, MaterialLibrary],
     pixelDensity = 1,
     shouldAutomaticallySetPixelDensity = true,
     shouldUseTrackBall = true,
@@ -142,13 +137,10 @@ export class ThreeJSView extends EventDispatcher {
     this.width = width;
     this.widthHalf = width * 0.5;
     this.scene.add(this.container);
-    this.renderer = new THREE.WebGLRenderer(
-      webglOptions as WebGLRendererParameters
-    );
+    this.renderer = new THREE.WebGLRenderer(webglOptions as WebGLRendererParameters);
     this.renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
 
-    ThreeJSView.GL_MAX_TEXTURE_IMAGE_UNITS =
-      this.renderer.capabilities.maxTextures;
+    ThreeJSView.GL_MAX_TEXTURE_IMAGE_UNITS = this.renderer.capabilities.maxTextures;
     ThreeJSView.GL_MAX_TEXTURE_SIZE = this.renderer.capabilities.maxTextureSize;
     this.mousePicker = new MousePicker({ threeView: this });
     this.shouldUseTrackBall = shouldUseTrackBall;
@@ -158,12 +150,10 @@ export class ThreeJSView extends EventDispatcher {
       -this.heightHalf,
       this.heightHalf,
       0,
-      80000
+      80000,
     );
     this.perspectiveCamera = new THREE.PerspectiveCamera(50, 1, 0.5, 6000);
-    this.camera = this.isOrthographic
-      ? this.orthographicCamera
-      : this.perspectiveCamera;
+    this.camera = this.isOrthographic ? this.orthographicCamera : this.perspectiveCamera;
 
     if (!(this.camera instanceof OrthographicCamera)) {
       this.camera.aspect = this.width / this.height;
@@ -178,10 +168,7 @@ export class ThreeJSView extends EventDispatcher {
 
   private _init(clearColor: number) {
     if (this.shouldUseTrackBall) {
-      this.trackballControls = new TrackballControls(
-        this.camera,
-        this._containerElement
-      );
+      this.trackballControls = new TrackballControls(this.camera, this._containerElement);
       this.trackballControls.dynamicDampingFactor = 0.2;
       this.trackballControls.noPan = false;
       this.trackballControls.noZoom = false;
@@ -202,13 +189,13 @@ export class ThreeJSView extends EventDispatcher {
     this.renderer.setClearColor(clearColor);
 
     if (!this.isFullScreen) {
-      window.addEventListener("scroll", this._onWindowScrollDelegate, {
+      window.addEventListener('scroll', this._onWindowScrollDelegate, {
         capture: true,
       });
     }
 
-    this.canvas.addEventListener("mouseout", this._onCanvasMouseOutDelegate);
-    this.canvas.addEventListener("mouseover", this._onCanvasMouseOverDelegate);
+    this.canvas.addEventListener('mouseout', this._onCanvasMouseOutDelegate);
+    this.canvas.addEventListener('mouseover', this._onCanvasMouseOverDelegate);
   }
 
   dispose() {
@@ -223,16 +210,13 @@ export class ThreeJSView extends EventDispatcher {
     }
 
     if (!this.isFullScreen) {
-      window.removeEventListener("scroll", this._onWindowScrollDelegate, {
+      window.removeEventListener('scroll', this._onWindowScrollDelegate, {
         capture: true,
       });
     }
 
-    this.canvas.removeEventListener("mouseout", this._onCanvasMouseOutDelegate);
-    this.canvas.removeEventListener(
-      "mouseover",
-      this._onCanvasMouseOverDelegate
-    );
+    this.canvas.removeEventListener('mouseout', this._onCanvasMouseOutDelegate);
+    this.canvas.removeEventListener('mouseover', this._onCanvasMouseOverDelegate);
 
     this.remove(this.container);
     this.scene.remove(this.ambientLight);
@@ -333,7 +317,7 @@ export class ThreeJSView extends EventDispatcher {
     this._projectTMPVector.z = z;
     this._projectTMPVector.unproject(this.camera);
 
-    if (this.camera.type === "OrthographicCamera") {
+    if (this.camera.type === 'OrthographicCamera') {
       return this._projectTMPVector;
     }
 
@@ -345,26 +329,17 @@ export class ThreeJSView extends EventDispatcher {
     this._tmpCameraPosition.y = this.camera.position.y;
     this._tmpCameraPosition.z = this.camera.position.z;
 
-    return this._tmpCameraPosition.add(
-      this._projectTMPVector.multiplyScalar(distance)
-    );
+    return this._tmpCameraPosition.add(this._projectTMPVector.multiplyScalar(distance));
   }
 
-  unproject(
-    obj:
-      | THREE.Line
-      | typeof LineMesh
-      | typeof LineMesh2
-      | THREE.Vector3
-      | THREE.Object3D
-  ) {
+  unproject(obj: THREE.Line | typeof LineMesh | typeof LineMesh2 | THREE.Vector3 | THREE.Object3D) {
     switch (true) {
       case obj instanceof LineMesh:
       case obj instanceof LineMesh2:
         this._unprojectTMPVector.set(
           this.mousePicker.intersectionPoint.x,
           this.mousePicker.intersectionPoint.y,
-          this.mousePicker.intersectionPoint.z
+          this.mousePicker.intersectionPoint.z,
         );
 
         break;
@@ -380,27 +355,19 @@ export class ThreeJSView extends EventDispatcher {
       //   break;
 
       case obj instanceof THREE.Vector3:
-        this._unprojectTMPVector.set(
-          (obj as THREE.Vector3).x,
-          (obj as THREE.Vector3).y,
-          (obj as THREE.Vector3).z
-        );
+        this._unprojectTMPVector.set((obj as THREE.Vector3).x, (obj as THREE.Vector3).y, (obj as THREE.Vector3).z);
 
         break;
 
       default:
-        this._unprojectTMPVector.setFromMatrixPosition(
-          (obj as THREE.Object3D).matrixWorld
-        );
+        this._unprojectTMPVector.setFromMatrixPosition((obj as THREE.Object3D).matrixWorld);
 
         break;
     }
 
     this._unprojectTMPVector.project(this.camera);
-    this._unprojectTMPVector.x =
-      this._unprojectTMPVector.x * this.widthHalf + this.widthHalf;
-    this._unprojectTMPVector.y =
-      -(this._unprojectTMPVector.y * this.heightHalf) + this.heightHalf;
+    this._unprojectTMPVector.x = this._unprojectTMPVector.x * this.widthHalf + this.widthHalf;
+    this._unprojectTMPVector.y = -(this._unprojectTMPVector.y * this.heightHalf) + this.heightHalf;
     this._unprojectResult.x = this._unprojectTMPVector.x;
     this._unprojectResult.y = this._unprojectTMPVector.y;
 
@@ -412,10 +379,7 @@ export class ThreeJSView extends EventDispatcher {
       this.camera.updateMatrixWorld(); // make sure the camera matrix is updated
 
       this.camera.matrixWorldInverse.copy(this.camera.matrixWorld).invert();
-      this._cameraViewProjectionMatrix.multiplyMatrices(
-        this.camera.projectionMatrix,
-        this.camera.matrixWorldInverse
-      );
+      this._cameraViewProjectionMatrix.multiplyMatrices(this.camera.projectionMatrix, this.camera.matrixWorldInverse);
 
       this._frustum.setFromProjectionMatrix(this._cameraViewProjectionMatrix);
 
@@ -428,20 +392,13 @@ export class ThreeJSView extends EventDispatcher {
   pointIntersectsFrustum(point: THREE.Vector3) {
     this.camera.updateMatrixWorld(); // make sure the camera matrix is updated
     this.camera.matrixWorldInverse.copy(this.camera.matrixWorld).invert();
-    this._cameraViewProjectionMatrix.multiplyMatrices(
-      this.camera.projectionMatrix,
-      this.camera.matrixWorldInverse
-    );
+    this._cameraViewProjectionMatrix.multiplyMatrices(this.camera.projectionMatrix, this.camera.matrixWorldInverse);
     this._frustum.setFromProjectionMatrix(this._cameraViewProjectionMatrix);
 
     return this._frustum.containsPoint(point);
   }
 
-  findClosestObjectToMouse(
-    mesh: THREE.Object3D,
-    classesToExclude = [],
-    _result?: FindClosestObjectToMouseResults
-  ) {
+  findClosestObjectToMouse(mesh: THREE.Object3D, classesToExclude = [], _result?: FindClosestObjectToMouseResults) {
     if (!_result) {
       _result = {
         closestObjectDistance: Infinity,
@@ -460,20 +417,10 @@ export class ThreeJSView extends EventDispatcher {
       _result.box3.makeEmpty();
       _result.box3.setFromObject(mesh);
       _result.box3.getSize(_result.sizeTarget);
-      _result.bound.set(
-        screenPos.x,
-        screenPos.y,
-        _result.sizeTarget.x,
-        _result.sizeTarget.y
-      );
+      _result.bound.set(screenPos.x, screenPos.y, _result.sizeTarget.x, _result.sizeTarget.y);
 
-      let shouldExclude = classesToExclude.some(
-        (ClassRef) => mesh instanceof ClassRef
-      );
-      let distance = GeometryUtils.distancePointToRectangle(
-        this.mousePicker.mouse,
-        _result.bound
-      );
+      let shouldExclude = classesToExclude.some((ClassRef) => mesh instanceof ClassRef);
+      let distance = GeometryUtils.distancePointToRectangle(this.mousePicker.mouse, _result.bound);
 
       if (distance < _result.closestObjectDistance && !shouldExclude) {
         _result.closestObjectDistance = distance;
@@ -482,11 +429,7 @@ export class ThreeJSView extends EventDispatcher {
     }
 
     for (let c = 0; c < mesh.children.length; c++) {
-      this.findClosestObjectToMouse(
-        mesh.children[c] as Object3D,
-        classesToExclude,
-        _result
-      );
+      this.findClosestObjectToMouse(mesh.children[c] as Object3D, classesToExclude, _result);
     }
 
     return _result;
@@ -518,16 +461,12 @@ export class ThreeJSView extends EventDispatcher {
     instancedMeshes.forEach((instancedMesh: THREE.InstancedMesh) => {
       // Anything that extends InstancedAttributes includes the ability
       // to display a geometry or not at the shader level.
-      const attributeAffectsDisplay =
-        !!instancedMesh.geometry.attributes.instanceDisplay;
+      const attributeAffectsDisplay = !!instancedMesh.geometry.attributes.instanceDisplay;
 
       // Take into account only those instances that are drawn
       for (let idx = 0; idx < instancedMesh.count; idx++) {
         // Is it hidden?
-        if (
-          attributeAffectsDisplay &&
-          instancedMesh.geometry.attributes.instanceDisplay.getX(idx) === 0
-        ) {
+        if (attributeAffectsDisplay && instancedMesh.geometry.attributes.instanceDisplay.getX(idx) === 0) {
           continue;
         } else {
           // Extracting a single position

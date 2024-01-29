@@ -60,9 +60,7 @@ export default defineConfig({
     addon.clean(),
 
     copy({
-      targets: [
-        {src: '../LICENSE.md', dest: '.'}
-      ]
-    })
+      targets: [{ src: '../LICENSE.md', dest: '.' }],
+    }),
   ],
 });

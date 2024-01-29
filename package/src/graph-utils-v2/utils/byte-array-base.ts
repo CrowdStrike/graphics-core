@@ -12,24 +12,7 @@ export abstract class ByteArrayBase {
     let nstep = 8;
 
     function asHexString(x: number, digits: number) {
-      let lut: Array<string> = [
-        '0',
-        '1',
-        '2',
-        '3',
-        '4',
-        '5',
-        '6',
-        '7',
-        '8',
-        '9',
-        'a',
-        'b',
-        'c',
-        'd',
-        'e',
-        'f',
-      ];
+      let lut: Array<string> = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
       let sh = '';
 
       for (let d = 0; d < digits; d++) {
@@ -81,11 +64,7 @@ export abstract class ByteArrayBase {
       enc2 = ((b0 & 3) << 4) | (b1 >> 4);
       enc3 = ((b1 & 15) << 2) | (b2 >> 6);
       enc4 = b2 & 63;
-      r +=
-        base64Key.charAt(enc1) +
-        base64Key.charAt(enc2) +
-        base64Key.charAt(enc3) +
-        base64Key.charAt(enc4);
+      r += base64Key.charAt(enc1) + base64Key.charAt(enc2) + base64Key.charAt(enc3) + base64Key.charAt(enc4);
       count -= 3;
     }
 

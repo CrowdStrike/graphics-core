@@ -13,10 +13,7 @@ export class DynamicSpriteSheetGenerator {
   private readonly _defaultWidth: number | undefined;
   private readonly _defaultHeight: number | undefined;
 
-  constructor(
-    defaultWidth: number | undefined = undefined,
-    defaultHeight: number | undefined = undefined,
-  ) {
+  constructor(defaultWidth: number | undefined = undefined, defaultHeight: number | undefined = undefined) {
     this._cullCount = 0;
     this._defaultWidth = defaultWidth;
     this._defaultHeight = defaultHeight;

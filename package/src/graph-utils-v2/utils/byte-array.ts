@@ -143,9 +143,7 @@ export class ByteArray extends ByteArrayBase {
    */
   readUnsignedByte() {
     if (this.position >= this.length) {
-      throw new Error(
-        'ByteArray out of bounds read. Position=' + this.position + ', Length=' + this.length,
-      );
+      throw new Error('ByteArray out of bounds read. Position=' + this.position + ', Length=' + this.length);
     }
 
     let view = new Uint8Array(this.arraybytes);
@@ -204,19 +202,14 @@ export class ByteArray extends ByteArrayBase {
       } else if (c < 0xf0) {
         let c2 = data.getUint8(this.position++);
 
-        value += String.fromCharCode(
-          ((c & 0x1f) << 12) | ((c2 & 0x7f) << 6) | (data.getUint8(this.position++) & 0x7f),
-        );
+        value += String.fromCharCode(((c & 0x1f) << 12) | ((c2 & 0x7f) << 6) | (data.getUint8(this.position++) & 0x7f));
       } else {
         let c2 = data.getUint8(this.position++);
 
         let c3 = data.getUint8(this.position++);
 
         value += String.fromCharCode(
-          ((c & 0x0f) << 18) |
-            ((c2 & 0x7f) << 12) |
-            ((c3 << 6) & 0x7f) |
-            (data.getUint8(this.position++) & 0x7f),
+          ((c & 0x0f) << 18) | ((c2 & 0x7f) << 12) | ((c3 << 6) & 0x7f) | (data.getUint8(this.position++) & 0x7f),
         );
       }
     }

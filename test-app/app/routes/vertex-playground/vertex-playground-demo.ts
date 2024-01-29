@@ -21,7 +21,7 @@ import {
   TextStyle,
 } from '@crowdstrike/graphics-core';
 import * as dat from 'dat.gui';
-import gsap, { Power3 } from 'gsap';
+import { gsap, Power3 } from 'gsap';
 import IconTextureAtlas from 'test-app-for-graphics-core/assets/icon-texture-atlas.png';
 import iconCoordinates from 'test-app-for-graphics-core/utils/coordinates';
 import * as THREE from 'three';
@@ -275,7 +275,6 @@ export class VertexPlaygroundDemo {
     threeJsView.camera.position.z = 800;
     threeJsView.camera.far = 6000000;
     threeJsView.camera.updateProjectionMatrix();
-
 
     threeJsView.mousePicker.addEventListener(MousePickerEvents.MOUSE_UP, this.onMouseUp, this);
     threeJsView.mousePicker.addEventListener(MousePickerEvents.MOUSE_DOWN, this.onMouseDown, this);
@@ -718,13 +717,13 @@ export class VertexPlaygroundDemo {
     }
   }
 
-  onMouseDown(e: MousePickerEvents ) {
+  onMouseDown(e: MousePickerEvents) {
     const { instanceId } = e as MousePickerEvents;
 
     if (instanceId === null) return;
   }
 
-  onRollOut(e: MousePickerEvents ) {
+  onRollOut(e: MousePickerEvents) {
     const { instanceId } = e as MousePickerEvents;
 
     if (instanceId === this.rolledOverIdx) {
@@ -774,7 +773,7 @@ export class VertexPlaygroundDemo {
     }
   }
 
-  onRollOver(e: MousePickerEvents ) {
+  onRollOver(e: MousePickerEvents) {
     const { instanceId } = e as MousePickerEvents;
 
     if (instanceId === null) {

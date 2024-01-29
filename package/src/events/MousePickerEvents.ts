@@ -1,26 +1,26 @@
-import { Event } from "../graph-utils-v2/events/event";
-import { Point } from "../utils/kurst/geom/Point";
+import { Event } from '../graph-utils-v2/events/event';
+import { Point } from '../utils/kurst/geom/Point';
 
-import type { InstancedMeshWithController } from "../entities/instanced-attributes";
+import type { InstancedMeshWithController } from '../entities/instanced-attributes';
 
 export class MousePickerEvents extends Event {
-  static ROLL_OVER = "onRollOver";
-  static ROLL_OUT = "onMouseOut";
-  static MOUSE_UP = "onMouseUp";
-  static MOUSE_DOWN = "onMouseDown";
-  static RIGHT_CLICK = "onRightClick";
-  static CANVAS_MOUSE_DOWN = "onCanvasMouseDown";
-  static CANVAS_MOUSE_UP = "onCanvasMouseUp";
-  static CANVAS_CLICK = "onCanvasClick";
-  static START_DRAG = "onStartDrag";
-  static STOP_DRAG = "onStopDrag";
-  static START_DRAG_OBJECT = "onStartDragObject";
-  static DRAG_OBJECT = "onDragObject";
-  static STOP_DRAG_OBJECT = "onStopDragObject";
-  static MOUSE_WHEEL = "onMouseWheel";
-  static TOUCH_ZOOM = "onTouchZoom";
-  static TAP_DRAG = "onTapDrag";
-  static DOUBLE_CLICK = "onDoubleClick";
+  static ROLL_OVER = 'onRollOver';
+  static ROLL_OUT = 'onMouseOut';
+  static MOUSE_UP = 'onMouseUp';
+  static MOUSE_DOWN = 'onMouseDown';
+  static RIGHT_CLICK = 'onRightClick';
+  static CANVAS_MOUSE_DOWN = 'onCanvasMouseDown';
+  static CANVAS_MOUSE_UP = 'onCanvasMouseUp';
+  static CANVAS_CLICK = 'onCanvasClick';
+  static START_DRAG = 'onStartDrag';
+  static STOP_DRAG = 'onStopDrag';
+  static START_DRAG_OBJECT = 'onStartDragObject';
+  static DRAG_OBJECT = 'onDragObject';
+  static STOP_DRAG_OBJECT = 'onStopDragObject';
+  static MOUSE_WHEEL = 'onMouseWheel';
+  static TOUCH_ZOOM = 'onTouchZoom';
+  static TAP_DRAG = 'onTapDrag';
+  static DOUBLE_CLICK = 'onDoubleClick';
 
   instanceId: number | null = null;
   object: THREE.Object3D | InstancedMeshWithController | null = null; // THREE.Object3D

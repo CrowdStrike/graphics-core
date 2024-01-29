@@ -1,4 +1,10 @@
-import { LineBezier2, LineBezier3, LineV2, NumberUtils , setupScene } from '@crowdstrike/graphics-core';
+import {
+  LineBezier2,
+  LineBezier3,
+  LineV2,
+  NumberUtils,
+  setupScene,
+} from '@crowdstrike/graphics-core';
 import * as dat from 'dat.gui';
 import * as THREE from 'three';
 
@@ -115,7 +121,7 @@ export class LineTypesDemo {
           this.demoParams.shouldAnimateControlPoints
             ? 10 + Math.sin(this.demoParams.angle) * r
             : line._controlPoint1Offset,
-          line._controlPoint1IntersectsLineAt
+          line._controlPoint1IntersectsLineAt,
         );
 
         if (line instanceof LineBezier3) {
@@ -123,7 +129,7 @@ export class LineTypesDemo {
             this.demoParams.shouldAnimateControlPoints
               ? 10 + Math.sin(this.demoParams.angle) * r
               : line._controlPoint1Offset,
-            line._controlPoint2IntersectsLineAt
+            line._controlPoint2IntersectsLineAt,
           );
         }
 
@@ -175,7 +181,7 @@ export class LineTypesDemo {
       this.lines.forEach((line) => {
         line.setColor(
           this.tmpColor.set(this.demoParams.startColor),
-          this.tmpColor2.set(this.demoParams.endColor)
+          this.tmpColor2.set(this.demoParams.endColor),
         );
       });
     }
@@ -235,7 +241,7 @@ export class LineTypesDemo {
       framesCallback?: (fps: number, numberOfEntities: number, maxNumberOfEntities: number) => void;
       finishedAddingCallback?: () => void;
       shouldIncrementEntities?: boolean;
-    } = {}
+    } = {},
   ) {
     const { stats, controls, renderer, threeJsView } = setupScene(element);
 
@@ -651,6 +657,6 @@ export class LineTypesDemo {
     window.removeEventListener('resize', this.resizeDelegate);
     this.threeJsView?.dispose();
     this.isDisposed = true;
-    this.gui?.destroy()
+    this.gui?.destroy();
   }
 }

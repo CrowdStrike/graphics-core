@@ -187,11 +187,7 @@ export class IconGenerator {
     return iconMaterialData;
   }
 
-  static update(
-    mesh: IconMesh,
-    iconDefinition: IconDefinition,
-    { shouldCache = false, shouldPool = false } = {},
-  ) {
+  static update(mesh: IconMesh, iconDefinition: IconDefinition, { shouldCache = false, shouldPool = false } = {}) {
     if (Array.isArray(mesh.material)) {
       throw new Error('IconGenerator.update does not support material arrays');
     }
@@ -277,13 +273,14 @@ export class IconGenerator {
         default:
           {
             if (backgroundLayer === undefined || backgroundLayer.rect === undefined) {
-              throw new Error(
-                'Icon generator background layer / layer rectangle should not be undefined',
-              );
+              throw new Error('Icon generator background layer / layer rectangle should not be undefined');
             }
 
             let x = Math.floor((backgroundLayer.rect.width - layer.rect.width) / 2) + layer.offset.x;
-            let y = Math.floor((backgroundLayer.rect.height - layer.rect.height) / 2) + layer.offset.y + backgroundLayer.rect.y;
+            let y =
+              Math.floor((backgroundLayer.rect.height - layer.rect.height) / 2) +
+              layer.offset.y +
+              backgroundLayer.rect.y;
 
             layer.rect.x = x;
             layer.rect.y = y;

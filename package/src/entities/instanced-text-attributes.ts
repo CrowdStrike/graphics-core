@@ -1,26 +1,23 @@
-import { TextStyle } from "../data/TextStyle";
-import { LabelGenerator } from "../generators/LabelGenerator";
-import { StringUtils } from "../graph-utils-v2/utils/string-utils";
-import { TextGenerator } from "../textures/text/TextGenerator";
-import { UNKNOWN_INSTANCE_IDX } from "./instanced-attributes";
-import { InstancedIconAttributes } from "./instanced-icon-attributes";
+import { TextStyle } from '../data/TextStyle';
+import { LabelGenerator } from '../generators/LabelGenerator';
+import { StringUtils } from '../graph-utils-v2/utils/string-utils';
+import { TextGenerator } from '../textures/text/TextGenerator';
+import { UNKNOWN_INSTANCE_IDX } from './instanced-attributes';
+import { InstancedIconAttributes } from './instanced-icon-attributes';
 
-import type {
-  EntityWithId,
-  UiBadgeConfiguration,
-} from "./instanced-attributes";
+import type { EntityWithId, UiBadgeConfiguration } from './instanced-attributes';
 
 export enum LabelPosition {
-  right = "right",
-  bottom = "bottom",
+  right = 'right',
+  bottom = 'bottom',
 }
 
 export enum InstancedTextAlignment {
-  start = "start",
-  middle = "middle",
+  start = 'start',
+  middle = 'middle',
 }
 
-type TruncationStrategy = "start" | "end" | "middle";
+type TruncationStrategy = 'start' | 'end' | 'middle';
 
 export interface InstancedTextConfiguration {
   alignment?: InstancedTextAlignment;
@@ -62,10 +59,7 @@ export class InstancedTextAttributes extends InstancedIconAttributes {
   pixelDensity: number;
 
   // uiConfig is only necessary if this class is to be used as a badge
-  constructor(
-    textConfig: InstancedTextConfiguration,
-    uiConfig?: UiBadgeConfiguration
-  ) {
+  constructor(textConfig: InstancedTextConfiguration, uiConfig?: UiBadgeConfiguration) {
     let { textureAtlas } = textConfig;
 
     // There's a case that the provided
@@ -78,15 +72,14 @@ export class InstancedTextAttributes extends InstancedIconAttributes {
         textSpriteSheetGenerator.requestRegion(2048, 2048);
       }
 
-      textureAtlas = textSpriteSheetGenerator.spriteSheets[0]
-        .canvas as HTMLCanvasElement;
+      textureAtlas = textSpriteSheetGenerator.spriteSheets[0].canvas as HTMLCanvasElement;
     }
 
     super(
       {
         textureAtlas,
       },
-      uiConfig
+      uiConfig,
     );
 
     this.alignment = textConfig.alignment || InstancedTextAlignment.middle;
@@ -132,8 +125,7 @@ export class InstancedTextAttributes extends InstancedIconAttributes {
     // In which page of the spritesheet array can we locate the image?
     const textureIdx = label.spriteSheetIdx ?? -1;
 
-    const [x, y, w, h] = label.textGenerator?._spriteRegionData
-      ?.normalizedCoordinates || [0, 0, 1, 1];
+    const [x, y, w, h] = label.textGenerator?._spriteRegionData?.normalizedCoordinates || [0, 0, 1, 1];
 
     this.mesh.geometry.attributes.uvOffset.setXYZW(idx, x, y, w, h);
     this.mesh.geometry.attributes.uvOffset.needsUpdate = true;
@@ -145,7 +137,7 @@ export class InstancedTextAttributes extends InstancedIconAttributes {
 
     if (textureCount > InstancedIconAttributes.MAX_TEXTURE_ARRAY_SIZE) {
       throw new Error(
-        `WebGL: Too many textures; FRAGMENT shader texture image units count exceeds MAX_TEXTURE_IMAGE_UNITS(${InstancedIconAttributes.MAX_TEXTURE_ARRAY_SIZE})`
+        `WebGL: Too many textures; FRAGMENT shader texture image units count exceeds MAX_TEXTURE_IMAGE_UNITS(${InstancedIconAttributes.MAX_TEXTURE_ARRAY_SIZE})`,
       );
     }
 
@@ -176,10 +168,7 @@ export class InstancedTextAttributes extends InstancedIconAttributes {
 
     // How much do we need to scale the text for it to have
     // the same height regardless of text?
-    this.baseScaleLookup.set(idx, [
-      label.width / PLANE_GEOMETRY_WIDTH,
-      label.height / PLANE_GEOMETRY_HEIGHT,
-    ]);
+    this.baseScaleLookup.set(idx, [label.width / PLANE_GEOMETRY_WIDTH, label.height / PLANE_GEOMETRY_HEIGHT]);
 
     this.textLookup.set(idx, text);
 
@@ -193,8 +182,7 @@ export class InstancedTextAttributes extends InstancedIconAttributes {
   }
 
   updateTextConfig(config: Partial<InstancedTextConfiguration>) {
-    const { alignment, truncationLength, truncationStrategy, pixelDensity } =
-      config;
+    const { alignment, truncationLength, truncationStrategy, pixelDensity } = config;
 
     if (alignment) {
       this.alignment = alignment;
@@ -213,12 +201,7 @@ export class InstancedTextAttributes extends InstancedIconAttributes {
     }
   }
 
-  updateTextAt(
-    idx: number,
-    text: string,
-    truncationStrategy?: TruncationStrategy,
-    truncationLength?: number
-  ) {
+  updateTextAt(idx: number, text: string, truncationStrategy?: TruncationStrategy, truncationLength?: number) {
     truncationStrategy = truncationStrategy ?? this.truncationStrategy;
 
     if (truncationLength) {
@@ -230,15 +213,15 @@ export class InstancedTextAttributes extends InstancedIconAttributes {
     // Therefore, we have to re-run the truncation in order to check
     // the cache.
     switch (truncationStrategy) {
-      case "start":
+      case 'start':
         text = StringUtils.truncateFromEnd(text, this.truncationLength);
 
         break;
-      case "end":
+      case 'end':
         text = StringUtils.truncate(text, this.truncationLength);
 
         break;
-      case "middle":
+      case 'middle':
         text = StringUtils.truncateMiddle(text, this.truncationLength);
 
         break;
@@ -284,7 +267,7 @@ export class InstancedTextAttributes extends InstancedIconAttributes {
         idx,
         this.translation3.x - positionOffsetX - oldScaleX / 2,
         this.translation3.y - positionOffsetY,
-        this.translation3.z
+        this.translation3.z,
       );
     } else {
       super.setScale(idx, scalar, recurse);
@@ -304,12 +287,7 @@ export class InstancedTextAttributes extends InstancedIconAttributes {
       this.mesh.getMatrixAt(idx, this.matrix);
       this.matrix.decompose(this.translation3, this.q, this.s);
 
-      super.setPosition(
-        idx,
-        x + positionOffsetX + this.s.x / 2,
-        y + positionOffsetY,
-        z
-      );
+      super.setPosition(idx, x + positionOffsetX + this.s.x / 2, y + positionOffsetY, z);
     } else {
       super.setPosition(idx, x + positionOffsetX, y + positionOffsetY, z);
     }

@@ -1,7 +1,7 @@
 import { FontLoader, LabelGenerator, NumberUtils, TextStyle } from '@crowdstrike/graphics-core';
 import { ThreeJsComponentInterface } from 'test-app-for-graphics-core/utils/threejs-component-interface';
 
-import type { LabelMesh} from '@crowdstrike/graphics-core';
+import type { LabelMesh } from '@crowdstrike/graphics-core';
 import type { EmberComponentInterfaceParams } from 'test-app-for-graphics-core/utils/ember-component-interface';
 
 export class LabelGeneratorTest extends ThreeJsComponentInterface {
@@ -110,7 +110,7 @@ export class LabelGeneratorTest extends ThreeJsComponentInterface {
 
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error
-      a[i] = a[j]
+      a[i] = a[j];
 
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error

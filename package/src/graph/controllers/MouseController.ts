@@ -1,10 +1,10 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import { MousePickerEvents } from "../../events/MousePickerEvents";
-import { EventDispatcher } from "../../graph-utils-v2/events/event-dispatcher";
+import { MousePickerEvents } from '../../events/MousePickerEvents';
+import { EventDispatcher } from '../../graph-utils-v2/events/event-dispatcher';
 
-import type { MousePicker } from "../../core/MousePicker";
-import type { ThreeJSView } from "../../core/ThreeJSView";
+import type { MousePicker } from '../../core/MousePicker';
+import type { ThreeJSView } from '../../core/ThreeJSView';
 
 interface Subscriber {
   startDragObject?(event: MousePickerEvents): void;
@@ -44,88 +44,28 @@ export class MouseController extends EventDispatcher {
     this._subscribers = subscribers;
     this._mousePicker = threeView.mousePicker;
 
-    this._mousePicker.addEventListener(
-      MousePickerEvents.MOUSE_UP,
-      this._onMouseUp,
-      this,
-    );
-    this._mousePicker.addEventListener(
-      MousePickerEvents.MOUSE_DOWN,
-      this._onMouseDown,
-      this,
-    );
-    this._mousePicker.addEventListener(
-      MousePickerEvents.MOUSE_WHEEL,
-      this._onMouseWheel,
-      this,
-    );
-    this._mousePicker.addEventListener(
-      MousePickerEvents.ROLL_OUT,
-      this._onRollOut,
-      this,
-    );
-    this._mousePicker.addEventListener(
-      MousePickerEvents.ROLL_OVER,
-      this._onRollOver,
-      this,
-    );
-    this._mousePicker.addEventListener(
-      MousePickerEvents.CANVAS_MOUSE_UP,
-      this._onCanvasMouseUp,
-      this,
-    );
+    this._mousePicker.addEventListener(MousePickerEvents.MOUSE_UP, this._onMouseUp, this);
+    this._mousePicker.addEventListener(MousePickerEvents.MOUSE_DOWN, this._onMouseDown, this);
+    this._mousePicker.addEventListener(MousePickerEvents.MOUSE_WHEEL, this._onMouseWheel, this);
+    this._mousePicker.addEventListener(MousePickerEvents.ROLL_OUT, this._onRollOut, this);
+    this._mousePicker.addEventListener(MousePickerEvents.ROLL_OVER, this._onRollOver, this);
+    this._mousePicker.addEventListener(MousePickerEvents.CANVAS_MOUSE_UP, this._onCanvasMouseUp, this);
 
-    this._mousePicker.addEventListener(
-      MousePickerEvents.DOUBLE_CLICK,
-      this._onDoubleClick,
-      this,
-    );
+    this._mousePicker.addEventListener(MousePickerEvents.DOUBLE_CLICK, this._onDoubleClick, this);
 
-    this._mousePicker.addEventListener(
-      MousePickerEvents.CANVAS_MOUSE_DOWN,
-      this._onCanvasMouseDown,
-      this,
-    );
-    this._mousePicker.addEventListener(
-      MousePickerEvents.START_DRAG,
-      this._onStartDrag,
-      this,
-    );
-    this._mousePicker.addEventListener(
-      MousePickerEvents.STOP_DRAG,
-      this._onStopDrag,
-      this,
-    );
-    this._mousePicker.addEventListener(
-      MousePickerEvents.STOP_DRAG_OBJECT,
-      this._stopDragObject,
-      this,
-    );
-    this._mousePicker.addEventListener(
-      MousePickerEvents.START_DRAG_OBJECT,
-      this._startDragObject,
-      this,
-    );
-    this._mousePicker.addEventListener(
-      MousePickerEvents.DRAG_OBJECT,
-      this._onDragObject,
-      this,
-    );
+    this._mousePicker.addEventListener(MousePickerEvents.CANVAS_MOUSE_DOWN, this._onCanvasMouseDown, this);
+    this._mousePicker.addEventListener(MousePickerEvents.START_DRAG, this._onStartDrag, this);
+    this._mousePicker.addEventListener(MousePickerEvents.STOP_DRAG, this._onStopDrag, this);
+    this._mousePicker.addEventListener(MousePickerEvents.STOP_DRAG_OBJECT, this._stopDragObject, this);
+    this._mousePicker.addEventListener(MousePickerEvents.START_DRAG_OBJECT, this._startDragObject, this);
+    this._mousePicker.addEventListener(MousePickerEvents.DRAG_OBJECT, this._onDragObject, this);
 
     this._mousePicker.linePrecision = 4;
-    this._onCanvasMouseOutDelegate = (e: MousePickerEvents) =>
-      this._onCanvasMouseOut(e);
-    this._onCanvasMouseOverDelegate = (e: MousePickerEvents) =>
-      this._onCanvasMouseOver(e);
+    this._onCanvasMouseOutDelegate = (e: MousePickerEvents) => this._onCanvasMouseOut(e);
+    this._onCanvasMouseOverDelegate = (e: MousePickerEvents) => this._onCanvasMouseOver(e);
     this._threeView = threeView;
-    this._threeView.canvas.addEventListener(
-      "mouseout",
-      () => this._onCanvasMouseOutDelegate,
-    );
-    this._threeView.canvas.addEventListener(
-      "mouseover",
-      () => this._onCanvasMouseOverDelegate,
-    );
+    this._threeView.canvas.addEventListener('mouseout', () => this._onCanvasMouseOutDelegate);
+    this._threeView.canvas.addEventListener('mouseover', () => this._onCanvasMouseOverDelegate);
   }
 
   dispose() {
@@ -134,81 +74,23 @@ export class MouseController extends EventDispatcher {
     }
 
     if (this._mousePicker) {
-      this._mousePicker.removeEventListener(
-        MousePickerEvents.STOP_DRAG_OBJECT,
-        this._stopDragObject,
-        this,
-      );
-      this._mousePicker.removeEventListener(
-        MousePickerEvents.START_DRAG_OBJECT,
-        this._startDragObject,
-        this,
-      );
-      this._mousePicker.removeEventListener(
-        MousePickerEvents.DRAG_OBJECT,
-        this._onDragObject,
-        this,
-      );
-      this._mousePicker.removeEventListener(
-        MousePickerEvents.DOUBLE_CLICK,
-        this._onDoubleClick,
-        this,
-      );
-      this._mousePicker.removeEventListener(
-        MousePickerEvents.MOUSE_UP,
-        this._onMouseUp,
-        this,
-      );
-      this._mousePicker.removeEventListener(
-        MousePickerEvents.MOUSE_DOWN,
-        this._onMouseDown,
-        this,
-      );
-      this._mousePicker.removeEventListener(
-        MousePickerEvents.ROLL_OUT,
-        this._onRollOut,
-        this,
-      );
-      this._mousePicker.removeEventListener(
-        MousePickerEvents.ROLL_OVER,
-        this._onRollOver,
-        this,
-      );
-      this._mousePicker.removeEventListener(
-        MousePickerEvents.MOUSE_WHEEL,
-        this._onMouseWheel,
-        this,
-      );
-      this._mousePicker.removeEventListener(
-        MousePickerEvents.CANVAS_MOUSE_DOWN,
-        this._onCanvasMouseDown,
-        this,
-      );
-      this._mousePicker.removeEventListener(
-        MousePickerEvents.CANVAS_MOUSE_UP,
-        this._onCanvasMouseUp,
-        this,
-      );
-      this._mousePicker.removeEventListener(
-        MousePickerEvents.START_DRAG,
-        this._onStartDrag,
-        this,
-      );
-      this._mousePicker.removeEventListener(
-        MousePickerEvents.STOP_DRAG,
-        this._onStopDrag,
-        this,
-      );
+      this._mousePicker.removeEventListener(MousePickerEvents.STOP_DRAG_OBJECT, this._stopDragObject, this);
+      this._mousePicker.removeEventListener(MousePickerEvents.START_DRAG_OBJECT, this._startDragObject, this);
+      this._mousePicker.removeEventListener(MousePickerEvents.DRAG_OBJECT, this._onDragObject, this);
+      this._mousePicker.removeEventListener(MousePickerEvents.DOUBLE_CLICK, this._onDoubleClick, this);
+      this._mousePicker.removeEventListener(MousePickerEvents.MOUSE_UP, this._onMouseUp, this);
+      this._mousePicker.removeEventListener(MousePickerEvents.MOUSE_DOWN, this._onMouseDown, this);
+      this._mousePicker.removeEventListener(MousePickerEvents.ROLL_OUT, this._onRollOut, this);
+      this._mousePicker.removeEventListener(MousePickerEvents.ROLL_OVER, this._onRollOver, this);
+      this._mousePicker.removeEventListener(MousePickerEvents.MOUSE_WHEEL, this._onMouseWheel, this);
+      this._mousePicker.removeEventListener(MousePickerEvents.CANVAS_MOUSE_DOWN, this._onCanvasMouseDown, this);
+      this._mousePicker.removeEventListener(MousePickerEvents.CANVAS_MOUSE_UP, this._onCanvasMouseUp, this);
+      this._mousePicker.removeEventListener(MousePickerEvents.START_DRAG, this._onStartDrag, this);
+      this._mousePicker.removeEventListener(MousePickerEvents.STOP_DRAG, this._onStopDrag, this);
     }
 
-    this._threeView.canvas.removeEventListener(
-      "mouseover",
-      () => this._onCanvasMouseOverDelegate,
-    );
-    this._threeView.canvas.removeEventListener(
-      "mouseout",
-      () => this._onCanvasMouseOutDelegate,
-    );
+    this._threeView.canvas.removeEventListener('mouseover', () => this._onCanvasMouseOverDelegate);
+    this._threeView.canvas.removeEventListener('mouseout', () => this._onCanvasMouseOutDelegate);
 
     this._mousePicker = DISPOSED_OBJECT;
     this._threeView = DISPOSED_OBJECT;

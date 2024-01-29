@@ -1,4 +1,4 @@
-import { RequestAnimationFrame , ThreeJSView } from '@crowdstrike/graphics-core';
+import { RequestAnimationFrame, ThreeJSView } from '@crowdstrike/graphics-core';
 
 import { EmberComponentInterface } from './ember-component-interface';
 

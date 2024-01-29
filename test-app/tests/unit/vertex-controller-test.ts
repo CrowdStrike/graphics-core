@@ -143,6 +143,6 @@ module('Unit | graphics-core | vertex-controller', function (hooks) {
   });
 
   test('TODO adding slots to configuration mid-flight', function (assert) {
-    assert.ok(true)
+    assert.ok(true);
   });
 });

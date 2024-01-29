@@ -6,20 +6,10 @@
 
     "baseUrl": ".",
     "paths": {
-      "test-app-for-graphics-core/tests/*": [
-        "tests/*"
-      ],
-      "test-app-for-graphics-core/*": [
-        "app/*"
-      ],
-      "*": [
-        "types/*"
-      ]
+      "test-app-for-graphics-core/tests/*": ["tests/*"],
+      "test-app-for-graphics-core/*": ["app/*"],
+      "*": ["types/*"]
     }
   },
-  "include": [
-    "app/**/*",
-    "tests/**/*",
-    "types/**/*"
-  ]
+  "include": ["app/**/*", "tests/**/*", "types/**/*"]
 }

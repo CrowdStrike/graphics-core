@@ -1,10 +1,10 @@
-import * as THREE from "three";
+import * as THREE from 'three';
 
-import { NumberUtils } from "../../graph-utils-v2/utils/number-utils";
-import { Block } from "../../utils/kurst/data/Block";
-import { Packer } from "../../utils/kurst/data/Packer";
-import { BitmapData } from "../../utils/kurst/display/BitmapData";
-import { SpriteRegion } from "./SpriteRegion";
+import { NumberUtils } from '../../graph-utils-v2/utils/number-utils';
+import { Block } from '../../utils/kurst/data/Block';
+import { Packer } from '../../utils/kurst/data/Packer';
+import { BitmapData } from '../../utils/kurst/display/BitmapData';
+import { SpriteRegion } from './SpriteRegion';
 
 /**
  * Wraps a BitmapData (HTMLCanvasElement) and allows us to pack multiple elements into one image
@@ -35,12 +35,8 @@ export class DynamicSpriteSheet {
    * is rounded up to the nearest power of two the requested bitmap size
    */
   createBitmap(width: number, height: number, bitmapSizeMultiplier = 3) {
-    this.width = NumberUtils.roundupNearestPowerOfTwo(
-      width * bitmapSizeMultiplier
-    );
-    this.height = NumberUtils.roundupNearestPowerOfTwo(
-      height * bitmapSizeMultiplier
-    );
+    this.width = NumberUtils.roundupNearestPowerOfTwo(width * bitmapSizeMultiplier);
+    this.height = NumberUtils.roundupNearestPowerOfTwo(height * bitmapSizeMultiplier);
     this.bitmap = new BitmapData(this.width, this.height, true);
     this._packer = new Packer(this.width, this.height);
   }

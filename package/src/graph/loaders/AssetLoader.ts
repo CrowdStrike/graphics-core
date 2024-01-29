@@ -1,9 +1,9 @@
-import { Event } from "../../graph-utils-v2/events/event";
-import { EventDispatcher } from "../../graph-utils-v2/events/event-dispatcher";
-import { FontLoader } from "../../loaders/FontLoader";
-import { TextureAtlasLoader } from "../../loaders/TextureAtlasLoader";
+import { Event } from '../../graph-utils-v2/events/event';
+import { EventDispatcher } from '../../graph-utils-v2/events/event-dispatcher';
+import { FontLoader } from '../../loaders/FontLoader';
+import { TextureAtlasLoader } from '../../loaders/TextureAtlasLoader';
 
-import type { Atlas } from "../../loaders/TextureAtlasLoader";
+import type { Atlas } from '../../loaders/TextureAtlasLoader';
 
 interface AssetLoaderParams {
   fonts: string[];
@@ -41,12 +41,7 @@ export class AssetLoader extends EventDispatcher {
   }
 
   private _checkLoaded() {
-    if (
-      this.atlas &&
-      this.fontLoader &&
-      this.fontLoader.isLoaded &&
-      this.atlas.isLoaded
-    ) {
+    if (this.atlas && this.fontLoader && this.fontLoader.isLoaded && this.atlas.isLoaded) {
       this.areAllAssetsLoaded = true;
       this.dispatchEvent(new Event(Event.COMPLETE));
     }

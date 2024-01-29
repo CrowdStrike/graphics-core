@@ -1,9 +1,6 @@
 import * as THREE from 'three';
 
-import {
-  MeshBasicTintFragmentShader,
-  MeshBasicTintVertexShader,
-} from '../shaders/MeshBasicTintMaterialShader';
+import { MeshBasicTintFragmentShader, MeshBasicTintVertexShader } from '../shaders/MeshBasicTintMaterialShader';
 
 // eslint-disable-next-line import/namespace
 interface BasicTintShaderParameters extends THREE.ShaderMaterialParameters {

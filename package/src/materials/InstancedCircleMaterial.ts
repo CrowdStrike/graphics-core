@@ -1,9 +1,6 @@
 import * as THREE from 'three';
 
-import {
-  InstancedCircleFragmentShader,
-  InstancedCircleVertexShader,
-} from '../shaders/InstancedCircleMaterialShader';
+import { InstancedCircleFragmentShader, InstancedCircleVertexShader } from '../shaders/InstancedCircleMaterialShader';
 
 export class InstancedCircleMaterial extends THREE.ShaderMaterial {
   constructor(parameters = {}) {

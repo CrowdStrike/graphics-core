@@ -1,12 +1,9 @@
-import gsap, { Power3 } from 'gsap';
+import { gsap, Power3 } from 'gsap';
 
 import { TextStyle } from '../../data/TextStyle';
 import { InstancedIconAttributes } from '../../entities/instanced-icon-attributes';
 import { InstancedInteractionAttributes } from '../../entities/instanced-interaction-attributes';
-import {
-  InstancedTextAlignment,
-  InstancedTextAttributes,
-} from '../../entities/instanced-text-attributes';
+import { InstancedTextAlignment, InstancedTextAttributes } from '../../entities/instanced-text-attributes';
 import { InstancedPositionVector3 } from '../../entities/utils/instanced-position';
 
 import type {
@@ -132,14 +129,12 @@ export class GraphicsV2VertexController {
       return attributes.mesh;
     }
 
-    return
+    return;
   }
 
   get uiAttributeMap() {
     if (!this.iconAttributes) {
-      throw new Error(
-        'GraphicsV2VertexController: uiAttributeMap requested but this.iconAttributes does not exist',
-      );
+      throw new Error('GraphicsV2VertexController: uiAttributeMap requested but this.iconAttributes does not exist');
     }
 
     return this.iconAttributes.uiLayers;
@@ -226,7 +221,7 @@ export class GraphicsV2VertexController {
        * recursively set the position of the base icon and all overlays
        */
       attributes: this.iconAttributes,
-      entity: this
+      entity: this,
     });
 
     this.uiAttributes.forEach((d) => {
@@ -248,10 +243,7 @@ export class GraphicsV2VertexController {
     let interactionCallback = this.interactions.get(layerName);
 
     if (interactionCallback?.[interactionKey] !== undefined) {
-      interactionCallback[interactionKey](
-        this,
-        this.getUiLayer<InstancedIconAttributes>(layerName),
-      );
+      interactionCallback[interactionKey](this, this.getUiLayer<InstancedIconAttributes>(layerName));
     }
   }
 
@@ -259,18 +251,14 @@ export class GraphicsV2VertexController {
     // make a copy so that this.getUiLayerPositions doesn't get re-computed below
     const overlaysWithCoordinates = this.overlays;
 
-    return this.uiAttributes.filter(
-      (a) => !overlaysWithCoordinates.map((a) => a.attributes).includes(a),
-    );
+    return this.uiAttributes.filter((a) => !overlaysWithCoordinates.map((a) => a.attributes).includes(a));
   }
 
   get attributesToShow() {
     // make a copy so that this.getUiLayerPositions doesn't get recomputed below
     const overlaysWithCoordinates = this.overlays;
 
-    return this.uiAttributes.filter((a) =>
-      overlaysWithCoordinates.map((a) => a.attributes).includes(a),
-    );
+    return this.uiAttributes.filter((a) => overlaysWithCoordinates.map((a) => a.attributes).includes(a));
   }
 
   /**
@@ -393,9 +381,7 @@ export class GraphicsV2VertexController {
 
           attributes.changeIcon(instanceIdx, width, height, [x, y, w, h]);
         } else {
-          throw new Error(
-            `GraphicsV2VertexController: this.iconCoordinates[${icon}] entry doesn't exist`,
-          );
+          throw new Error(`GraphicsV2VertexController: this.iconCoordinates[${icon}] entry doesn't exist`);
         }
       }
 
@@ -562,10 +548,7 @@ export class GraphicsV2VertexController {
     }
 
     if (state.isVisible !== undefined) {
-      this.setVisibilityForLayer(
-        GraphicsV2VertexController.getLayerSlotName(name, idx),
-        state.isVisible,
-      );
+      this.setVisibilityForLayer(GraphicsV2VertexController.getLayerSlotName(name, idx), state.isVisible);
     }
   }
 
@@ -592,18 +575,15 @@ export class GraphicsV2VertexController {
   }
 
   private updateLayerInteractions() {
-    const layersWithInteractions = this.overlays.reduce<[string, InteractionCallbacks][]>(
-      (acc, curr) => {
-        const { instanceName, interactions } = curr;
+    const layersWithInteractions = this.overlays.reduce<[string, InteractionCallbacks][]>((acc, curr) => {
+      const { instanceName, interactions } = curr;
 
-        if (interactions) {
-          acc.push([instanceName, interactions]);
-        }
+      if (interactions) {
+        acc.push([instanceName, interactions]);
+      }
 
-        return acc;
-      },
-      [],
-    );
+      return acc;
+    }, []);
 
     if (layersWithInteractions.length > 0) {
       this.interactions.clear();
@@ -629,8 +609,7 @@ export class GraphicsV2VertexController {
         // if the key exists, respect the visibility override
         const visibilityOverride = this.visibilityOverrides.get(instanceName);
 
-        visibilityOverride !== undefined &&
-          attributes.setDisplayAt(this.instanceIdx, visibilityOverride);
+        visibilityOverride !== undefined && attributes.setDisplayAt(this.instanceIdx, visibilityOverride);
       } else {
         attributes.setDisplayAt(this.instanceIdx, isVisible);
       }
@@ -646,7 +625,9 @@ export class GraphicsV2VertexController {
       this.getUiLayer(layerName);
       this.visibilityOverrides.set(layerName, isVisible);
       this.setVisibility(this.isVisible);
-    } catch (e) {e;}
+    } catch (e) {
+      e;
+    }
   }
 
   get width() {
@@ -658,9 +639,7 @@ export class GraphicsV2VertexController {
   }
 }
 
-function mapConfigLayerToAttributes<T extends UiLayerAttributeClasses>(
-  config: LayersConfiguration,
-): T {
+function mapConfigLayerToAttributes<T extends UiLayerAttributeClasses>(config: LayersConfiguration): T {
   switch (config.instancedAttributeType) {
     case 'InstancedIconAttributes':
       return new InstancedIconAttributes(config.iconConfig ?? {}, config.uiConfig) as T;
@@ -669,14 +648,10 @@ function mapConfigLayerToAttributes<T extends UiLayerAttributeClasses>(
         return new InstancedTextAttributes(config.textConfig, config.uiConfig) as T;
       }
 
-      throw new Error(
-        'mapConfigLayerToAttributes: no textConfig exists for specified InstancedTextAttributes layer',
-      );
+      throw new Error('mapConfigLayerToAttributes: no textConfig exists for specified InstancedTextAttributes layer');
     case 'InstancedInteractionAttributes':
       return new InstancedInteractionAttributes({ size: 1 }, config.uiConfig) as T;
     default:
-      throw new Error(
-        'mapConfigLayerToAttributes: LayerConfiguration instancedAttributeType not supported',
-      );
+      throw new Error('mapConfigLayerToAttributes: LayerConfiguration instancedAttributeType not supported');
   }
 }

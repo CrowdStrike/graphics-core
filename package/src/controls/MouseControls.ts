@@ -1,12 +1,12 @@
-import * as THREE from "three";
+import * as THREE from 'three';
 
-import { MouseControlsEvent } from "../events/MouseControlsEvent";
-import { MousePickerEvents } from "../events/MousePickerEvents";
-import { RenderableObject } from "../graph/core/RenderableObject";
-import { NumberUtils } from "../graph-utils-v2/utils/number-utils";
+import { MouseControlsEvent } from '../events/MouseControlsEvent';
+import { MousePickerEvents } from '../events/MousePickerEvents';
+import { RenderableObject } from '../graph/core/RenderableObject';
+import { NumberUtils } from '../graph-utils-v2/utils/number-utils';
 
-import type { MousePicker } from "../core/MousePicker";
-import type { ThreeJSView } from "../core/ThreeJSView";
+import type { MousePicker } from '../core/MousePicker';
+import type { ThreeJSView } from '../core/ThreeJSView';
 
 interface MouseControlsParams {
   dragConstraint?: THREE.Vector3;
@@ -37,12 +37,8 @@ export class MouseControls extends RenderableObject {
   private _previousDragPoint = new THREE.Vector3();
   private _targetScale: number;
   private _worldToLocalIntersectionPoint = new THREE.Vector3();
-  private _zoomChangeEvent = new MouseControlsEvent(
-    MouseControlsEvent.ZOOM_CHANGE,
-  );
-  private _zoomCompleteEvent = new MouseControlsEvent(
-    MouseControlsEvent.ZOOM_COMPLETE,
-  );
+  private _zoomChangeEvent = new MouseControlsEvent(MouseControlsEvent.ZOOM_CHANGE);
+  private _zoomCompleteEvent = new MouseControlsEvent(MouseControlsEvent.ZOOM_COMPLETE);
   private _zoomDelta = new THREE.Vector2();
   private _zoomRange: number;
   private _shouldBlockScrolling = false;
@@ -95,10 +91,7 @@ export class MouseControls extends RenderableObject {
     this._zoomRange = this._maxScale - this._minScale;
 
     this.isActive = isActive;
-    this.threeView.canvas.addEventListener(
-      "mouseout",
-      this._onCanvasMouseOutDelegate,
-    );
+    this.threeView.canvas.addEventListener('mouseout', this._onCanvasMouseOutDelegate);
 
     if (this.shouldUseModifierToZoom && this.threeView.canvas.onwheel) {
       this.threeView.canvas.onwheel = () => {
@@ -108,19 +101,11 @@ export class MouseControls extends RenderableObject {
   }
 
   updateIntersectionPoint() {
-    let intersectionPoint = this.threeView.project(
-      this.threeView.mousePicker.mouse,
-    );
+    let intersectionPoint = this.threeView.project(this.threeView.mousePicker.mouse);
 
-    this._worldToLocalIntersectionPoint.set(
-      intersectionPoint.x,
-      intersectionPoint.y,
-      intersectionPoint.z,
-    );
+    this._worldToLocalIntersectionPoint.set(intersectionPoint.x, intersectionPoint.y, intersectionPoint.z);
 
-    return this._object3DContainer.worldToLocal(
-      this._worldToLocalIntersectionPoint,
-    );
+    return this._object3DContainer.worldToLocal(this._worldToLocalIntersectionPoint);
   }
 
   render() {
@@ -136,12 +121,9 @@ export class MouseControls extends RenderableObject {
       this._dragDelta.y = position.y - this._previousDragPoint.y;
       this._dragDelta.z = position.z - this._previousDragPoint.z;
 
-      this._object3DContainer.position.x +=
-        this._dragDelta.x * this.dragConstraint.x;
-      this._object3DContainer.position.y +=
-        this._dragDelta.y * this.dragConstraint.y;
-      this._object3DContainer.position.z +=
-        this._dragDelta.z * this.dragConstraint.z;
+      this._object3DContainer.position.x += this._dragDelta.x * this.dragConstraint.x;
+      this._object3DContainer.position.y += this._dragDelta.y * this.dragConstraint.y;
+      this._object3DContainer.position.z += this._dragDelta.z * this.dragConstraint.z;
 
       this._dragDistance = position.distanceTo(this._previousDragPoint);
 
@@ -156,10 +138,8 @@ export class MouseControls extends RenderableObject {
       this._dragDelta.x = ~~(this._dragDelta.x * 10000) / 10000; // round to 4 decimal places - toFixed  / round is an order of magnitudes slower
       this._dragDelta.y = ~~(this._dragDelta.y * 10000) / 10000;
 
-      this._object3DContainer.position.x +=
-        this._dragDelta.x * this.dragConstraint.x;
-      this._object3DContainer.position.y +=
-        this._dragDelta.y * this.dragConstraint.y;
+      this._object3DContainer.position.x += this._dragDelta.x * this.dragConstraint.x;
+      this._object3DContainer.position.y += this._dragDelta.y * this.dragConstraint.y;
 
       if (this._dragDelta.x === 0 && this._dragDelta.y === 0) {
         this._isMouseThrown = false;
@@ -167,9 +147,7 @@ export class MouseControls extends RenderableObject {
     }
 
     if (this.isZooming && this.isZoomEnabled) {
-      let dynamicDampingFactor = this._isPinchZoom
-        ? this.dynamicDampingFactorTouch
-        : this.dynamicDampingFactor;
+      let dynamicDampingFactor = this._isPinchZoom ? this.dynamicDampingFactorTouch : this.dynamicDampingFactor;
 
       this._zoomDelta.y -= this._zoomDelta.y * dynamicDampingFactor;
       this._containerMousePosition = this.updateIntersectionPoint();
@@ -179,11 +157,7 @@ export class MouseControls extends RenderableObject {
 
       targetScale -= zoomFactor;
       targetScale = ~~(targetScale * 10000) / 10000; // round to 4 decimal places - toFixed  / round is an order of magnitudes slower
-      targetScale = NumberUtils.constrain(
-        targetScale,
-        this._minScale,
-        this._maxScale,
-      );
+      targetScale = NumberUtils.constrain(targetScale, this._minScale, this._maxScale);
 
       if (!NumberUtils.isNear(targetScale, this._targetScale, 0.001)) {
         // 1) get original mouse position & scale
@@ -191,17 +165,10 @@ export class MouseControls extends RenderableObject {
         let mouseY = this._containerMousePosition.y;
         let mouseZ = this._containerMousePosition.z;
 
-        this._object3DContainer.scale.set(
-          targetScale,
-          targetScale,
-          targetScale,
-        );
+        this._object3DContainer.scale.set(targetScale, targetScale, targetScale);
 
         // 2) Render to update values after the scale operation and get value delta to calc diff offset caused by scale change
-        this.threeView.renderer.render(
-          this.threeView.scene,
-          this.threeView.camera,
-        );
+        this.threeView.renderer.render(this.threeView.scene, this.threeView.camera);
         this._containerMousePosition = this.updateIntersectionPoint();
 
         let newMouseX = this._containerMousePosition.x;
@@ -241,78 +208,27 @@ export class MouseControls extends RenderableObject {
   dispose() {
     this._maxScale = 1.8;
     this._minScale = 0.4;
-    this._mousePicker.removeEventListener(
-      MousePickerEvents.MOUSE_WHEEL,
-      this._onMouseWheel,
-      this,
-    );
-    this._mousePicker.removeEventListener(
-      MousePickerEvents.START_DRAG,
-      this._onStartDrag,
-      this,
-    );
-    this._mousePicker.removeEventListener(
-      MousePickerEvents.STOP_DRAG,
-      this._onStopDrag,
-      this,
-    );
-    this._mousePicker.removeEventListener(
-      MousePickerEvents.TOUCH_ZOOM,
-      this._onTouchZoom,
-      this,
-    );
+    this._mousePicker.removeEventListener(MousePickerEvents.MOUSE_WHEEL, this._onMouseWheel, this);
+    this._mousePicker.removeEventListener(MousePickerEvents.START_DRAG, this._onStartDrag, this);
+    this._mousePicker.removeEventListener(MousePickerEvents.STOP_DRAG, this._onStopDrag, this);
+    this._mousePicker.removeEventListener(MousePickerEvents.TOUCH_ZOOM, this._onTouchZoom, this);
     this._onCanvasMouseOutDelegate = () => undefined;
     this.isDragging = false;
-    this.threeView.canvas.removeEventListener(
-      "mouseout",
-      this._onCanvasMouseOutDelegate,
-    );
+    this.threeView.canvas.removeEventListener('mouseout', this._onCanvasMouseOutDelegate);
     this.threeView.canvas.onwheel = () => undefined;
   }
 
   didToggleActiveState(currentState: boolean) {
-    this._mousePicker.removeEventListener(
-      MousePickerEvents.MOUSE_WHEEL,
-      this._onMouseWheel,
-      this,
-    );
-    this._mousePicker.removeEventListener(
-      MousePickerEvents.START_DRAG,
-      this._onStartDrag,
-      this,
-    );
-    this._mousePicker.removeEventListener(
-      MousePickerEvents.STOP_DRAG,
-      this._onStopDrag,
-      this,
-    );
-    this._mousePicker.removeEventListener(
-      MousePickerEvents.TOUCH_ZOOM,
-      this._onTouchZoom,
-      this,
-    );
+    this._mousePicker.removeEventListener(MousePickerEvents.MOUSE_WHEEL, this._onMouseWheel, this);
+    this._mousePicker.removeEventListener(MousePickerEvents.START_DRAG, this._onStartDrag, this);
+    this._mousePicker.removeEventListener(MousePickerEvents.STOP_DRAG, this._onStopDrag, this);
+    this._mousePicker.removeEventListener(MousePickerEvents.TOUCH_ZOOM, this._onTouchZoom, this);
 
     if (currentState) {
-      this._mousePicker.addEventListener(
-        MousePickerEvents.MOUSE_WHEEL,
-        this._onMouseWheel,
-        this,
-      );
-      this._mousePicker.addEventListener(
-        MousePickerEvents.START_DRAG,
-        this._onStartDrag,
-        this,
-      );
-      this._mousePicker.addEventListener(
-        MousePickerEvents.STOP_DRAG,
-        this._onStopDrag,
-        this,
-      );
-      this._mousePicker.addEventListener(
-        MousePickerEvents.TOUCH_ZOOM,
-        this._onTouchZoom,
-        this,
-      );
+      this._mousePicker.addEventListener(MousePickerEvents.MOUSE_WHEEL, this._onMouseWheel, this);
+      this._mousePicker.addEventListener(MousePickerEvents.START_DRAG, this._onStartDrag, this);
+      this._mousePicker.addEventListener(MousePickerEvents.STOP_DRAG, this._onStopDrag, this);
+      this._mousePicker.addEventListener(MousePickerEvents.TOUCH_ZOOM, this._onTouchZoom, this);
     }
   }
 

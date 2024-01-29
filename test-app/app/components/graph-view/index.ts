@@ -24,7 +24,7 @@ interface Args {
 
 function graphViewSettings<TData>(
   eci: GraphViewConfiguration<TData>,
-  container: Component<any>,
+  container: FalconGraphViewComponent,
 ) {
   let { rootURL } = getAppConfig(container);
 

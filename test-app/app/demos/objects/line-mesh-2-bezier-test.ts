@@ -3,7 +3,7 @@ import { ThreeJsComponentInterface } from 'test-app-for-graphics-core/utils/thre
 import * as THREE from 'three';
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial';
 
-import type { ILineMesh2} from '@crowdstrike/graphics-core';
+import type { ILineMesh2 } from '@crowdstrike/graphics-core';
 import type { EmberComponentInterfaceParams } from 'test-app-for-graphics-core/utils/ember-component-interface';
 
 export class LineMesh2BezierTest extends ThreeJsComponentInterface {

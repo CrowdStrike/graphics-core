@@ -36,9 +36,7 @@ export class SvgMeshGenerator {
         resolve(img);
       };
 
-      img.src =
-        'data:image/svg+xml; charset=utf8, ' +
-        encodeURIComponent(new XMLSerializer().serializeToString(svg));
+      img.src = 'data:image/svg+xml; charset=utf8, ' + encodeURIComponent(new XMLSerializer().serializeToString(svg));
     });
   }
 

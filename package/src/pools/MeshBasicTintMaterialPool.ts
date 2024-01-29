@@ -40,10 +40,7 @@ export class MeshBasicTintMaterialPool extends ObjectPoolInterface<MeshBasicTint
       throw new Error('Text generator has no sprite region');
     }
 
-    LabelGenerator._updateMaterialRepeatOffset(
-      material,
-      this._tmpTextureInfo.textGenerator.spriteRegion,
-    );
+    LabelGenerator._updateMaterialRepeatOffset(material, this._tmpTextureInfo.textGenerator.spriteRegion);
 
     return material;
   }

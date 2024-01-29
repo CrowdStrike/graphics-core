@@ -1,13 +1,7 @@
 import type { UiBadgeConfiguration } from '../../entities/instanced-attributes';
-import type {
-  InstancedIconAttributes,
-  InstancedIconConfiguration,
-} from '../../entities/instanced-icon-attributes';
+import type { InstancedIconAttributes, InstancedIconConfiguration } from '../../entities/instanced-icon-attributes';
 import type { InstancedInteractionAttributes } from '../../entities/instanced-interaction-attributes';
-import type {
-  InstancedTextAttributes,
-  InstancedTextConfiguration,
-} from '../../entities/instanced-text-attributes';
+import type { InstancedTextAttributes, InstancedTextConfiguration } from '../../entities/instanced-text-attributes';
 import type { InstancedAttributeTypes } from '../../entities/utils/instanced-attribute-types';
 
 export type UiLayerAttributeClasses =

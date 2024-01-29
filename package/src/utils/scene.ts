@@ -1,9 +1,9 @@
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import Stats from "three/examples/jsm/libs/stats.module.js";
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import Stats from 'three/examples/jsm/libs/stats.module.js';
 
-import { ThreeJSView, ThreeJSViewParams } from "../core/ThreeJSView";
+import { ThreeJSView, ThreeJSViewParams } from '../core/ThreeJSView';
 
-import type * as THREE from "three";
+import type * as THREE from 'three';
 
 // This will become mutated once a THREE.WebGLRenderer
 // is instantiated
@@ -42,7 +42,7 @@ export const setupScene = (element: HTMLElement) => {
   GL_MAX_TEXTURE_SIZE = renderer.capabilities.maxTextureSize;
 
   element.appendChild(renderer.domElement);
-  stats.dom.style.top = "";
+  stats.dom.style.top = '';
   element.appendChild(stats.dom);
 
   threeJsView.setSize(window.innerWidth, window.innerHeight);
@@ -54,7 +54,7 @@ export const setupScene = (element: HTMLElement) => {
 
   renderer.domElement.focus();
 
-  window.addEventListener("resize", () => {
+  window.addEventListener('resize', () => {
     threeJsView.setSize(window.innerWidth, window.innerHeight);
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
@@ -66,14 +66,14 @@ export const setupOffscreenCanvas = () => {
   const width = 1024 * window.devicePixelRatio;
   const height = 1024 * window.devicePixelRatio;
 
-  const offscreenCanvas = document.createElement("canvas");
+  const offscreenCanvas = document.createElement('canvas');
 
   offscreenCanvas.width = width;
   offscreenCanvas.height = height;
   offscreenCanvas.style.width = `${width / window.devicePixelRatio}px`;
   offscreenCanvas.style.height = `${height / window.devicePixelRatio}px`;
 
-  const ctx = offscreenCanvas.getContext("2d");
+  const ctx = offscreenCanvas.getContext('2d');
 
   if (!ctx) return;
 
@@ -81,25 +81,19 @@ export const setupOffscreenCanvas = () => {
 
   for (let i = 0; i < height; i += 50) {
     for (let j = 0; j < width; j += 50) {
-      ctx.fillStyle = `rgb(${(i / height) * 255}, ${
-        (j / width) * 255
-      }, ${bValue})`;
+      ctx.fillStyle = `rgb(${(i / height) * 255}, ${(j / width) * 255}, ${bValue})`;
       ctx.fillRect(i, j, 50, 50);
     }
   }
 
-  ctx.textAlign = "center";
-  ctx.textBaseline = "top";
-  ctx.font = "24px monospace";
-  ctx.fillStyle = "black";
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
+  ctx.font = '24px monospace';
+  ctx.fillStyle = 'black';
 
   for (let i = 0; i < height; i += width / 10) {
     for (let j = 0; j < width; j += height / 10) {
-      ctx.fillText(
-        `${(j / width).toFixed(1)}, ${(i / height).toFixed(1)}`,
-        i,
-        j,
-      );
+      ctx.fillText(`${(j / width).toFixed(1)}, ${(i / height).toFixed(1)}`, i, j);
     }
   }
 

@@ -1,10 +1,10 @@
-import { ColorUtils } from "../../../graph-utils-v2/utils/color-utils";
-import { Rectangle } from "../geom/Rectangle";
+import { ColorUtils } from '../../../graph-utils-v2/utils/color-utils';
+import { Rectangle } from '../geom/Rectangle';
 
-import type { ByteArray } from "../../../graph-utils-v2/utils/byte-array";
-import type { ColorTransform } from "../geom/ColorTransform";
-import type { Matrix } from "../geom/Matrix";
-import type { Point } from "../geom/Point";
+import type { ByteArray } from '../../../graph-utils-v2/utils/byte-array';
+import type { ColorTransform } from '../geom/ColorTransform';
+import type { Matrix } from '../geom/Matrix';
+import type { Point } from '../geom/Point';
 
 /**
  * The BitmapData class lets you work with the data(pixels) of a Bitmap
@@ -97,18 +97,13 @@ export class BitmapData {
    *                    bitmap image area. The default value is
    *                    0xFFFFFFFF(solid white).
    */
-  constructor(
-    width: number,
-    height: number,
-    transparent = true,
-    fillColor?: number,
-  ) {
+  constructor(width: number, height: number, transparent = true, fillColor?: number) {
     this._locked = false;
     this._transparent = transparent;
-    this._imageCanvas = document.createElement("canvas");
+    this._imageCanvas = document.createElement('canvas');
     this._imageCanvas.width = width;
     this._imageCanvas.height = height;
-    this._context = this._imageCanvas.getContext("2d");
+    this._context = this._imageCanvas.getContext('2d');
     this._rect = new Rectangle(0, 0, width, height);
 
     if (fillColor !== undefined) {
@@ -137,12 +132,7 @@ export class BitmapData {
     this._imageCanvas.height = value;
 
     if (this._locked && this._context) {
-      this._imageData = this._context.getImageData(
-        0,
-        0,
-        this._rect.width,
-        this._rect.height,
-      );
+      this._imageData = this._context.getImageData(0, 0, this._rect.width, this._rect.height);
     }
   }
 
@@ -192,12 +182,7 @@ export class BitmapData {
     this._imageCanvas.width = value;
 
     if (this._locked && this._context) {
-      this._imageData = this._context.getImageData(
-        0,
-        0,
-        this._rect.width,
-        this._rect.height,
-      );
+      this._imageData = this._context.getImageData(0, 0, this._rect.width, this._rect.height);
     }
   }
 
@@ -228,12 +213,7 @@ export class BitmapData {
    */
   colorTransform(rect: Rectangle, colorTransform: ColorTransform) {
     if (!this._locked && this._context) {
-      this._imageData = this._context.getImageData(
-        0,
-        0,
-        this._rect.width,
-        this._rect.height,
-      );
+      this._imageData = this._context.getImageData(0, 0, this._rect.width, this._rect.height);
     }
 
     if (!this._imageData) {
@@ -248,17 +228,10 @@ export class BitmapData {
     for (i = 0; i < rect.width; ++i) {
       for (j = 0; j < rect.height; ++j) {
         index = (i + rect.x + (j + rect.y) * this.width) * 4;
-        data[index] =
-          data[index] * colorTransform.redMultiplier + colorTransform.redOffset;
-        data[index + 1] =
-          data[index + 1] * colorTransform.greenMultiplier +
-          colorTransform.greenOffset;
-        data[index + 2] =
-          data[index + 2] * colorTransform.blueMultiplier +
-          colorTransform.blueOffset;
-        data[index + 3] =
-          data[index + 3] * colorTransform.alphaMultiplier +
-          colorTransform.alphaOffset;
+        data[index] = data[index] * colorTransform.redMultiplier + colorTransform.redOffset;
+        data[index + 1] = data[index + 1] * colorTransform.greenMultiplier + colorTransform.greenOffset;
+        data[index + 2] = data[index + 2] * colorTransform.blueMultiplier + colorTransform.blueOffset;
+        data[index + 3] = data[index + 3] * colorTransform.alphaMultiplier + colorTransform.alphaOffset;
       }
     }
 
@@ -319,12 +292,7 @@ export class BitmapData {
     destChannel: number,
   ) {
     if (!this._locked && this._context) {
-      this._imageData = this._context.getImageData(
-        0,
-        0,
-        this._rect.width,
-        this._rect.height,
-      );
+      this._imageData = this._context.getImageData(0, 0, this._rect.width, this._rect.height);
     }
 
     if (!this._imageData || !sourceBitmap.imageData) {
@@ -342,11 +310,9 @@ export class BitmapData {
 
     for (i = 0; i < sourceRect.width; ++i) {
       for (j = 0; j < sourceRect.height; ++j) {
-        sourceIndex =
-          (i + sourceRect.x + (j + sourceRect.y) * sourceBitmap.width) * 4;
+        sourceIndex = (i + sourceRect.x + (j + sourceRect.y) * sourceBitmap.width) * 4;
         destIndex = (i + destPoint.x + (j + destPoint.y) * this.width) * 4;
-        destData[destIndex + destOffset] =
-          sourceData[sourceIndex + sourceOffset];
+        destData[destIndex + destOffset] = sourceData[sourceIndex + sourceOffset];
       }
     }
 
@@ -400,11 +366,7 @@ export class BitmapData {
    public copyPixels(bmpd:HTMLImageElement, sourceRect:Rectangle, destRect:Rectangle);
    public copyPixels(bmpd:HTMLCanvasElement, sourceRect:Rectangle, destRect:Rectangle);
    */
-  copyPixels(
-    bmpd: BitmapData | HTMLImageElement | HTMLCanvasElement,
-    sourceRect: Rectangle,
-    destRect: Rectangle,
-  ) {
+  copyPixels(bmpd: BitmapData | HTMLImageElement | HTMLCanvasElement, sourceRect: Rectangle, destRect: Rectangle) {
     if (bmpd === undefined) {
       return;
     }
@@ -417,12 +379,7 @@ export class BitmapData {
       this._copyPixels(bmpd, sourceRect, destRect);
 
       if (this._imageData && this._context) {
-        this._imageData = this._context.getImageData(
-          0,
-          0,
-          this._rect.width,
-          this._rect.height,
-        );
+        this._imageData = this._context.getImageData(0, 0, this._rect.width, this._rect.height);
       }
     } else {
       this._copyPixels(bmpd, sourceRect, destRect);
@@ -455,10 +412,7 @@ export class BitmapData {
         destRect.width,
         destRect.height,
       );
-    } else if (
-      (bmpd instanceof HTMLImageElement || bmpd instanceof HTMLCanvasElement) &&
-      this._context
-    ) {
+    } else if ((bmpd instanceof HTMLImageElement || bmpd instanceof HTMLCanvasElement) && this._context) {
       this._context.drawImage(
         bmpd,
         sourceRect.x,
@@ -577,11 +531,7 @@ export class BitmapData {
 
    */
   // eslint-disable-next-line max-params
-  draw(
-    source: BitmapData | HTMLImageElement | HTMLCanvasElement,
-    matrix?: Matrix,
-    clipRect?: Rectangle,
-  ) {
+  draw(source: BitmapData | HTMLImageElement | HTMLCanvasElement, matrix?: Matrix, clipRect?: Rectangle) {
     if (source === undefined) {
       return;
     }
@@ -589,12 +539,7 @@ export class BitmapData {
     if (this._locked && this._context && this._imageData) {
       this._context.putImageData(this._imageData, 0, 0);
       this._draw(source, matrix, clipRect);
-      this._imageData = this._context.getImageData(
-        0,
-        0,
-        this._rect.width,
-        this._rect.height,
-      );
+      this._imageData = this._context.getImageData(0, 0, this._rect.width, this._rect.height);
     } else {
       this._draw(source, matrix, clipRect);
     }
@@ -624,55 +569,25 @@ export class BitmapData {
       this._context.save();
 
       if (matrix != null) {
-        this._context.setTransform(
-          matrix.a,
-          matrix.b,
-          matrix.c,
-          matrix.d,
-          matrix.tx,
-          matrix.ty,
-        );
+        this._context.setTransform(matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx, matrix.ty);
       }
 
       if (clipRect != null) {
-        this._context.drawImage(
-          source.canvas,
-          clipRect.x,
-          clipRect.y,
-          clipRect.width,
-          clipRect.height,
-        );
+        this._context.drawImage(source.canvas, clipRect.x, clipRect.y, clipRect.width, clipRect.height);
       } else {
         this._context.drawImage(source.canvas, 0, 0);
       }
 
       this._context.restore();
-    } else if (
-      (source instanceof HTMLImageElement ||
-        source instanceof HTMLCanvasElement) &&
-      this._context
-    ) {
+    } else if ((source instanceof HTMLImageElement || source instanceof HTMLCanvasElement) && this._context) {
       this._context.save();
 
       if (matrix != null) {
-        this._context.setTransform(
-          matrix.a,
-          matrix.b,
-          matrix.c,
-          matrix.d,
-          matrix.tx,
-          matrix.ty,
-        );
+        this._context.setTransform(matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx, matrix.ty);
       }
 
       if (clipRect != null) {
-        this._context.drawImage(
-          source,
-          clipRect.x,
-          clipRect.y,
-          clipRect.width,
-          clipRect.height,
-        );
+        this._context.drawImage(source, clipRect.x, clipRect.y, clipRect.width, clipRect.height);
       } else {
         this._context.drawImage(source, 0, 0);
       }
@@ -699,12 +614,7 @@ export class BitmapData {
       this._fillRect(rect, color);
 
       if (this._imageData && this._context) {
-        this._imageData = this._context.getImageData(
-          0,
-          0,
-          this._rect.width,
-          this._rect.height,
-        );
+        this._imageData = this._context.getImageData(0, 0, this._rect.width, this._rect.height);
       }
     } else {
       this._fillRect(rect, color);
@@ -768,7 +678,7 @@ export class BitmapData {
       return (r << 16) | (g << 8) | b;
     }
 
-    return
+    return;
   }
 
   /**
@@ -819,7 +729,7 @@ export class BitmapData {
       return (a << 24) | (r << 16) | (g << 8) | b;
     }
 
-    return
+    return;
   }
 
   /**
@@ -836,12 +746,7 @@ export class BitmapData {
     }
 
     this._locked = true;
-    this._imageData = this._context.getImageData(
-      0,
-      0,
-      this._rect.width,
-      this._rect.height,
-    );
+    this._imageData = this._context.getImageData(0, 0, this._rect.width, this._rect.height);
   }
 
   /**
@@ -858,12 +763,7 @@ export class BitmapData {
    */
   setArray(rect: Rectangle, inputArray: number[]) {
     if (!this._locked && this._context) {
-      this._imageData = this._context.getImageData(
-        0,
-        0,
-        this._rect.width,
-        this._rect.height,
-      );
+      this._imageData = this._context.getImageData(0, 0, this._rect.width, this._rect.height);
     }
 
     if (!this._imageData) {
@@ -913,12 +813,7 @@ export class BitmapData {
     let argb = ColorUtils.float32ColorToARGB(color);
 
     if (!this._locked && this._context) {
-      this._imageData = this._context.getImageData(
-        0,
-        0,
-        this._rect.width,
-        this._rect.height,
-      );
+      this._imageData = this._context.getImageData(0, 0, this._rect.width, this._rect.height);
     }
 
     if (!this._imageData) {
@@ -977,12 +872,7 @@ export class BitmapData {
     let argb = ColorUtils.float32ColorToARGB(color);
 
     if (!this._locked && this._context) {
-      this._imageData = this._context.getImageData(
-        0,
-        0,
-        this._rect.width,
-        this._rect.height,
-      );
+      this._imageData = this._context.getImageData(0, 0, this._rect.width, this._rect.height);
     }
 
     let index = (x + y * this._imageCanvas.width) * 4;
@@ -1023,12 +913,7 @@ export class BitmapData {
     }
 
     if (!this._locked && this._context) {
-      this._imageData = this._context.getImageData(
-        0,
-        0,
-        this._rect.width,
-        this._rect.height,
-      );
+      this._imageData = this._context.getImageData(0, 0, this._rect.width, this._rect.height);
     }
 
     inputByteArray.position = 0;
@@ -1102,9 +987,7 @@ export class BitmapData {
       let argb = ColorUtils.float32ColorToARGB(color);
 
       if (this._transparent) {
-        this._context.fillStyle = `rgba(${argb[1]},${argb[2]},${argb[3]},${
-          argb[0] / 255
-        })`;
+        this._context.fillStyle = `rgba(${argb[1]},${argb[2]},${argb[3]},${argb[0] / 255})`;
       } else {
         this._context.fillStyle = `rgba(${argb[1]},${argb[2]},${argb[3]},1)`;
       }
@@ -1119,12 +1002,7 @@ export class BitmapData {
    */
   get imageData() {
     if (!this._locked && this._context) {
-      return this._context.getImageData(
-        0,
-        0,
-        this._rect.width,
-        this._rect.height,
-      );
+      return this._context.getImageData(0, 0, this._rect.width, this._rect.height);
     }
 
     return this._imageData;

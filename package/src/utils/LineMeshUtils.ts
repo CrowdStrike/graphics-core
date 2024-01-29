@@ -1,17 +1,14 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import * as THREE from "three";
+import * as THREE from 'three';
 
-import { NumberUtils } from "../graph-utils-v2/utils/number-utils";
-import {
-  SPLINE_CONTROL_OFFSET,
-  VERTEX_LAYOUT_MODE,
-} from "../objects/settings/LineMeshSettings";
-import { DebugSpheres } from "../utils/kurst/utils/DebugSpheres";
-import { ThreeGeomUtils } from "../utils/kurst/utils/ThreeGeomUtils";
+import { NumberUtils } from '../graph-utils-v2/utils/number-utils';
+import { SPLINE_CONTROL_OFFSET, VERTEX_LAYOUT_MODE } from '../objects/settings/LineMeshSettings';
+import { DebugSpheres } from '../utils/kurst/utils/DebugSpheres';
+import { ThreeGeomUtils } from '../utils/kurst/utils/ThreeGeomUtils';
 
-import type { ILineMeshType } from "../objects/LineMesh";
-import type { ILineMesh2Type } from "../objects/LineMesh2";
+import type { ILineMeshType } from '../objects/LineMesh';
+import type { ILineMesh2Type } from '../objects/LineMesh2';
 
 /*
  *  - Do not position first or last vertex these are assigned to start / end vertices
@@ -37,14 +34,11 @@ export class LineMeshUtils {
   static _vCoplanarDirection = new THREE.Vector3();
   static _midPoint = new THREE.Vector3();
 
-  static initSplineCurveProperties(
-    lineMesh: ILineMeshType | ILineMesh2Type
-  ): CurveProperties {
+  static initSplineCurveProperties(lineMesh: ILineMeshType | ILineMesh2Type): CurveProperties {
     let isCurveShapeC =
       lineMesh.settings.drawMode === VERTEX_LAYOUT_MODE.CURVE_C ||
       lineMesh.settings.drawMode === VERTEX_LAYOUT_MODE.CURVE_ARC;
-    let isCurveShapeS =
-      lineMesh.settings.drawMode === VERTEX_LAYOUT_MODE.CURVE_S;
+    let isCurveShapeS = lineMesh.settings.drawMode === VERTEX_LAYOUT_MODE.CURVE_S;
 
     if (isCurveShapeC) {
       lineMesh.settings.maxVertices = lineMesh.settings.divisions + 2;
@@ -52,21 +46,12 @@ export class LineMeshUtils {
 
     let splineCurveControlPoint = new THREE.Vector3();
     let quadraticBezierCurve = isCurveShapeC
-      ? new THREE.QuadraticBezierCurve3(
-          lineMesh.start,
-          splineCurveControlPoint,
-          lineMesh.end
-        )
+      ? new THREE.QuadraticBezierCurve3(lineMesh.start, splineCurveControlPoint, lineMesh.end)
       : null;
     let controlStart = new THREE.Vector3();
     let controlEnd = new THREE.Vector3();
     let cubicBezierCurve3 = isCurveShapeS
-      ? new THREE.CubicBezierCurve3(
-          lineMesh.start,
-          controlStart,
-          controlEnd,
-          lineMesh.end
-        )
+      ? new THREE.CubicBezierCurve3(lineMesh.start, controlStart, controlEnd, lineMesh.end)
       : null;
     let splineCurveResults: THREE.Vector3[] = [];
 
@@ -89,10 +74,7 @@ export class LineMeshUtils {
     return { debugA, debugB };
   }
 
-  static distribute(
-    line: ILineMeshType | ILineMesh2Type,
-    shouldUpdateVertexColours = false
-  ) {
+  static distribute(line: ILineMeshType | ILineMesh2Type, shouldUpdateVertexColours = false) {
     let l = line._vertices.length;
     let { settings } = line;
     let color = null;
@@ -145,10 +127,7 @@ export class LineMeshUtils {
     }
   }
 
-  static normalize(
-    line: ILineMeshType | ILineMesh2Type,
-    shouldUpdateVertexColours = false
-  ) {
+  static normalize(line: ILineMeshType | ILineMesh2Type, shouldUpdateVertexColours = false) {
     let l = line._vertices.length;
     let { settings } = line;
     let color = null;
@@ -169,9 +148,7 @@ export class LineMeshUtils {
         if (c < vnLengthLessOne) {
           // use normals array
 
-          v.x =
-            line.start.x +
-            LineMeshUtils._vIncrement.x * line._verticeXNormals[c];
+          v.x = line.start.x + LineMeshUtils._vIncrement.x * line._verticeXNormals[c];
           v.y = line.start.y + LineMeshUtils._vIncrement.y * c;
           v.z = line.start.z + LineMeshUtils._vIncrement.z * c;
         } else {
@@ -218,10 +195,7 @@ export class LineMeshUtils {
     }
   }
 
-  static curveC(
-    line: ILineMeshType | ILineMesh2Type,
-    shouldUpdateVertexColours = false
-  ) {
+  static curveC(line: ILineMeshType | ILineMesh2Type, shouldUpdateVertexColours = false) {
     let l = line._vertices.length;
     let color = null;
     let distance = 0;
@@ -230,22 +204,15 @@ export class LineMeshUtils {
     let control = line.start.distanceTo(line.end) / SPLINE_CONTROL_OFFSET;
 
     line.curveProperties.splineCurveControlPoint.set(
-      line.end.x +
-        (line.start.x - line.end.x) / 2 +
-        (line.end.x === line.start.x ? 0 : control),
-      line.end.y +
-        (line.start.y - line.end.y) / 2 +
-        (line.end.y === line.start.y ? 0 : control),
-      line.end.z +
-        (line.start.z - line.end.z) / 2 +
-        (line.end.z === line.start.z ? 0 : control)
+      line.end.x + (line.start.x - line.end.x) / 2 + (line.end.x === line.start.x ? 0 : control),
+      line.end.y + (line.start.y - line.end.y) / 2 + (line.end.y === line.start.y ? 0 : control),
+      line.end.z + (line.start.z - line.end.z) / 2 + (line.end.z === line.start.z ? 0 : control),
     );
 
     if (line.curveProperties?.quadraticBezierCurve) {
-      line.curveProperties.splineCurveResults =
-        line.curveProperties.quadraticBezierCurve.getPoints(
-          line.settings.maxVertices
-        );
+      line.curveProperties.splineCurveResults = line.curveProperties.quadraticBezierCurve.getPoints(
+        line.settings.maxVertices,
+      );
     }
 
     for (let c = 0; c < l; c++) {
@@ -271,50 +238,35 @@ export class LineMeshUtils {
       }
 
       if (!isLineMesh2 && c > 0) {
-        distance += v.distanceTo(
-          line.curveProperties.splineCurveResults[c - 1]
-        );
+        distance += v.distanceTo(line.curveProperties.splineCurveResults[c - 1]);
         line._lineDistances.setX(c, distance);
       }
     }
   }
 
-  static curveArc(
-    line: ILineMeshType | ILineMesh2Type,
-    shouldUpdateVertexColours = false
-  ) {
+  static curveArc(line: ILineMeshType | ILineMesh2Type, shouldUpdateVertexColours = false) {
     let l = line._vertices.length;
     let color = null;
     let isLineMesh2 = !!line.isLine2;
     let { end, start } = line;
-    let midPoint = ThreeGeomUtils.pointInBetween(
-      start,
-      end,
-      LineMeshUtils._midPoint,
-      0.5
-    );
+    let midPoint = ThreeGeomUtils.pointInBetween(start, end, LineMeshUtils._midPoint, 0.5);
     let { settings } = line;
     let { controlPointOffset } = settings;
     let distance = 0;
     let angle = Math.atan2(end.y - start.y, end.x - start.x);
 
-    line.curveProperties.splineCurveControlPoint.set(
-      midPoint.x,
-      midPoint.y,
-      midPoint.z
-    );
+    line.curveProperties.splineCurveControlPoint.set(midPoint.x, midPoint.y, midPoint.z);
 
     line.curveProperties.splineCurveControlPoint.set(
       Math.sin(angle) * controlPointOffset + midPoint.x,
       -Math.cos(angle) * controlPointOffset + midPoint.y,
-      0
+      0,
     );
 
     if (line.curveProperties?.quadraticBezierCurve) {
-      line.curveProperties.splineCurveResults =
-        line.curveProperties.quadraticBezierCurve.getPoints(
-          line.settings.maxVertices
-        );
+      line.curveProperties.splineCurveResults = line.curveProperties.quadraticBezierCurve.getPoints(
+        line.settings.maxVertices,
+      );
     }
 
     for (let c = 0; c < l; c++) {
@@ -340,18 +292,13 @@ export class LineMeshUtils {
       }
 
       if (!isLineMesh2 && c > 0) {
-        distance += v.distanceTo(
-          line.curveProperties.splineCurveResults[c - 1]
-        );
+        distance += v.distanceTo(line.curveProperties.splineCurveResults[c - 1]);
         line._lineDistances.setX(c, distance);
       }
     }
   }
 
-  static curveS(
-    line: ILineMeshType | ILineMesh2Type,
-    shouldUpdateVertexColours = false
-  ) {
+  static curveS(line: ILineMeshType | ILineMesh2Type, shouldUpdateVertexColours = false) {
     let l = line._vertices.length;
     let { start, end } = line;
     let { settings } = line;
@@ -379,29 +326,22 @@ export class LineMeshUtils {
       // prettier-ignore
       let isZCoplanar = (start.z === end.z && Boolean(coplanarOffsetStrategy.z)) || coplanarOverride.z > 0;
 
-      if (
-        (isXCoplanar || isYCoplanar || isZCoplanar) &&
-        coplanarOffsets !== null
-      ) {
+      if ((isXCoplanar || isYCoplanar || isZCoplanar) && coplanarOffsets !== null) {
         // --- if the line is coplanar then give it a separate offset
         let coplanarDirection = LineMeshUtils._vCoplanarDirection;
 
-        coplanarDirection.set(
-          Number(isXCoplanar),
-          Number(isYCoplanar),
-          Number(isZCoplanar)
-        );
+        coplanarDirection.set(Number(isXCoplanar), Number(isYCoplanar), Number(isZCoplanar));
 
         if (coplanarOffsets) {
           line.curveProperties.controlStart.set(
             line.start.x + coplanarDirection.x * coplanarOffsets.x,
             line.start.y + coplanarDirection.y * coplanarOffsets.y,
-            line.start.z + coplanarDirection.z * coplanarOffsets.z
+            line.start.z + coplanarDirection.z * coplanarOffsets.z,
           );
           line.curveProperties.controlEnd.set(
             line.end.x + coplanarDirection.x * coplanarOffsets.x,
             line.end.y + coplanarDirection.y * coplanarOffsets.y,
-            line.end.z + coplanarDirection.z * coplanarOffsets.z
+            line.end.z + coplanarDirection.z * coplanarOffsets.z,
           );
         }
       } else {
@@ -426,12 +366,12 @@ export class LineMeshUtils {
         line.curveProperties.controlStart.set(
           line.start.x + distance.x * controlPointAxis.x * invert,
           line.start.y + distance.y * controlPointAxis.y * invert,
-          line.start.z + distance.z * controlPointAxis.z * invert
+          line.start.z + distance.z * controlPointAxis.z * invert,
         );
         line.curveProperties.controlEnd.set(
           line.end.x - distance.x * controlPointAxis.x * invert,
           line.end.y - distance.y * controlPointAxis.y * invert,
-          line.end.z - distance.z * controlPointAxis.z * invert
+          line.end.z - distance.z * controlPointAxis.z * invert,
         );
       }
     } else {
@@ -439,12 +379,12 @@ export class LineMeshUtils {
       line.curveProperties.controlStart.set(
         line.start.x - controlPointOffset * dir.x * controlPointAxis.x,
         line.start.y - controlPointOffset * dir.y * controlPointAxis.y,
-        line.start.z - controlPointOffset * dir.z * controlPointAxis.z
+        line.start.z - controlPointOffset * dir.z * controlPointAxis.z,
       );
       line.curveProperties.controlEnd.set(
         line.end.x + controlPointOffset * dir.x * controlPointAxis.x,
         line.end.y + controlPointOffset * dir.y * controlPointAxis.y,
-        line.end.z + controlPointOffset * dir.z * controlPointAxis.z
+        line.end.z + controlPointOffset * dir.z * controlPointAxis.z,
       );
     }
 
@@ -452,20 +392,19 @@ export class LineMeshUtils {
       line.debugA.position.set(
         line.curveProperties.controlStart.x,
         line.curveProperties.controlStart.y,
-        line.curveProperties.controlStart.z
+        line.curveProperties.controlStart.z,
       );
       line.debugB.position.set(
         line.curveProperties.controlEnd.x,
         line.curveProperties.controlEnd.y,
-        line.curveProperties.controlEnd.z
+        line.curveProperties.controlEnd.z,
       );
     }
 
     if (line.curveProperties.cubicBezierCurve3) {
-      line.curveProperties.splineCurveResults =
-        line.curveProperties.cubicBezierCurve3.getPoints(
-          line.settings.maxVertices
-        );
+      line.curveProperties.splineCurveResults = line.curveProperties.cubicBezierCurve3.getPoints(
+        line.settings.maxVertices,
+      );
     }
 
     if (isLineMesh2) {
@@ -500,19 +439,14 @@ export class LineMeshUtils {
 
         // --- set line distances attributes
         if (c > 0) {
-          distance += v.distanceTo(
-            line.curveProperties.splineCurveResults[c - 1]
-          );
+          distance += v.distanceTo(line.curveProperties.splineCurveResults[c - 1]);
           line._lineDistances.setX(c, distance);
         }
       }
     }
   }
 
-  static vertexArray(
-    line: ILineMeshType | ILineMesh2Type,
-    shouldUpdateVertexColours = false
-  ) {
+  static vertexArray(line: ILineMeshType | ILineMesh2Type, shouldUpdateVertexColours = false) {
     let l = line._vertices.length;
     let color = null;
     let distance = 0;

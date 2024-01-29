@@ -14,7 +14,7 @@ module.exports = {
         '--disable-dev-shm-usage',
         '--disable-software-rasterizer',
         '--mute-audio',
-        "--use-gl=angle",
+        '--use-gl=angle',
         '--remote-debugging-port=0',
         '--window-size=1440,900',
       ].filter(Boolean),

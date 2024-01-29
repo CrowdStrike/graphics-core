@@ -2,7 +2,7 @@ import { LineMesh, LineMeshSettings, VERTEX_LAYOUT_MODE } from '@crowdstrike/gra
 import { ThreeJsComponentInterface } from 'test-app-for-graphics-core/utils/threejs-component-interface';
 import * as THREE from 'three';
 
-import type { ILineMeshType} from '@crowdstrike/graphics-core';
+import type { ILineMeshType } from '@crowdstrike/graphics-core';
 import type { EmberComponentInterfaceParams } from 'test-app-for-graphics-core/utils/ember-component-interface';
 
 export class ArcLineTest extends ThreeJsComponentInterface {
@@ -11,7 +11,7 @@ export class ArcLineTest extends ThreeJsComponentInterface {
   };
 
   lines: ILineMeshType[] = [];
-  _material: THREE.LineBasicMaterial
+  _material: THREE.LineBasicMaterial;
 
   constructor(settings: EmberComponentInterfaceParams) {
     super(settings);

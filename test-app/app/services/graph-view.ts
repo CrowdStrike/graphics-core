@@ -2,7 +2,10 @@ import Service, { inject as service } from '@ember/service';
 
 import type { Theme, ThemeManager } from '@crowdstrike/ember-toucan-styles';
 import type ApplicationInstance from '@ember/application/instance';
-import type { EntityDisplayState , ThreeJsComponentInterface } from 'test-app-for-graphics-core/utils/threejs-component-interface';
+import type {
+  EntityDisplayState,
+  ThreeJsComponentInterface,
+} from 'test-app-for-graphics-core/utils/threejs-component-interface';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type FunctionKeyof<T> = { [k in keyof T]: T[k] extends Function ? k : never }[keyof T];

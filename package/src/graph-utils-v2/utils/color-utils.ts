@@ -100,10 +100,8 @@ export class ColorUtils {
    * @constructor
    */
   static RandomRGBColorString() {
-    return `#${ColorUtils.componentToHex(
+    return `#${ColorUtils.componentToHex(NumberUtils.getRandomInt(0, 255))}${ColorUtils.componentToHex(
       NumberUtils.getRandomInt(0, 255),
-    )}${ColorUtils.componentToHex(NumberUtils.getRandomInt(0, 255))}${ColorUtils.componentToHex(
-      NumberUtils.getRandomInt(0, 255),
-    )}`;
+    )}${ColorUtils.componentToHex(NumberUtils.getRandomInt(0, 255))}`;
   }
 }

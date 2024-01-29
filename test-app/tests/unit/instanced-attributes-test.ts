@@ -49,14 +49,14 @@ module('Unit | graphics-core | instanced-attributes', function (hooks) {
     assert.strictEqual(
       instancedAttributes.size,
       INSTANCES_TO_ADD,
-      'InstancedAttribute dictionary contains the right amount of ID entries after insertion'
+      'InstancedAttribute dictionary contains the right amount of ID entries after insertion',
     );
 
     await waitUntil(() => noPendingTasks(instancedAttributes)).then(() => {
       assert.strictEqual(
         instancedAttributes.mesh.geometry.attributes['instanceDisplay']?.getX(0),
         1,
-        'instanceDisplay attribute array updates after instance insertion'
+        'instanceDisplay attribute array updates after instance insertion',
       );
     });
 
@@ -68,14 +68,14 @@ module('Unit | graphics-core | instanced-attributes', function (hooks) {
       assert.strictEqual(
         instancedAttributes.mesh.geometry.attributes['instanceDisplay']?.getX(0),
         0,
-        'instanceDisplay attribute array updates after instance deletion'
+        'instanceDisplay attribute array updates after instance deletion',
       );
     });
 
     assert.strictEqual(
       instancedAttributes.size,
       INSTANCES_TO_ADD - INSTANCES_TO_REMOVE,
-      'InstancedAttribute dictionary contains the right amount of ID entries after deletion'
+      'InstancedAttribute dictionary contains the right amount of ID entries after deletion',
     );
 
     verticesToRemove.forEach((vertex) => {
@@ -87,7 +87,7 @@ module('Unit | graphics-core | instanced-attributes', function (hooks) {
     assert.strictEqual(
       instancedAttributes.size,
       INSTANCES_TO_ADD - INSTANCES_TO_REMOVE,
-      "Deleting a non-existent ID doesn't change the number of entries"
+      "Deleting a non-existent ID doesn't change the number of entries",
     );
 
     // add a previously non-existent ID – which index will it be added in?
@@ -102,7 +102,7 @@ module('Unit | graphics-core | instanced-attributes', function (hooks) {
     assert.strictEqual(
       instancedAttributes.dataForId(idToAdd),
       0,
-      'New instance will move to most recently removed index'
+      'New instance will move to most recently removed index',
     );
 
     debugAssert('id may not be falsey', idsToRemove[0]);
@@ -114,7 +114,7 @@ module('Unit | graphics-core | instanced-attributes', function (hooks) {
     assert.strictEqual(
       instancedAttributes.dataForId(vertex1.id),
       instancedAttributes.size - 1,
-      'Previously removed instance will move to new index'
+      'Previously removed instance will move to new index',
     );
   });
 
@@ -122,13 +122,13 @@ module('Unit | graphics-core | instanced-attributes', function (hooks) {
     assert.strictEqual(
       instancedAttributes.attributes,
       attributes,
-      'InstancedAttributes.attributes object gets set correctly'
+      'InstancedAttributes.attributes object gets set correctly',
     );
 
     assert.strictEqual(
       instancedAttributes.mesh.geometry.attributes['instanceDisplay']?.array.length,
       MAX_INSTANCE_COUNT,
-      'instanceDisplay attribute array gets correctly added to mesh geometry'
+      'instanceDisplay attribute array gets correctly added to mesh geometry',
     );
   });
 
@@ -136,12 +136,12 @@ module('Unit | graphics-core | instanced-attributes', function (hooks) {
     assert.strictEqual(
       instancedAttributes.maxInstanceCount,
       MAX_INSTANCE_COUNT,
-      'InstancedAttributes.maxInstanceCount gets set correctly'
+      'InstancedAttributes.maxInstanceCount gets set correctly',
     );
 
     assert.throws(() => {
       const verticesToAdd: EntityWithId[] = Array.from(Array(MAX_INSTANCE_COUNT + 1).keys()).map(
-        () => ({ id: NumberUtils.generateUUID() })
+        () => ({ id: NumberUtils.generateUUID() }),
       );
 
       verticesToAdd.forEach((vertex) => {

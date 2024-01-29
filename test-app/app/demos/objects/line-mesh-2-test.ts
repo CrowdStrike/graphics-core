@@ -1,12 +1,9 @@
-import { LineMesh2 ,
-  LineMeshSettings,
-  VERTEX_LAYOUT_MODE,
-} from '@crowdstrike/graphics-core';
+import { LineMesh2, LineMeshSettings, VERTEX_LAYOUT_MODE } from '@crowdstrike/graphics-core';
 import { ThreeJsComponentInterface } from 'test-app-for-graphics-core/utils/threejs-component-interface';
 import * as THREE from 'three';
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial';
 
-import type { ILineMesh2Type} from '@crowdstrike/graphics-core';
+import type { ILineMesh2Type } from '@crowdstrike/graphics-core';
 import type { EmberComponentInterfaceParams } from 'test-app-for-graphics-core/utils/ember-component-interface';
 
 export class LineMesh2Test extends ThreeJsComponentInterface {
@@ -23,7 +20,7 @@ export class LineMesh2Test extends ThreeJsComponentInterface {
   fatSpline: ILineMesh2Type;
   distributedLine: ILineMesh2Type;
   normalizedLine: ILineMesh2Type;
-  increment: number
+  increment: number;
 
   constructor(settings: EmberComponentInterfaceParams) {
     super(settings);

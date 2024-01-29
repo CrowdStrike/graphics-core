@@ -12,12 +12,7 @@ export class TextGeneratorCache {
    * @param height : Number
    * @returns {TextGenerator}
    */
-  static renderToGenerator(
-    textStyle: TextStyle,
-    label: string,
-    width: number,
-    height: number,
-  ): TextGenerator {
+  static renderToGenerator(textStyle: TextStyle, label: string, width: number, height: number): TextGenerator {
     let textureKey = TextGeneratorCache.getTextureKey(textStyle, label);
 
     if (!TextGeneratorCache._textGeneratorCache[textureKey]) {
@@ -36,10 +31,7 @@ export class TextGeneratorCache {
    * @returns {boolean}
    */
   static isTextureGeneratorCached(textStyle: TextStyle, label: string) {
-    return (
-      TextGeneratorCache._textGeneratorCache[TextGeneratorCache.getTextureKey(textStyle, label)] !=
-      null
-    );
+    return TextGeneratorCache._textGeneratorCache[TextGeneratorCache.getTextureKey(textStyle, label)] != null;
   }
 
   /**
