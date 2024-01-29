@@ -1,4 +1,4 @@
-import gsap from 'gsap';
+import { gsap } from 'gsap';
 import * as THREE from 'three';
 
 interface ColorTweenProxyParams {

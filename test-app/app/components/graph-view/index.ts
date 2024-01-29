@@ -22,7 +22,10 @@ interface Args {
   canvasClasses?: string;
 }
 
-function graphViewSettings<TData>(eci: GraphViewConfiguration<TData>, container: Component<any>) {
+function graphViewSettings<TData>(
+  eci: GraphViewConfiguration<TData>,
+  container: FalconGraphViewComponent,
+) {
   let { rootURL } = getAppConfig(container);
 
   if (eci.viewSettings) {

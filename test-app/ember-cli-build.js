@@ -2,10 +2,10 @@
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 const tailwindConfig = require('./tailwind.config');
-const sideWatch = require('@embroider/broccoli-side-watch')
+const sideWatch = require('@embroider/broccoli-side-watch');
 const packageJson = require('./package');
 
-const path = require('path')
+const path = require('path');
 
 const isProduction = () => EmberApp.env() === 'production';
 
@@ -22,7 +22,9 @@ module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
     ...configureCSSModules({ tailwindConfig }),
     trees: {
-      app: sideWatch('app', { watching: [path.parse(require.resolve('@crowdstrike/graphics-core')).dir] }),
+      app: sideWatch('app', {
+        watching: [path.parse(require.resolve('@crowdstrike/graphics-core')).dir],
+      }),
     },
     autoImport: {
       watchDependencies: Object.keys(packageJson.dependencies),
@@ -43,9 +45,7 @@ module.exports = function (defaults) {
           // we set to global mode to avoid hashing tailwind classes
           mode: 'global',
           // class naming template
-          localIdentName: isProduction()
-            ? '[sha512:hash:base64:5]'
-            : '[path][name]__[local]',
+          localIdentName: isProduction() ? '[sha512:hash:base64:5]' : '[path][name]__[local]',
         },
       },
       webpackConfig: {

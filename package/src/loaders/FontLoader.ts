@@ -21,7 +21,7 @@ export class FontLoader {
           }),
         )
           .then((e) => this.onFontLoaded(e))
-          .catch((e) => this.onFontLoadedError(e))
+          .catch((e: ErrorEvent) => this.onFontLoadedError(e))
           .finally(() => this.dispose());
       }
 
@@ -58,7 +58,7 @@ export class FontLoader {
     return true;
   }
 
-  onFontLoadedError(e: any) {
+  onFontLoadedError(e: ErrorEvent) {
     this._isLoaded = true;
     throw new Error(e.error);
   }

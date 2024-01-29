@@ -47,13 +47,13 @@ module('Unit | graphics-core | instanced-text-attributes', function (hooks) {
     assert.strictEqual(
       instancedAttributes.textLookup.get(idxA),
       StringUtils.truncate(textA, truncationLength),
-      'one instance is truncated at the end'
+      'one instance is truncated at the end',
     );
 
     assert.strictEqual(
       instancedAttributes.textLookup.get(idxB),
       StringUtils.truncateMiddle(textB, truncationLength),
-      'another instance is truncated in the middle'
+      'another instance is truncated in the middle',
     );
   });
 });

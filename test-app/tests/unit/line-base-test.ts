@@ -9,7 +9,7 @@ import {
   LineBezier3,
   LineV2,
 } from '@crowdstrike/graphics-core';
-import sinon from 'sinon';
+import { spy } from 'sinon';
 
 module('Unit | graphics-core | LineV2 / Line2Bezier / Line3Bezier', function (hooks) {
   setupTest(hooks);
@@ -51,16 +51,20 @@ module('Unit | graphics-core | LineV2 / Line2Bezier / Line3Bezier', function (ho
   test('calling update(true) updates the curve', async function (assert) {
     // eslint-disable-next-line
     // @ts-ignore
-    const spy = sinon.spy(line3, 'updateCurve'); // this is a protected method
+    const updateCurveSpy = spy(line3, 'updateCurve'); // this is a protected method
 
     line3.setControlPoint1Offsets(10, 0.1);
     assert.deepEqual(
-      spy.callCount,
+      updateCurveSpy.callCount,
       0,
       'updateCurve is not called automatically when setting control points',
     );
 
     line3.update(true);
-    assert.deepEqual(spy.callCount, 1, 'updateCurve is called when update(true) is called');
+    assert.deepEqual(
+      updateCurveSpy.callCount,
+      1,
+      'updateCurve is called when update(true) is called',
+    );
   });
 });

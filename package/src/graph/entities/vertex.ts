@@ -1,4 +1,4 @@
-import gsap, { Power3 } from 'gsap';
+import { gsap, Power3 } from 'gsap';
 
 import { TextStyle } from '../../data/TextStyle';
 import { InstancedIconAttributes } from '../../entities/instanced-icon-attributes';

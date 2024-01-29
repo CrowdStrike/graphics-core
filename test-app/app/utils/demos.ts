@@ -267,3 +267,5 @@ export const DEMO_LIST = [
     tags: [DEMO_TAGS.PRIMITIVE],
   },
 ];
+
+export type DemoType = (typeof DEMO_LIST)[number];

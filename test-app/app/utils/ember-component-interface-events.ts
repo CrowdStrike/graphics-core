@@ -13,8 +13,8 @@ export class EmberComponentInterfaceEvents extends Event {
   static GRAPH_VIEW_SUSPENDED = 'EmberComponentInterfaceEvents_GRAPH_VIEW_SUSPENDED';
   static ENTITIES_ADDED = 'EmberComponentInterfaceEvents_ADDED_ENTITY';
 
-  graphItems?: any[];
-  graphItemData?: any;
+  graphItems?: unknown[];
+  graphItemData?: unknown;
   data?: unknown;
   dataType?: unknown;
   id?: string;

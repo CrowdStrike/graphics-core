@@ -32,13 +32,8 @@
     "paths": {
       // No paths, no absolute imports, only node_modules imports allowed
       // But fallback for type-overrides and such
-      "*": [
-        "types/*"
-      ]
+      "*": ["types/*"]
     }
   },
-  "include": [
-    "src/**/*",
-    "types/*"
-  ]
+  "include": ["src/**/*", "types/*"]
 }

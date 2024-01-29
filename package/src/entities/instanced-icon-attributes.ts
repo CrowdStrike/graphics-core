@@ -11,7 +11,7 @@
  *
  * TODO Delete lookup maps on remove()
  */
-import gsap, { Power3 } from 'gsap';
+import { gsap, Power3 } from 'gsap';
 import * as THREE from 'three';
 
 import { SvgMeshGenerator } from '../generators/SvgMeshGenerator';

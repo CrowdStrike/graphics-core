@@ -21,7 +21,7 @@ import {
   TextStyle,
 } from '@crowdstrike/graphics-core';
 import * as dat from 'dat.gui';
-import gsap, { Power3 } from 'gsap';
+import { gsap, Power3 } from 'gsap';
 import IconTextureAtlas from 'test-app-for-graphics-core/assets/icon-texture-atlas.png';
 import iconCoordinates from 'test-app-for-graphics-core/utils/coordinates';
 import * as THREE from 'three';

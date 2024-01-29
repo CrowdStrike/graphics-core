@@ -1,4 +1,4 @@
-import gsap, { Power3 } from 'gsap';
+import { gsap, Power3 } from 'gsap';
 import * as THREE from 'three';
 
 import type { GraphicsV2VertexController } from '../../graph/entities/vertex';

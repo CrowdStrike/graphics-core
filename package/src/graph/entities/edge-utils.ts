@@ -1,4 +1,4 @@
-import gsap from 'gsap';
+import { gsap } from 'gsap';
 import { LineBasicMaterial, LineDashedMaterial } from 'three';
 
 import { ColorUtils } from '../../graph-utils-v2/utils/color-utils';

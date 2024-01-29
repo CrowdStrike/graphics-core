@@ -1,4 +1,4 @@
-import gsap, { Power3 } from 'gsap';
+import { gsap, Power3 } from 'gsap';
 import * as THREE from 'three';
 
 import { RequestAnimationFrame } from '../graph-utils-v2/utils/request-animation-frame';

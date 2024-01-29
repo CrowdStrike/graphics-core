@@ -8,16 +8,12 @@
 
 module.exports = {
   // content: [path.join(appEntry, relevantFilesGlob)],
-  content: [
-    './app/**/*.{gjs,gts,hbs,html,js,ts}',
-  ],
+  content: ['./app/**/*.{gjs,gts,hbs,html,js,ts}'],
   theme: {
-    extend: []
+    extend: [],
   },
   presets: [require('@crowdstrike/tailwind-toucan-base')],
   // presets: [],
 
-  plugins: [
-    require('@tailwindcss/typography')
-  ],
+  plugins: [require('@tailwindcss/typography')],
 };
