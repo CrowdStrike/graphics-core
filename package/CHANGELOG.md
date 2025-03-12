@@ -1,5 +1,11 @@
 # @crowdstrike/graphics-core
 
+## 1.4.0
+
+### Minor Changes
+
+- [#64](https://github.com/CrowdStrike/graphics-core/pull/64) [`40e4579`](https://github.com/CrowdStrike/graphics-core/commit/40e45796d4f876f680427a4e6f7f1893e2e5f9df) Thanks [@zacoppotamus](https://github.com/zacoppotamus)! - add position for sixth vertex badge
+
 ## 1.3.0
 
 ### Minor Changes
