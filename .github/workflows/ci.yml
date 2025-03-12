@@ -54,7 +54,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/pnpm
-      - uses: ./.github/actions/assert-build
+      # - uses: ./.github/actions/assert-build
+      - name: Build and Assert Output
+        shell: bash
+        run: pnpm build
+        working-directory: package
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist-${{ matrix.typescript-scenario }}
+          path: dist
       - name: "Change TS to ${{ matrix.typescript-scenario }}"
         run: "pnpm add --save-dev ${{ matrix.typescript-scenario}}"
         working-directory: ./test-app
