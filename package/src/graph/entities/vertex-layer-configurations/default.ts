@@ -23,6 +23,10 @@ export const DEFAULT_UI_OFFSETS = {
     x: 48,
     y: -59,
   },
+  [GraphicsV2VertexController.getLayerSlotName('badge_below', 5)]: {
+    x: 60,
+    y: -59,
+  },
   [GraphicsV2VertexController.getLayerSlotName('disposition', 0)]: {
     x: 8,
     y: 8,
@@ -172,6 +176,17 @@ export const generateVerticalUiSlots = (layerOffsets = DEFAULT_UI_OFFSETS): Slot
             layerOffsets[GraphicsV2VertexController.getLayerSlotName('badge_below', 2)],
             layerOffsets[GraphicsV2VertexController.getLayerSlotName('badge_below', 3)],
             layerOffsets[GraphicsV2VertexController.getLayerSlotName('badge_below', 4)],
+          ],
+          'x',
+        ),
+        centerAlignNamedSlotLayers(
+          [
+            layerOffsets[GraphicsV2VertexController.getLayerSlotName('badge_below', 0)],
+            layerOffsets[GraphicsV2VertexController.getLayerSlotName('badge_below', 1)],
+            layerOffsets[GraphicsV2VertexController.getLayerSlotName('badge_below', 2)],
+            layerOffsets[GraphicsV2VertexController.getLayerSlotName('badge_below', 3)],
+            layerOffsets[GraphicsV2VertexController.getLayerSlotName('badge_below', 4)],
+            layerOffsets[GraphicsV2VertexController.getLayerSlotName('badge_below', 5)],
           ],
           'x',
         ),

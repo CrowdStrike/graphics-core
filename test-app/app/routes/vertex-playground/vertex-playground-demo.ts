@@ -314,12 +314,13 @@ export class VertexPlaygroundDemo {
 
   randomizeOverlays(baseIcon?: string) {
     const numInteractions = NumberUtils.getRandomInt(0, 3);
-    const numBadgeBelow = NumberUtils.getRandomInt(0, 5);
+    const numBadgeBelow = NumberUtils.getRandomInt(0, 6);
 
     return {
       badge_below: [
         { icon: 'circle-squares', color: 0xdddddd },
         { icon: 'arrow-and-circle', color: 0xdddddd },
+        { icon: 'concentric-circles', color: 0xdddddd },
         { icon: 'concentric-circles', color: 0xdddddd },
         { icon: 'concentric-circles', color: 0xdddddd },
         { icon: 'concentric-circles', color: 0xdddddd },
