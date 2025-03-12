@@ -3,12 +3,12 @@ description: Setup node and install dependencies using pnpm
 runs:
   using: "composite"
   steps:
-    - name: Install Nodes.js
-      uses: actions/setup-node@v3
+    - uses: actions/setup-node@v4
+      name: Install Node.js
       with:
-        node-version: 16
-    - name: Install pnpm
-      uses: pnpm/action-setup@v2.4.0
+        node-version: 18.17.0
+    - uses: pnpm/action-setup@v4.0.0
+      name: Install pnpm
       with:
         version: 7.3.0
         run_install: false
@@ -16,7 +16,7 @@ runs:
       shell: bash
       run: |
         echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-    - uses: actions/cache@v3
+    - uses: actions/cache@v4
       name: Setup pnpm cache
       with:
         path: ${{ env.STORE_PATH }}

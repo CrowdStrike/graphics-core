@@ -24,7 +24,7 @@
     "typedoc": "^0.25.4"
   },
   "volta": {
-    "node": "16.15.1",
+    "node": "18.17.0",
     "pnpm": "7.3.0"
   },
   "packageManager": "pnpm@7.3.0",

@@ -8,7 +8,8 @@ runs:
       run: pnpm build
       working-directory: package
     - name: Upload dist assets to cache
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: dist
         path: ${{ env.dist }}
+        overwrite: true
